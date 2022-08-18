@@ -17,9 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->decimal('balance', 15, 4)->default('0');
             $table->string('password');
-            $table->rememberToken();
+            $table->string('api_key')->nullable();
+            $table->string('status')->default('ACTIVE');
+            $table->string('timezone');
+            $table->string('activation_token')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }
