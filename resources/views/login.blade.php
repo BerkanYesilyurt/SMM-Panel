@@ -15,9 +15,9 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>SMM Panel</title>
+    <title>{{$configsArray['title']}}</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content="{{$configsArray['meta_description']}}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -116,12 +116,12 @@
                       </g>
                     </svg>
                   </span>
-                            <span class="app-brand-text demo text-body fw-bolder">SMM-Panel</span>
+                            <span class="app-brand-text demo text-body fw-bolder">{{$configsArray['title']}}</span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Welcome to SMM Panel! 👋</h4>
-                    <p class="mb-4">Simply the fastest, cheapest, biggest panel in the SMM World. Please sign-in to your account and start the adventure.  </p>
+                    <h4 class="mb-2">Welcome to {{$configsArray['title']}}! 👋</h4>
+                    <p class="mb-4">{{$configsArray['meta_description']}} </p>
 
                     <form class="mb-3" action="" method="POST">
                         <div class="mb-3">
@@ -138,9 +138,9 @@
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Password</label>
-                                <a href="">
-                                    <small>Forgot Password?</small>
-                                </a>
+                                @if($configsArray['forgot_password'])
+                                <a href=""><small>Forgot Password?</small></a>
+                                @endif
                             </div>
                             <div class="input-group input-group-merge">
                                 <input
@@ -164,16 +164,16 @@
                             <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                         </div>
                     </form>
-
+                    @if($configsArray['register_page'])
                     <p class="text-center">
                         <span>Don't have an account? </span>
                         <a href="">
                             <span>Sign up</span>
                         </a>
                     </p>
+                    @endif
                 </div>
             </div>
-            <!-- /Register -->
         </div>
     </div>
 </div>
