@@ -7,19 +7,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
-    public function check(Config $config){
-    $maintenance_mode = $config->where('name','=', 'maintenance_mode')->value('value');
-    $directly_login = $config->where('name','=', 'directly_login')->value('value');
-
-    if($maintenance_mode){
-        return view('undermaintenance');
+    public function __construct()
+    {
+        $this->middleware('maintenance');
     }
 
-    if(auth()){
+    public function check(Config $config){
+    $directly_login = $config->where('name','=', 'directly_login')->value('value');
+
+    if(auth()->check()){
         return view('dashboard');
     }elseif($directly_login){
-        return route('login');
+        return redirect()->route('login');
     }else{
         return view('index');
     }
@@ -27,7 +26,12 @@ class HomeController extends Controller
     }
 
 
-    public function showLogin(){
-        return view('login');
+    public function showLogin(Config $config){
+        $configs = $config->all();
+        $configsArray = [];
+        foreach($configs as $config){
+            $configsArray[$config->name] = $config->value;
+        }
+        return view('login', compact('configsArray'));
     }
 }
