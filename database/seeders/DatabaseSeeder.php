@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         DB::table('configs')->insert([
             [
                 'name' => 'title',
-                'value' => 'SMM Panel',
+                'value' => 'SMM-Panel',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -75,6 +75,12 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'directly_login',
+                'value' => '1',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'forgot_password',
                 'value' => '1',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
