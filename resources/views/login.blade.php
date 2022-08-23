@@ -15,9 +15,10 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>{{$configsArray['title']}}</title>
+    <title>{{$configsArray['title']}} - Login</title>
 
     <meta name="description" content="{{$configsArray['meta_description']}}" />
+    <meta name="keywords" content="{{$configsArray['meta_keywords']}}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -120,10 +121,11 @@
                         </a>
                     </div>
                     <!-- /Logo -->
+                    <center>
                     <h4 class="mb-2">Welcome to {{$configsArray['title']}}! 👋</h4>
                     <p class="mb-4">{{$configsArray['meta_description']}} </p>
-
-                    <form class="mb-3" action="" method="POST">
+                    </center>
+                    <form class="mb-3" action="/login" method="POST">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input
@@ -167,7 +169,7 @@
                     @if($configsArray['register_page'])
                     <p class="text-center">
                         <span>Don't have an account? </span>
-                        <a href="">
+                        <a href="/register">
                             <span>Sign up</span>
                         </a>
                     </p>
