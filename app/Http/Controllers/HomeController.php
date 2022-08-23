@@ -26,12 +26,17 @@ class HomeController extends Controller
     }
 
 
-    public function showLogin(Config $config){
-        $configs = $config->all();
-        $configsArray = [];
-        foreach($configs as $config){
-            $configsArray[$config->name] = $config->value;
-        }
+    public function showLogin(){
+        $configsArray = ConfigController::configs();
         return view('login', compact('configsArray'));
+    }
+
+    public function showRegister(){
+        $configsArray = ConfigController::configs();
+        if($configsArray['register_page']){
+            return view('register', compact('configsArray'));
+        }else{
+            return redirect('/');
+        }
     }
 }
