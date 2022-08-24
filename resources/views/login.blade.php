@@ -121,11 +121,22 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <center>
-                    <h4 class="mb-2">Welcome to {{$configsArray['title']}}! 👋</h4>
-                    <p class="mb-4">{{$configsArray['meta_description']}} </p>
-                    </center>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul style="margin-bottom: 1px;">
+                                @foreach ($errors->all() as $error)
+                                    <li><b>{{ $error }}</b></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @else
+                        <center>
+                            <h4 class="mb-2">Welcome to {{$configsArray['title']}}! 👋</h4>
+                            <p class="mb-4">{{$configsArray['meta_description']}} </p>
+                        </center>
+                    @endif
                     <form class="mb-3" action="/login" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input

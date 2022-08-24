@@ -121,11 +121,22 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <center>
-                    <h4 class="mb-2">Adventure starts here 🚀</h4>
-                    <p class="mb-4">If you are looking for cheap SMM panel services, {{$configsArray['title']}} is the right panel for this.</p>
-                    </center>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul style="margin-bottom: 1px;">
+                                @foreach ($errors->all() as $error)
+                                    <li><b>{{ $error }}</b></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @else
+                        <center>
+                            <h4 class="mb-2">Adventure starts here 🚀</h4>
+                            <p class="mb-4">If you are looking for cheap SMM panel services, {{$configsArray['title']}} is the right panel for this.</p>
+                        </center>
+                    @endif
                     <form class="mb-3" action="/register" method="POST">
+                        @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input
@@ -194,6 +205,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- / Content -->
 
