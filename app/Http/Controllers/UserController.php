@@ -9,11 +9,19 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     public function login(Request $request, User $user){
+
         $fields = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
-        if(auth()->attempt($fields)){
+
+        if(is_null($request->rememberme)){
+            $rememberme = 0;
+        }else{
+            $rememberme = 1;
+        }
+
+        if(auth()->attempt($fields, $rememberme)){
             $request->session()->regenerate();
             return redirect('/')->with('message', 'You have successfully logged in.');
         }
@@ -23,10 +31,10 @@ class UserController extends Controller
 
     public function register(Request $request, User $user){
         $fields = $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => ['required', 'confirmed', 'min:6'],
-            'contact' => ['required'],
+            'name' => ['required', 'min:3', 'max:150'],
+            'email' => ['required', 'email', 'max:150', Rule::unique('users', 'email')],
+            'password' => ['required', 'confirmed', 'min:6', 'max:50'],
+            'contact' => ['required', 'max:150'],
         ]);
 
         $fields['password'] = bcrypt($fields['password']);
