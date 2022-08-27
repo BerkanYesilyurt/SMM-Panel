@@ -146,6 +146,7 @@
                                 name="name"
                                 placeholder="Your Full Name"
                                 autofocus
+                                value = "{{ old('name') ?? '' }}"
                             />
                         </div>
                         <div class="mb-3">
@@ -156,6 +157,7 @@
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
+                                value = "{{ old('email') ?? '' }}"
                             />
                         </div>
                         <div class="mb-3">
@@ -188,6 +190,7 @@
                                 id="contact"
                                 name="contact"
                                 placeholder="Skype"
+                                value = "{{ old('contact') ?? '' }}"
                             />
                         </div>
                         <div class="mb-3">
