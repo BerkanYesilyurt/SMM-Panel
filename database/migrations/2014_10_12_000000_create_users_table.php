@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('contact');
             $table->string('api_key')->nullable();
+            $table->string('authority')->default('none');
             $table->string('status')->default('ACTIVE');
             $table->string('timezone')->nullable();
             $table->string('activation_token')->nullable();
