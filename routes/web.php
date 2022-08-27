@@ -22,3 +22,5 @@ Route::get('/register', [HomeController::class, 'showRegister'])->name('register
 
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/register', [UserController::class, 'register']);
+
+Route::get('/logout', [UserController::class, 'logout']);
