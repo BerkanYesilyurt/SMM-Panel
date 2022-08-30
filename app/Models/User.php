@@ -44,6 +44,12 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTimezone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $contact
+ * @property string $authority
+ * @property string|null $remember_token
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAuthority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  */
 class User extends Authenticatable
 {
