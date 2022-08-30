@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('subject')->default('OTHER');
-            $table->text('description');
+            $table->text('message');
             $table->string('order_id')->nullable();
+            $table->string('order_request')->nullable();
+            $table->string('pay_type')->nullable();
             $table->string('pay_id')->nullable();
+            $table->string('feature_request')->nullable();
             $table->string('status')->default('ACTIVE');
             $table->timestamps();
         });
