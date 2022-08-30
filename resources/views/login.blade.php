@@ -146,6 +146,7 @@
                                 name="email"
                                 placeholder="Enter your email"
                                 autofocus
+                                value="{{old('email')}}"
                             />
                         </div>
                         <div class="mb-3 form-password-toggle">
@@ -213,5 +214,7 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 </html>
