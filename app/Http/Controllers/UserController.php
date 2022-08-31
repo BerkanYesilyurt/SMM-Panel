@@ -23,9 +23,10 @@ class UserController extends Controller
 
         if(auth()->attempt($fields, $rememberme)){
             $request->session()->regenerate();
-            return redirect('/')->with('message', 'You have successfully logged in.');
+            alert()->success('Success!','You have successfully logged in.')->timerProgressBar();
+            return redirect('/');
         }
-
+        toast('Invalid Credentials','error')->timerProgressBar();
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 
@@ -42,14 +43,21 @@ class UserController extends Controller
         $newUser = $user->create($fields);
         auth()->login($newUser);
 
-        return redirect('/')->with('message', 'You have successfully registered.');
+        alert()->success('Success!','You have successfully registered and logged in.')->timerProgressBar();;
+        return redirect('/');
     }
 
     public function logout(Request $request){
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/')->with('message', 'You have successfully logged out.');
+        alert()->success('Success!','You have successfully logged out.')->timerProgressBar();;
+        return redirect('/');
+    }
+
+    public function userStatistics(User $user){
+        $userStatistics = [];
+
     }
 
 }
