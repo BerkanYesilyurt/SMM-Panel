@@ -16,7 +16,7 @@ class HomeController extends Controller
     $directly_login = $config->where('name','=', 'directly_login')->value('value');
 
     if(auth()->check()){
-        return view('dashboard');
+        return view('pages.new-order');
     }elseif($directly_login){
         return redirect()->route('login');
     }else{
@@ -27,14 +27,13 @@ class HomeController extends Controller
 
 
     public function showLogin(){
-        $configsArray = ConfigController::configs();
-        return view('login', compact('configsArray'));
+        return view('login');
     }
 
     public function showRegister(){
         $configsArray = ConfigController::configs();
         if($configsArray['register_page']){
-            return view('register', compact('configsArray'));
+            return view('register');
         }else{
             return redirect('/');
         }
