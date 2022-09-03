@@ -78,7 +78,7 @@
                     <h5 class="modal-title" id="modalCenterTitle">Create New Ticket</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="POST" action="/tickets">
+                <form method="POST" id="form" action="/tickets">
                     @csrf
                 <div class="modal-body">
                     <div class="row">
@@ -158,7 +158,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Create">
+                    <button class="btn btn-primary" onclick="submit(); this.disabled = true;" style="color: white;" id="submitbutton">Create</button>
                 </div>
                 </form>
             </div>
@@ -203,6 +203,10 @@
                 element4.style.display = "none";
                 element5.style.display = "none";
             }
+        }
+
+        function submit(){
+            document.getElementById("form").submit();
         }
 
     </script>
