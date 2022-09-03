@@ -29,4 +29,4 @@ Route::get('/logout', [UserController::class, 'logout']);
 Route::get('/tickets', [TicketController::class, 'index']);
 Route::post('/tickets', [TicketController::class, 'createTicket']);
 Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages']);
-Route::post('/ticket_message', [TicketController::class, 'newTicketMessages']);
+Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
