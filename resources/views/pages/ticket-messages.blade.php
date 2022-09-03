@@ -59,6 +59,16 @@
 
 
             </div>
+            <form action="/ticket_message" method="POST">
+                @csrf
+            <div class="input-group">
+                <span class="input-group-text">New Message</span>
+                <textarea class="form-control" name="message" style="width: 75%; resize: none;" aria-label="With textarea" placeholder="Repeatedly sending messages to same ticket will increase the response time."></textarea>
+                <button type="submit" class="btn btn-primary" onclick="history.back()" style="float:right;">
+                    <span class="tf-icons bx bx-send"></span>&nbsp; Send
+                </button>
+            </div>
+            </form>
             <!--/ Card layout -->
 
 @endsection
