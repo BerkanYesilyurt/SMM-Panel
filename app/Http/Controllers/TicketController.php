@@ -16,12 +16,12 @@ class TicketController extends Controller
 
     public function createTicket(Request $request){
         $fields = $request->validate([
-            'subject'            => ['required', Rule::in(['order', 'payment', 'request', 'childpanel', 'other'])],
-            'orderid'            => ['required_if:subject,=,order'],
-            'order_request'      => ['required_if:subject,=,order', Rule::in(['refill', 'cancel', 'speed-up', 'other'])],
-            'payid'              => ['required_if:subject,=,payment'],
-            'feature_request'    => ['required_if:subject,=,request', Rule::in(['feature', 'service', 'other'])],
-            'message'            => ['required']
+            'subject'            => ['required', 'max:100', Rule::in(['order', 'payment', 'request', 'childpanel', 'other'])],
+            'orderid'            => ['required_if:subject,=,order', 'max:180'],
+            'order_request'      => ['required_if:subject,=,order', 'max:100', Rule::in(['refill', 'cancel', 'speed-up', 'other'])],
+            'payid'              => ['required_if:subject,=,payment', 'max:100'],
+            'feature_request'    => ['required_if:subject,=,request', 'max:100', Rule::in(['feature', 'service', 'other'])],
+            'message'            => ['required', 'max:5000']
         ]);
 
         $ticket = new Ticket();
@@ -59,14 +59,37 @@ class TicketController extends Controller
     }
 
     public function ticketMessages($ticket_id, Ticket $ticket, TicketMessage $ticketMessage){
-        $ownerOfTicket = $ticket->where('id', $ticket_id)->value('user_id');
+        $relatedTicket = $ticket->where('id', $ticket_id);
 
-        if(auth()->user()->id == $ownerOfTicket){
-            $ticketMessages = $ticketMessage->where('ticket_id', $ticket_id)->orderBy('created_at', 'DESC')->get();
-            return view('pages.ticket-messages', compact('ticketMessages'));
+        if(auth()->user()->id == $relatedTicket->value('user_id')){
+            $ticketMessages = $ticketMessage->where('ticket_id', $ticket_id)->orderBy('created_at', 'ASC')->get();
+            return view('pages.ticket-messages', compact('ticketMessages'))
+                ->with('ticket_id', $ticket_id)
+                ->with('status', $relatedTicket->value('status'));
         }else{
             return redirect('/');
         }
 
+    }
+
+    public function newTicketMessage(Request $request, Ticket $ticket){
+        $request->validate([
+            'ticket_id'            => ['required', 'digits_between:1,10'],
+            'message'            => ['required', 'max:5000']
+        ]);
+
+        $relatedTicket = $ticket->where('id', $request->ticket_id);
+        if(auth()->user()->id == $relatedTicket->value('user_id')){
+        $ticketMessages = new TicketMessage();
+        $ticketMessages->ticket_id = $request->ticket_id;
+        $ticketMessages->user_id = auth()->user()->id;
+        $ticketMessages->message = $request->message;
+        $ticketMessages->save();
+
+        alert()->success('Success!','You have successfully sent the message.')->timerProgressBar();
+        return back();
+        }else{
+            return redirect('/');
+        }
     }
 }
