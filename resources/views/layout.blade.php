@@ -15,7 +15,7 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>{{$configsArray['title']}}</title>
+    <title>{{$configsArray['title']}} - @yield('subTitle')</title>
 
     <meta name="description" content="{{$configsArray['meta_description']}}" />
     <meta name="keywords" content="{{$configsArray['meta_keywords']}}">
@@ -80,7 +80,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a href="/" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                     width="25"
@@ -148,7 +148,7 @@
 
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Profile</span></li>
             <ul class="menu-inner py-1">
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('profile') || request()->is('profile/*') ? ' active' : '' }}">
                     <a href="/profile" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i>
                         <div data-i18n="My Profile">My Profile</div>
@@ -156,13 +156,13 @@
                 </li>
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">ORDERS</span></li>
-                <li class="menu-item active">
+                <li class="menu-item{{ request()->is('/') ? ' active' : '' }}">
                     <a href="/" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-plus"></i>
                         <div data-i18n="New Order">New Order</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('massorders') || request()->is('massorders/*') ? ' active' : '' }}">
                     <a
                         href="/massorders"
                         class="menu-link"
@@ -171,7 +171,7 @@
                         <div data-i18n="Mass Orders">Mass Orders</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('orders') || request()->is('orders/*') ? ' active' : '' }}">
                     <a
                         href="/orders"
                         class="menu-link"
@@ -185,14 +185,14 @@
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Services</span></li>
 
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('services') || request()->is('services/*') ? ' active' : '' }}">
                     <a href="/services" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
                         <div data-i18n="Services">Services</div>
                     </a>
                 </li>
 
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('serviceupdates') || request()->is('serviceupdates/*') ? ' active' : '' }}">
                     <a href="/serviceupdates" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-left-indent"></i>
                         <div data-i18n="Service Updates">Service Updates</div>
@@ -202,7 +202,7 @@
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Balance</span></li>
 
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('addfunds') || request()->is('addfunds/*') ? ' active' : '' }}">
                     <a href="/addfunds" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-wallet"></i>
                         <div data-i18n="Add Funds">Add Funds</div>
@@ -212,14 +212,14 @@
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Support</span></li>
 
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('tickets') || request()->is('ticket/*') ? ' active' : '' }}">
                     <a href="/tickets" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-chat"></i>
                         <div data-i18n="Tickets">Tickets</div>
                     </a>
                 </li>
 
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('faq') || request()->is('faq/*') ? ' active' : '' }}">
                     <a href="/faq" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-question-mark"></i>
                         <div data-i18n="FAQ">FAQ</div>
@@ -229,7 +229,7 @@
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">OTHER</span></li>
 
-                <li class="menu-item">
+                <li class="menu-item{{ request()->is('api') || request()->is('api/*') ? ' active' : '' }}">
                     <a href="/api" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-network-chart"></i>
                         <div data-i18n="API">API</div>
