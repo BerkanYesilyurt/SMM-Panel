@@ -1,4 +1,5 @@
 @extends('layout')
+@section('subTitle', 'Tickets')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
@@ -112,7 +113,7 @@
 
                         <div class="mt-3" id="order-group">
                             <label for="orderid" class="form-label">ORDER ID:</label>
-                            <input type="text" id="orderid" name="orderid" class="form-control" placeholder="ORDERS ID" required>
+                            <input type="text" id="orderid" name="orderid" class="form-control" placeholder="ORDERS ID" maxlength="180" required>
                         </div>
                         <div class="mt-3" id="type-group">
                             <label for="order_request" class="form-label">REQUEST:</label>
@@ -138,7 +139,7 @@
                         </div>
                         <div class="mt-3" id="paymentid-group" style="display: none;">
                             <label for="payid" class="form-label">PAY ID:</label>
-                            <input type="text" id="payid" name="payid" class="form-control" placeholder="PAY ID" required>
+                            <input type="text" id="payid" name="payid" maxlength="100" class="form-control" placeholder="PAY ID" required>
                         </div>
                         <div class="mt-3" id="request-group" style="display: none;">
                             <label for="feature_request" class="form-label">TYPE:</label>
@@ -151,7 +152,7 @@
 
                         <div class="mt-3">
                             <label for="message" class="form-label">MESSAGE:</label>
-                            <textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Your Message" required></textarea>
+                            <textarea name="message" id="message" maxlength="5000" cols="30" rows="10" class="form-control" placeholder="Your Message" required></textarea>
                         </div>
 
                     </div>
