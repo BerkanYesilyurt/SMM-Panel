@@ -1,4 +1,5 @@
 @extends('layout')
+@section('subTitle', 'Ticket')
 @section('content')
 
     <!-- Content wrapper -->
@@ -15,6 +16,16 @@
                     <span class="tf-icons bx bx-arrow-back"></span>&nbsp; Go Back
                 </button>
             </h4>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul style="margin-bottom: 1px;">
+                        @foreach ($errors->all() as $error)
+                            <li><b>{{$error}}</b></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <br>
+            @endif
             @if($status == "CLOSED")
                 <span class="badge bg-danger" style="width: 100%; padding-top: 30px; padding-bottom: 30px; margin-bottom: 30px;">
                         No further messages are accepted as this ticket is closed.
