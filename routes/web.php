@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
@@ -30,3 +31,6 @@ Route::get('/tickets', [TicketController::class, 'index']);
 Route::post('/tickets', [TicketController::class, 'createTicket']);
 Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages']);
 Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
+
+Route::get('/faq', [FaqController::class, 'faqPage']);
+Route::post('/faq', [FaqController::class, 'createFaq']);
