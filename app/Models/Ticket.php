@@ -32,6 +32,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUserId($value)
  * @mixin \Eloquent
+ * @property string $message
+ * @property string|null $order_request
+ * @property string|null $pay_type
+ * @property string|null $feature_request
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereFeatureRequest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereOrderRequest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket wherePayType($value)
  */
 class Ticket extends Model
 {
