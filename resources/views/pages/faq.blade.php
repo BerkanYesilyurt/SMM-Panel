@@ -32,13 +32,4 @@
                     @endforelse
 
     </div>
-
-
-    <script>
-
-        function submit(){
-            document.getElementById("form").submit();
-        }
-
-    </script>
 @endsection
