@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,6 @@ Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
 
 Route::get('/faq', [FaqController::class, 'faqPage']);
 Route::post('/faq', [FaqController::class, 'createFaq']);
+
+Route::get('/profile', [ProfileController::class, 'profilePage']);
+Route::post('/profile', [ProfileController::class, 'updateProfile']);
