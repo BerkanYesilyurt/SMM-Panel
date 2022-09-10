@@ -38,3 +38,5 @@ Route::post('/faq', [FaqController::class, 'createFaq']);
 
 Route::get('/profile', [ProfileController::class, 'profilePage']);
 Route::post('/profile', [ProfileController::class, 'updateProfile']);
+
+Route::get('/generate', [ProfileController::class, 'generateToken']);
