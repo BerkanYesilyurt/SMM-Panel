@@ -18,25 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'check']);
+Route::get('/', [HomeController::class, 'check'])->middleware('maintenance');
 
-Route::get('/login', [HomeController::class, 'showLogin'])->name('login');
-Route::get('/register', [HomeController::class, 'showRegister'])->name('register');
+Route::get('/login', [HomeController::class, 'showLogin'])->middleware('guest', 'maintenance')->name('login');
+Route::get('/register', [HomeController::class, 'showRegister'])->middleware('guest', 'maintenance')->name('register');
 
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [UserController::class, 'login'])->middleware('guest', 'maintenance');
+Route::post('/register', [UserController::class, 'register'])->middleware('guest', 'maintenance');
 
-Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/logout', [UserController::class, 'logout'])->middleware('auth', 'maintenance');
 
-Route::get('/tickets', [TicketController::class, 'index']);
-Route::post('/tickets', [TicketController::class, 'createTicket']);
-Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages']);
-Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
+Route::get('/tickets', [TicketController::class, 'index'])->middleware('auth', 'maintenance');
+Route::post('/tickets', [TicketController::class, 'createTicket'])->middleware('auth', 'maintenance');
+Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages'])->middleware('auth', 'maintenance');
+Route::post('/ticket_message', [TicketController::class, 'newTicketMessage'])->middleware('auth', 'maintenance');
 
-Route::get('/faq', [FaqController::class, 'faqPage']);
-Route::post('/faq', [FaqController::class, 'createFaq']);
+Route::get('/faq', [FaqController::class, 'faqPage'])->middleware('auth', 'maintenance');
+Route::post('/faq', [FaqController::class, 'createFaq'])->middleware('auth', 'maintenance');
 
-Route::get('/profile', [ProfileController::class, 'profilePage']);
-Route::post('/profile', [ProfileController::class, 'updateProfile']);
+Route::get('/profile', [ProfileController::class, 'profilePage'])->middleware('auth', 'maintenance');
+Route::post('/profile', [ProfileController::class, 'updateProfile'])->middleware('auth', 'maintenance');
 
-Route::get('/generate', [ProfileController::class, 'generateToken']);
+Route::get('/generate', [ProfileController::class, 'generateToken'])->middleware('auth', 'maintenance');
