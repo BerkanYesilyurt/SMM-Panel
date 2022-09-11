@@ -43,7 +43,7 @@ class UserController extends Controller
         $newUser = $user->create($fields);
         auth()->login($newUser);
 
-        alert()->success('Success!','You have successfully registered and logged in.')->timerProgressBar();;
+        alert()->success('Success!','You have successfully registered and logged in.')->timerProgressBar();
         return redirect('/');
     }
 
