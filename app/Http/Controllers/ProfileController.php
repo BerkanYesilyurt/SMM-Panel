@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -16,7 +17,13 @@ class ProfileController extends Controller
 
     }
 
-    public function generateToken(){
+    public function generateToken(User $user){
+        $apiKey = Str::random(55);
 
+        $user->where('id', '=', auth()->user()->id)->update([
+            'api_key' => $apiKey
+        ]);
+
+        return back()->with('message', 'You have successfully generated new API key.');
     }
 }
