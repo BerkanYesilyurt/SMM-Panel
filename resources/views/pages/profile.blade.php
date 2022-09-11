@@ -18,15 +18,18 @@
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="name" class="form-label">Name</label>
-                                <input class="form-control" type="text" id="name" name="name" value="{{$currentUser->name}}" autofocus="">
+                                <input class="form-control" type="text" id="name" name="name"
+                                       value="{{$currentUser->name}}" autofocus="">
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="contact" class="form-label">Skype / Contact</label>
-                                <input type="text" class="form-control" id="contact" name="contact" value="{{$currentUser->contact}}">
+                                <input type="text" class="form-control" id="contact" name="contact"
+                                       value="{{$currentUser->contact}}">
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input class="form-control" type="text" id="email" name="email" value="{{$currentUser->email}}" readonly >
+                                <input class="form-control" type="text" id="email" name="email"
+                                       value="{{$currentUser->email}}" readonly>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label for="timezone" class="form-label">Timezone</label>
@@ -56,51 +59,67 @@
                                 <button type="submit" class="btn btn-primary me-2">Update Profile</button>
                             </div>
                         </div>
-                         </form>
-                        <br>
-                        <hr class="my-0">
-                        <br>
+                    </form>
+                    <br>
+                    <hr class="my-0">
+                    <br>
 
-                        <form action="/profile" name="changePassword" method="POST">
-                            @csrf
-                            <div class="mb-3 col-md-6">
-                                <label for="old_password" class="form-label">Current Password</label>
-                                <input class="form-control" type="password" id="old_password" name="old_password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" autofocus="">
-                            </div>
-                            <div class="mb-3 col-md-6"></div>
-                            <div class="mb-3 col-md-6">
-                                <label for="password" class="form-label">New Password</label>
-                                <input class="form-control" type="password" id="password" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" autofocus="">
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="password_confirmation" class="form-label">Confirm New Password</label>
-                                <input class="form-control" type="password" id="password_confirmation" name="password_confirmation" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" autofocus="">
-                            </div>
+                    <form action="/profile" name="changePassword" method="POST">
+                        @csrf
+                        <div class="mb-3 col-md-6">
+                            <label for="old_password" class="form-label">Current Password</label>
+                            <input class="form-control" type="password" id="old_password" name="old_password"
+                                   placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                   autofocus="">
+                        </div>
+                        <div class="mb-3 col-md-6"></div>
+                        <div class="mb-3 col-md-6">
+                            <label for="password" class="form-label">New Password</label>
+                            <input class="form-control" type="password" id="password" name="password"
+                                   placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                   autofocus="">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="password_confirmation" class="form-label">Confirm New Password</label>
+                            <input class="form-control" type="password" id="password_confirmation"
+                                   name="password_confirmation"
+                                   placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                   autofocus="">
+                        </div>
 
-                            <div class="mt-2">
-                                <button type="submit" class="btn btn-primary me-2">Change Password</button>
-                            </div>
-                        </form>
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-primary me-2">Change Password</button>
+                        </div>
+                    </form>
                 </div>
                 <!-- /Account -->
             </div>
-        <div class="card mb-4">
-            <h5 class="card-header">API</h5>
-            <div class="card-body">
-                <div class="mb-3 col-12 mb-0">
-                    <div class="alert alert-warning">
-                        <h6 class="alert-heading fw-bold mb-1">API key is private and gives direct access to your account!</h6>
-                        <p class="mb-0">Please do not share your api key with anyone.</p>
+            <div class="card mb-4">
+                <h5 class="card-header">API</h5>
+                <div class="card-body">
+                    <div class="mb-3 col-12 mb-0">
+                        @if(session('message'))
+                            <div class="alert alert-success">
+                                <h6 class="alert-heading fw-bold mb-1">{{session('message')}}</h6>
+                                <p class="mb-0">Please do not share your API key with anyone.</p>
+                            </div>
+                        @else
+                            <div class="alert alert-warning">
+                                <h6 class="alert-heading fw-bold mb-1">API key is private and gives direct access to your account!</h6>
+                                <p class="mb-0">Please do not share your API key with anyone.</p>
+                            </div>
+                        @endif
                     </div>
-                </div>
 
-                <div class="mb-3 col-md-6">
-                    <label for="name" class="form-label">API KEY</label>
-                    <input class="form-control" type="text" id="name" name="name" value="{{$currentUser->api_key ?? 'NOT DEFINED'}}" readonly>
-                </div>
-                <a href="/generate" class="btn btn-danger deactivate-account">{{$currentUser->api_key ? 'Regenerate API Key' : 'Generate API Key'}}</a>
+                    <div class="mb-3 col-md-6">
+                        <label for="name" class="form-label">API KEY</label>
+                        <input class="form-control" type="text" id="name" name="name" onClick="this.select();"
+                               value="{{$currentUser->api_key ?? 'NOT DEFINED'}}" readonly>
+                    </div>
+                    <a href="/generate"
+                       class="btn btn-danger deactivate-account">{{$currentUser->api_key ? 'Regenerate API Key' : 'Generate API Key'}}</a>
 
-            </div>
+                </div>
             </div>
         </div>
     </div>
