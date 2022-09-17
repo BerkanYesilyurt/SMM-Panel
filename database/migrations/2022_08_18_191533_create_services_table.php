@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('type')->default('manual');
             $table->integer('api_provider_id')->nullable()->default(NULL);
             $table->integer('api_service_id')->nullable()->default(NULL);
-            $table->string('status')->default('PENDING');
+            $table->string('status')->default('ACTIVE');
             $table->timestamps();
         });
     }
