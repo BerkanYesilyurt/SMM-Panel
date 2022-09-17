@@ -30,4 +30,8 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $guarded = [];
+
+    public function getServicesWithCategory(){
+        return $this->hasMany(Service::class, 'category_id', 'id')->get();
+    }
 }
