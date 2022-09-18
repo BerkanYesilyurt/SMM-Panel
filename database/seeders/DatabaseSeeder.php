@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'maintenance_mode',
-                'value' => '1',
+                'value' => '0',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
@@ -136,5 +136,22 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]
         ]);
+
+        DB::table('faq')->insert([
+            [
+                'question' => 'What is SMM Panel?',
+                'answer' => 'SMM panel, which is the short form of Social Media marketing panel is generally utilized concerning advertising organizations, brands, or ventures via web-based media. As you surely understand, Social media is the thing to get done where individuals from varying backgrounds associate for a considerable length of time.',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'question' => 'What is Partial status?',
+                'answer' => 'Partial Status is when we partially refund the remains of an order. Sometimes for some reasons we are unable to deliver a full order, so we refund you the remaining undelivered amount.',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]
+        ]);
+
+
     }
 }
