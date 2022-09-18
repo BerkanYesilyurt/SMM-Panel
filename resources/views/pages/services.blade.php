@@ -9,15 +9,23 @@
         <div class="card">
 
             <div class="table-responsive text-nowrap">
+                <style>
+                    table {
+                        border-spacing: 0px;
+                        table-layout: fixed;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                </style>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th><center>SERVICE ID</center></th>
-                        <th><center>NAME</center></th>
-                        <th><center>RATE</center></th>
-                        <th><center>MIN</center></th>
-                        <th><center>MAX</center></th>
-                        <th><center>DESCRIPTION</center></th>
+                        <th style="width: 8%;"><center>SERVICE ID</center></th>
+                        <th style="width: 50%;"><center>NAME</center></th>
+                        <th style="width: 11%;"><center>RATE</center></th>
+                        <th style="width: 8%;"><center>MIN</center></th>
+                        <th style="width: 8%;"><center>MAX</center></th>
+                        <th style="width: 15%;"><center>DESCRIPTION</center></th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -28,8 +36,8 @@
                         </tr>
                         @foreach($services[$categoryId] as $service)
                         <tr>
-                            <td><center>{{$service->id}}</center></td>
-                            <td><center>{{$service->name}}</center></td>
+                            <td><center><b>{{$service->id}}</b></center></td>
+                            <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$service->name}}</center></td>
                             <td><center>{{$configsArray['currency_symbol']}}{{$service->price}}</center></td>
                             <td><center>{{$service->min}}</center></td>
                             <td><center>{{$service->max}}</center></td>
