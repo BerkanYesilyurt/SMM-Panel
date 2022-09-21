@@ -16,7 +16,7 @@ class HomeController extends Controller
     $directly_login = $config->where('name','=', 'directly_login')->value('value');
 
     if(auth()->check()){
-        return view('pages.new-order');
+        return redirect()->route('new-order');
     }elseif($directly_login){
         return redirect()->route('login');
     }else{
