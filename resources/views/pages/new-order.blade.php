@@ -83,17 +83,17 @@
                                 <div class="mt-2 mb-3">
                                     <label for="Categories" class="form-label">Categories</label>
                                     <select id="Categories" class="form-select form-select-lg">
-                                        <option>Select</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option disabled selected hidden>Select A Category</option>
+                                        @foreach($categories as $categoryId => $categoryName)
+                                            <option value="{{$categoryId}}">{{$categoryName}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="mt-2 mb-3">
                                     <label for="Services" class="form-label">Services</label>
                                     <select id="Services" class="form-select form-select-lg">
-                                        <option>Select</option>
+                                        <option disabled selected hidden>Select A Service</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
