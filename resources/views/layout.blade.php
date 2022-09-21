@@ -156,8 +156,8 @@
                 </li>
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">ORDERS</span></li>
-                <li class="menu-item{{ request()->is('/') ? ' active' : '' }}">
-                    <a href="/" class="menu-link">
+                <li class="menu-item{{ request()->is('/') || request()->is('new-order') || request()->is('new-order/*') ? ' active' : '' }}">
+                    <a href="/new-order" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-plus"></i>
                         <div data-i18n="New Order">New Order</div>
                     </a>
