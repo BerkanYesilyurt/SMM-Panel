@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TicketController;
@@ -43,3 +44,5 @@ Route::post('/profile', [ProfileController::class, 'updateProfile'])->middleware
 Route::get('/generate', [ProfileController::class, 'generateToken'])->middleware('auth', 'maintenance');
 
 Route::get('/services', [ServiceController::class, 'servicesPage'])->middleware('auth', 'maintenance');
+
+Route::get('/new-order', [OrderController::class, 'orderPage'])->middleware('auth', 'maintenance')->name('new-order');
