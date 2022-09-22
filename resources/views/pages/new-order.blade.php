@@ -79,10 +79,17 @@
                         <div class="col-md-12">
                             <h5 class="card-header m-0 me-2 pb-3">New Order</h5>
                             <div class="px-2" style="margin-left: 0.9rem; margin-right: 0.9rem;">
-
+                                <form action="" method="" name="neworder" id="neworder">
+                                    @csrf
                                 <div class="mt-2 mb-3">
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                                    <style>
+                                        .hidden{
+                                            display:none;
+                                        }
+                                    </style>
                                     <label for="Categories" class="form-label">Categories</label>
-                                    <select id="Categories" class="form-select form-select-lg">
+                                    <select id="Categories" name="Categories" class="form-select form-select-lg" required>
                                         <option disabled selected hidden>Select A Category</option>
                                         @foreach($categories as $categoryId => $categoryName)
                                             <option value="{{$categoryId}}">{{$categoryName}}</option>
@@ -92,23 +99,28 @@
 
                                 <div class="mt-2 mb-3">
                                     <label for="Services" class="form-label">Services</label>
-                                    <select id="Services" class="form-select form-select-lg">
+                                    <select id="Services" name="Services" class="form-select form-select-lg" required>
                                         <option disabled selected hidden>Select A Service</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach($categories as $categoryId => $categoryName)
+                                            @foreach($services[$categoryId] as $service)
+                                                <option value="{{$service->id}}" class="hidden" data-category="{{$categoryId}}" data-price="{{$service->price}}" data-min="{{$service->min}}" data-max="{{$service->max}}">{{$service->name}} - {{$configsArray['currency_symbol']}}{{$service->price}}</option>
+                                            @endforeach
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="mt-2 mb-3">
                                     <label for="Link" class="form-label">Link</label>
-                                    <input id="Link" class="form-control form-control-lg" type="text" placeholder="Link">
+                                    <input id="Link" name="Link" class="form-control form-control-lg" type="text" placeholder="Link" required>
                                 </div>
 
                                 <div class="mt-2 mb-3">
                                     <label for="Quantity" class="form-label">Quantity</label>
-                                    <input id="Quantity" class="form-control form-control-lg" type="text" placeholder="Quantity">
-                                    <div class="form-text" style="padding-top: 8px;"><span class="badge bg-success" style="font-size:1em;"><b>Min: 100</b></span> - <span class="badge bg-danger" style="font-size:1em;"><b>Max: 500</b></span></div>
+                                    <input id="Quantity" name="Quantity" class="form-control form-control-lg" type="number" placeholder="Quantity" required>
+                                    <div class="form-text" style="padding-top: 8px;">
+                                        <span class="badge bg-success hidden" id="serviceMin" style="font-size:1em;"><b>Min: 100</b></span>
+                                        <span class="badge bg-danger hidden" id="serviceMax" style="font-size:1em;"><b>Max: 500</b></span>
+                                    </div>
                                 </div>
 
                                 <div class="mt-2 mb-3">
@@ -117,8 +129,9 @@
                                 </div>
 
                                 <div class="mt-2 mb-3">
-                                <button class="btn btn-primary btn-lg" type="button" style="width: 100%;">SUBMIT</button>
+                                <button class="btn btn-primary btn-lg" type="submit" style="width: 100%;">SUBMIT</button>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -129,5 +142,42 @@
 
         </div>
     </div>
+<script>
+    $(function(){
+        $("#Categories").on("change", function(){
+            var $target = $("#Services").val(""),
+                category = $(this).val();
 
+            $target
+                .toggleClass("hidden", category === "")
+                .find("option:gt(0)").addClass("hidden")
+                .siblings().filter("[data-category="+category+"]").removeClass("hidden");
+
+            $("#Services").val($("#Services option:first").val());
+        });
+
+        $("#Services").on("change", function(){
+            var serviceCategory = $(this).find(':selected').data('category');
+            var serviceMin = $(this).find(':selected').data('min');
+            var serviceMax = $(this).find(':selected').data('max');
+            var servicePrice = $(this).find(':selected').data('price');
+
+            $("#serviceMin").html("<b>MIN: " + serviceMin + "</b>").removeClass("hidden");
+            $("#serviceMax").html("<b>MAX: " + serviceMax + "</b>").removeClass("hidden");
+
+            $("#Link").attr({
+                required: true,
+                minlength:1,
+                maxlength:5000
+            });
+
+            $("#Quantity").attr({
+                required: true,
+                min:serviceMin,
+                max:serviceMax
+            });
+
+        });
+    });
+</script>
 @endsection
