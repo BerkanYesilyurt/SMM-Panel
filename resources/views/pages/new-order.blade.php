@@ -143,8 +143,17 @@
         </div>
     </div>
 <script>
+    function clearAll(){
+        $('#Link').val('');
+        $('#Quantity').val('');
+        $('#Charge').val('');
+        $("#serviceMax").addClass("hidden");
+        $("#serviceMin").addClass("hidden");
+    }
+
     $(function(){
         $("#Categories").on("change", function(){
+            clearAll();
             var $target = $("#Services").val(""),
                 category = $(this).val();
 
@@ -157,10 +166,10 @@
         });
 
         $("#Services").on("change", function(){
+            clearAll();
             var serviceCategory = $(this).find(':selected').data('category');
             var serviceMin = $(this).find(':selected').data('min');
             var serviceMax = $(this).find(':selected').data('max');
-            var servicePrice = $(this).find(':selected').data('price');
 
             $("#serviceMin").html("<b>MIN: " + serviceMin + "</b>").removeClass("hidden");
             $("#serviceMax").html("<b>MAX: " + serviceMax + "</b>").removeClass("hidden");
@@ -177,6 +186,12 @@
                 max:serviceMax
             });
 
+        });
+
+        $('#Quantity').on('input', function() {
+            var servicePrice = $('#Services').find(':selected').data('price');
+            var total = ($('#Quantity').val() / 1000) * servicePrice;
+            $('#Charge').val("{{$configsArray['currency_symbol']}}" + total.toFixed(4));
         });
     });
 </script>
