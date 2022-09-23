@@ -137,6 +137,22 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-lg-4 order-2 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="card-title m-0 me-2">Service Description</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="p-0 m-0">
+                            <li class="d-flex mb-4 pb-1">
+                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
