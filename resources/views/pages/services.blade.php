@@ -41,7 +41,7 @@
                             <td><center>{{$configsArray['currency_symbol']}}{{$service->price}}</center></td>
                             <td><center>{{$service->min}}</center></td>
                             <td><center>{{$service->max}}</center></td>
-                            <td><center><button type="button" onclick="changeModal(this)" data-servicename="{{$service->name}}" data-servicedescription="{{$service->description}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                            <td><center><button type="button" onclick="changeModal(this)" data-servicename="{{$service->name}}" data-servicedescription="<x-services :description='$service->description'/>" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
                                         <span class="tf-icons bx bx-detail"></span>&nbsp; View Details
                                     </button></center></td>
                         </tr>
