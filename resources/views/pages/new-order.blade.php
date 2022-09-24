@@ -104,6 +104,7 @@
                                         @foreach($categories as $categoryId => $categoryName)
                                             @foreach($services[$categoryId] as $service)
                                                 <option value="{{$service->id}}" class="hidden" data-serviceid="{{$service->id}}" data-category="{{$categoryId}}" data-description="{{$service->description}}" data-price="{{$service->price}}" data-min="{{$service->min}}" data-max="{{$service->max}}">{{$service->name}} - {{$configsArray['currency_symbol']}}{{$service->price}}</option>
+                                            @php($servicesList[$service->id] = $service)
                                             @endforeach
                                         @endforeach
                                     </select>
@@ -147,29 +148,11 @@
                             <li class="d-flex mb-4 pb-1">
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
 
-                                    <div id="serviceDescription">
-
-                                        <div class="me-2">
-                                            <a class="text-muted d-block mb-1">Refill & Guarantee</a>
-                                            <h5 class="mb-0"><span id="refill">N/A</span></h5>
-                                        </div>
-                                        <br>
-                                        <div class="me-2">
-                                            <a class="text-muted d-block mb-1">Start Time</a>
-                                            <h5 class="mb-0"><span id="starttime">N/A</span></h5>
-                                        </div>
-                                        <br>
-                                        <div class="me-2">
-                                            <a class="text-muted d-block mb-1">Speed</a>
-                                            <h5 class="mb-0"><span id="speed">N/A</span></h5>
-                                        </div>
-                                        <br>
-                                        <div class="me-2">
-                                            <a class="text-muted d-block mb-1">Description</a>
-                                            <span id="alldescription" style="white-space:pre-wrap; word-wrap:break-word; padding-right: 5px;"></span>
-                                        </div>
-
-                                    </div>
+                                    <div id="refill" class="d-flex w-100"></div>
+                                    <div id="starttime" class="d-flex w-100"></div>
+                                    <div id="speed" class="d-flex w-100"></div>
+                                    <div id="description" class="d-flex w-100"></div>
+                                    <div id="serviceDescription"></div>
 
                                 </div>
                             </li>
@@ -182,9 +165,8 @@
 
         </div>
     </div>
-<x-servicedescription :services="$services" />
+<x-servicedescription :services="$servicesList" />
 <script>
-    alert(servicesList.find(x => x.id == '1').name);
 
     function defaultDescription(){
         $("#serviceDescription")
@@ -192,7 +174,7 @@
             .html('<b><center>Please select a category and service to see description.</center></b>');
     }
 
-    //defaultDescription();
+    defaultDescription();
 
     function clearAll(){
         $('#Link').val('');
@@ -200,6 +182,11 @@
         $('#Charge').val('');
         $("#serviceMax").addClass("hidden");
         $("#serviceMin").addClass("hidden");
+        $("#refill").html("");
+        $("#starttime").html("");
+        $("#speed").html("");
+        $("#description").html("");
+        $("#serviceDescription").html("");
     }
 
     $(function(){
@@ -223,6 +210,7 @@
             var serviceCategory = $(this).find(':selected').data('category');
             var serviceMin = $(this).find(':selected').data('min');
             var serviceMax = $(this).find(':selected').data('max');
+            var serviceId = $(this).find(':selected').data('serviceid');
 
             $("#serviceMin").html("<b>MIN: " + serviceMin + "</b>").removeClass("hidden");
             $("#serviceMax").html("<b>MAX: " + serviceMax + "</b>").removeClass("hidden");
@@ -238,6 +226,17 @@
                 min:serviceMin,
                 max:serviceMax
             });
+
+            var refill = (servicesList.find(x => x.id == serviceId).refill).length > 1 ? servicesList.find(x => x.id == serviceId).refill : 'No DATA';
+            var starttime = (servicesList.find(x => x.id == serviceId).starttime).length > 1 ? servicesList.find(x => x.id == serviceId).starttime : 'No DATA';
+            var speed = (servicesList.find(x => x.id == serviceId).speed).length > 1 ? servicesList.find(x => x.id == serviceId).speed : 'No DATA';
+            var description = (servicesList.find(x => x.id == serviceId).description).length > 1 ? servicesList.find(x => x.id == serviceId).description : 'No DATA';
+
+            $("#serviceDescription").html("").removeAttr("style");
+            $("#refill").html('<div class="me-2"> <a class="text-muted d-block mb-1">Refill & Guarantee</a> <h5 class="mb-0">' + refill +'</h5></div>');
+            $("#starttime").html('<div class="me-2"> <a class="text-muted d-block mb-1">Start Time</a> <h5 class="mb-0">' + starttime +'</h5></div>');
+            $("#speed").html('<div class="me-2"> <a class="text-muted d-block mb-1">Speed</a> <h5 class="mb-0">' + speed +'</h5></div>');
+            $("#description").html('<div class="me-2"> <a class="text-muted d-block mb-1">Service Description</a> <h5 class="mb-0">' + description +'</h5></div>');
 
         });
 
