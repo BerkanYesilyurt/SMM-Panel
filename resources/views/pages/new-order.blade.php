@@ -103,7 +103,7 @@
                                         <option disabled selected hidden>Select A Service</option>
                                         @foreach($categories as $categoryId => $categoryName)
                                             @foreach($services[$categoryId] as $service)
-                                                <option value="{{$service->id}}" class="hidden" data-category="{{$categoryId}}" data-price="{{$service->price}}" data-min="{{$service->min}}" data-max="{{$service->max}}">{{$service->name}} - {{$configsArray['currency_symbol']}}{{$service->price}}</option>
+                                                <option value="{{$service->id}}" class="hidden" data-serviceid="{{$service->id}}" data-category="{{$categoryId}}" data-description="{{$service->description}}" data-price="{{$service->price}}" data-min="{{$service->min}}" data-max="{{$service->max}}">{{$service->name}} - {{$configsArray['currency_symbol']}}{{$service->price}}</option>
                                             @endforeach
                                         @endforeach
                                     </select>
@@ -140,13 +140,37 @@
             <div class="col-md-6 col-lg-4 order-2 mb-4">
                 <div class="card h-100">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        <h5 class="card-title m-0 me-2">Service Description</h5>
+                        <h5 class="card-title m-0 me-2">Service Details</h5>
                     </div>
                     <div class="card-body">
                         <ul class="p-0 m-0">
                             <li class="d-flex mb-4 pb-1">
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                    
+
+                                    <div id="serviceDescription">
+
+                                        <div class="me-2">
+                                            <a class="text-muted d-block mb-1">Refill & Guarantee</a>
+                                            <h5 class="mb-0"><span id="refill">N/A</span></h5>
+                                        </div>
+                                        <br>
+                                        <div class="me-2">
+                                            <a class="text-muted d-block mb-1">Start Time</a>
+                                            <h5 class="mb-0"><span id="starttime">N/A</span></h5>
+                                        </div>
+                                        <br>
+                                        <div class="me-2">
+                                            <a class="text-muted d-block mb-1">Speed</a>
+                                            <h5 class="mb-0"><span id="speed">N/A</span></h5>
+                                        </div>
+                                        <br>
+                                        <div class="me-2">
+                                            <a class="text-muted d-block mb-1">Description</a>
+                                            <span id="alldescription" style="white-space:pre-wrap; word-wrap:break-word; padding-right: 5px;"></span>
+                                        </div>
+
+                                    </div>
+
                                 </div>
                             </li>
                         </ul>
@@ -158,7 +182,18 @@
 
         </div>
     </div>
+<x-servicedescription :services="$services" />
 <script>
+    alert(servicesList.find(x => x.id == '1').name);
+
+    function defaultDescription(){
+        $("#serviceDescription")
+            .css({'position':'absolute','left':'50%','top':'50%','-webkit-transform':'translate(-50%, -50%)','transform':'translate(-50%, -50%)'})
+            .html('<b><center>Please select a category and service to see description.</center></b>');
+    }
+
+    //defaultDescription();
+
     function clearAll(){
         $('#Link').val('');
         $('#Quantity').val('');
@@ -168,8 +203,10 @@
     }
 
     $(function(){
+
         $("#Categories").on("change", function(){
             clearAll();
+            defaultDescription();
             var $target = $("#Services").val(""),
                 category = $(this).val();
 
