@@ -46,3 +46,5 @@ Route::get('/generate', [ProfileController::class, 'generateToken'])->middleware
 Route::get('/services', [ServiceController::class, 'servicesPage'])->middleware('auth', 'maintenance');
 
 Route::get('/new-order', [OrderController::class, 'orderPage'])->middleware('auth', 'maintenance')->name('new-order');
+
+Route::get('/massorders', [OrderController::class, 'massOrderPage'])->middleware('auth', 'maintenance');
