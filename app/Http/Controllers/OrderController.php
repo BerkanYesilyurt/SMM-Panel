@@ -18,4 +18,8 @@ class OrderController extends Controller
 
         return view('pages.new-order', compact('services', 'categories'));
     }
+
+    public function massOrderPage(){
+        return view('pages.massorders');
+    }
 }
