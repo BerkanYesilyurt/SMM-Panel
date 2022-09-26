@@ -74,12 +74,22 @@
             </div>
             <!-- Total Revenue -->
             <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul style="margin-bottom: 1px;">
+                            @foreach ($errors->all() as $error)
+                                <li><b>{{$error}}</b></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <br>
+                @endif
                 <div class="card">
                     <div class="row row-bordered g-0">
                         <div class="col-md-12">
                             <h5 class="card-header m-0 me-2 pb-3">New Order</h5>
                             <div class="px-2" style="margin-left: 0.9rem; margin-right: 0.9rem;">
-                                <form action="" method="" name="neworder" id="neworder">
+                                <form action="/new-order" method="POST" name="neworder" id="neworder">
                                     @csrf
                                 <div class="mt-2 mb-3">
                                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
