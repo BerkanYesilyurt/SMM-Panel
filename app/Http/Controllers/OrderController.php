@@ -22,4 +22,8 @@ class OrderController extends Controller
     public function massOrderPage(){
         return view('pages.massorders');
     }
+
+    public function ordersPage(){
+        return view('pages.orders');
+    }
 }
