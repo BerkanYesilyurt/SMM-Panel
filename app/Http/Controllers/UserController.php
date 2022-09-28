@@ -79,4 +79,13 @@ class UserController extends Controller
 
     }
 
+    public function getUserBalance($user_id = null){
+        if(is_null($user_id)){
+            $user_id = auth()->user()->id;
+        }
+
+        $balance = User::findOrFail($user_id)->balance;
+        return $balance;
+    }
+
 }
