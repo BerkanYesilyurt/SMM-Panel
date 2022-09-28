@@ -13,7 +13,11 @@ class NewOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if(auth()->check()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -24,7 +28,10 @@ class NewOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'categories' => 'required|numeric',
+            'services' => 'required|numeric',
+            'link' => 'required|min:1|max:5000',
+            'quantity' => 'required|numeric',
         ];
     }
 }
