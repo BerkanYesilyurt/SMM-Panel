@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LastLogin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -23,6 +24,8 @@ class UserController extends Controller
 
         if(auth()->attempt($fields, $rememberme)){
             $request->session()->regenerate();
+            event(new LastLogin(auth()->user(), $request));
+
             alert()->success('Success!','You have successfully logged in.')->timerProgressBar();
             return redirect('/');
         }
@@ -39,6 +42,8 @@ class UserController extends Controller
         ]);
 
         $fields['password'] = bcrypt($fields['password']);
+        $fields['last_login'] = now();
+        $fields['last_login_ip'] = $request->ip();
 
         $newUser = $user->create($fields);
         auth()->login($newUser);
