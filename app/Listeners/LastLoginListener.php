@@ -27,7 +27,7 @@ class LastLoginListener
     public function handle(LastLogin $event)
     {
         $event->user->last_login = now();
-        $event->user->last_login_ip = $event->request->ip();
+        $event->user->last_login_ip = $event->ip;
         $event->user->save();
     }
 }
