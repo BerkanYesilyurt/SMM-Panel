@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('timezone')->nullable();
             $table->string('activation_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('last_login')->nullable();
+            $table->string('last_login_ip')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
