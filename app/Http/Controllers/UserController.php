@@ -9,6 +9,20 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function getIpAdress(){
+        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+            if (array_key_exists($key, $_SERVER) === true){
+                foreach (explode(',', $_SERVER[$key]) as $ip){
+                    $ip = trim($ip);
+                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                        return $ip;
+                    }
+                }
+            }
+        }
+        return request()->getClientIp();
+    }
+
     public function login(Request $request, User $user){
 
         $fields = $request->validate([
@@ -24,7 +38,7 @@ class UserController extends Controller
 
         if(auth()->attempt($fields, $rememberme)){
             $request->session()->regenerate();
-            event(new LastLogin(auth()->user(), $request));
+            event(new LastLogin(auth()->user(), $request, $this->getIpAdress()));
 
             alert()->success('Success!','You have successfully logged in.')->timerProgressBar();
             return redirect('/');
@@ -43,7 +57,7 @@ class UserController extends Controller
 
         $fields['password'] = bcrypt($fields['password']);
         $fields['last_login'] = now();
-        $fields['last_login_ip'] = $request->ip();
+        $fields['last_login_ip'] = $this->getIpAdress();
 
         $newUser = $user->create($fields);
         auth()->login($newUser);
