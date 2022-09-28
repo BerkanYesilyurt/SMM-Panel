@@ -82,7 +82,6 @@
                             @endforeach
                         </ul>
                     </div>
-                    <br>
                 @endif
                 <div class="card">
                     <div class="row row-bordered g-0">
@@ -99,7 +98,7 @@
                                         }
                                     </style>
                                     <label for="Categories" class="form-label">Categories</label>
-                                    <select id="Categories" name="Categories" class="form-select form-select-lg" required>
+                                    <select id="Categories" name="categories" class="form-select form-select-lg" required>
                                         <option disabled selected hidden>Select A Category</option>
                                         @foreach($categories as $categoryId => $categoryName)
                                             <option value="{{$categoryId}}">{{$categoryName}}</option>
@@ -109,11 +108,12 @@
 
                                 <div class="mt-2 mb-3">
                                     <label for="Services" class="form-label">Services</label>
-                                    <select id="Services" name="Services" class="form-select form-select-lg" required>
+                                    <select id="Services" name="services" class="form-select form-select-lg" required>
                                         <option disabled selected hidden>Select A Service</option>
+                                        @php($servicesList = [])
                                         @foreach($categories as $categoryId => $categoryName)
                                             @foreach($services[$categoryId] as $service)
-                                                <option value="{{$service->id}}" class="hidden" data-serviceid="{{$service->id}}" data-category="{{$categoryId}}" data-description="{{$service->description}}" data-price="{{$service->price}}" data-min="{{$service->min}}" data-max="{{$service->max}}">{{$service->name}} - {{$configsArray['currency_symbol']}}{{$service->price}}</option>
+                                                <option value="{{$service->id}}" class="hidden" data-serviceid="{{$service->id}}" data-category="{{$categoryId}}" data-description="{{$service->description}}" data-price="{{$service->price}}" data-min="{{$service->min}}" data-max="{{$service->max}}">{{$service->id}} - {{$service->name}} - {{$configsArray['currency_symbol']}}{{$service->price}}</option>
                                             @php($servicesList[$service->id] = $service)
                                             @endforeach
                                         @endforeach
@@ -122,12 +122,12 @@
 
                                 <div class="mt-2 mb-3">
                                     <label for="Link" class="form-label">Link</label>
-                                    <input id="Link" name="Link" class="form-control form-control-lg" type="text" placeholder="Link" required>
+                                    <input id="Link" name="link" class="form-control form-control-lg" type="text" placeholder="Link" required>
                                 </div>
 
                                 <div class="mt-2 mb-3">
                                     <label for="Quantity" class="form-label">Quantity</label>
-                                    <input id="Quantity" name="Quantity" class="form-control form-control-lg" type="number" placeholder="Quantity" required>
+                                    <input id="Quantity" name="quantity" class="form-control form-control-lg" type="number" placeholder="Quantity" required>
                                     <div class="form-text" style="padding-top: 8px;">
                                         <span class="badge bg-success hidden" id="serviceMin" style="font-size:1em;"><b>Min: 100</b></span>
                                         <span class="badge bg-danger hidden" id="serviceMax" style="font-size:1em;"><b>Max: 500</b></span>
