@@ -21,10 +21,11 @@ class LastLogin
      *
      * @return void
      */
-    public function __construct($user, $request)
+    public function __construct($user, $request, $ip)
     {
         $this->user = $user;
         $this->request = $request;
+        $this->ip = $ip;
     }
 
     /**
