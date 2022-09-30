@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->text('name');
             $table->text('description');
-            $table->decimal('price', 15, 2)->default('0');
+            $table->decimal('price', 15, 5)->default('0');
             $table->integer('min');
             $table->integer('max');
             $table->string('type')->default('manual');
