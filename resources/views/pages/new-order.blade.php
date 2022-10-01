@@ -14,10 +14,11 @@
                             <div class="card-body">
                                 <h5 class="card-title text-primary">Welcome back {{ auth()->user()->name }}! 🎉</h5>
                                 <p class="mb-4">
-                                    Your total orders: <span class="fw-bold">0</span>
+                                    So far, you have placed <span class="fw-bold">{{$count['myorderscount']}}</span> orders through our panel. {{ $count['myorderscount'] == 0 ? 'You can get quality service by placing your first order right away.' : 'Thank you for choosing us.' }} We try to do the best for you!
                                 </p>
-
+                                @if($count['myorderscount'] > 0)
                                 <a href="/orders" class="btn btn-sm btn-outline-primary">View Your Orders</a>
+                                @endif
                             </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
@@ -49,7 +50,7 @@
                                     </div>
                                 </div>
                                 <span class="fw-semibold d-block mb-1">Total Orders:</span>
-                                <h3 class="card-title mb-2">0</h3>
+                                <h3 class="card-title mb-2">{{$count['totalorderscount']}}</h3>
                             </div>
                         </div>
                     </div>
