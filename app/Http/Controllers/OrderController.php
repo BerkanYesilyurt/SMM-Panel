@@ -21,7 +21,12 @@ class OrderController extends Controller
             $services[$category->id] = Category::find($category->id)->getServicesWithCategory();
         }
 
-        return view('pages.new-order', compact('services', 'categories'));
+        $count = [
+            'myorderscount' => Order::where('user_id','=', auth()->user()->id)->count(),
+            'totalorderscount' => Order::count()
+        ];
+
+        return view('pages.new-order', compact('services', 'categories', 'count'));
     }
 
     public function massOrderPage(){
@@ -36,8 +41,7 @@ class OrderController extends Controller
         $user = User::find(auth()->user()->id);
         $userBalance = (new UserController)->getUserBalance();
         $orderService = Service::whereId($request->services)->first();
-        $orderPrice = $orderService->price * $request->quantity / 1000;
-
+        $orderPrice = $orderService->price * (int)$request->quantity / 1000;
         $lastUserBalance = $userBalance - $orderPrice;
 
         if($userBalance >= $orderPrice && $lastUserBalance >= 0){
@@ -67,7 +71,7 @@ class OrderController extends Controller
                     'orderid' => $orderId,
                     'charge' => $orderPrice,
                     'link' => $request->link,
-                    'quantity' => $request->quantity,
+                    'quantity' => (int)$request->quantity,
                 ]);
 
         }else{
