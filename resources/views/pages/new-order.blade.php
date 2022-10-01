@@ -83,6 +83,18 @@
                         </ul>
                     </div>
                 @endif
+                @if(session('message'))
+                   <div class="alert alert-primary">
+                       <font size="4">
+                       <b>{{session('message')}}</b>
+                       <li><b>Order ID: </b>{{session('orderid')}}</li>
+                       <li><b>Service Name: </b>{{session('servicename')}}</li>
+                       <li><b>Link: </b>{{session('link')}}</li>
+                       <li><b>Quantity: </b> {{session('quantity')}}</li>
+                       <li><b>Charge: </b>{{$configsArray['currency_symbol']}}{{session('charge')}}</li>
+                       </font>
+                   </div>
+                @endif
                 <div class="card">
                     <div class="row row-bordered g-0">
                         <div class="col-md-12">
