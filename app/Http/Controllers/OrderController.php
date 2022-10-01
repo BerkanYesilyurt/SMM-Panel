@@ -41,9 +41,9 @@ class OrderController extends Controller
         $lastUserBalance = $userBalance - $orderPrice;
 
         if($userBalance >= $orderPrice && $lastUserBalance >= 0){
-            DB::transaction(function () use($request, $user, $order, $orderService, $orderPrice, $lastUserBalance) {
+            $orderId = DB::transaction(function () use($request, $user, $order, $orderService, $orderPrice, $lastUserBalance) {
                 $user->update(['balance' => $lastUserBalance]);
-                $order->create([
+                $createOrder = $order->create([
                     'user_id' => auth()->user()->id,
                     'service_id' => $orderService->id,
                     'link' => $request->link,
@@ -57,7 +57,21 @@ class OrderController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+                return $createOrder->id;
             });
+
+            return back()
+                ->with([
+                    'message' => 'You have successfully created order.',
+                    'servicename' => $orderService->name,
+                    'orderid' => $orderId,
+                    'charge' => $orderPrice,
+                    'link' => $request->link,
+                    'quantity' => $request->quantity,
+                ]);
+
+        }else{
+            return back()->withErrors(['NotEnoughBalance' => 'Your balance is not enough to place this order.']);
         }
     }
 }
