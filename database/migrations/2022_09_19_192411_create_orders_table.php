@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('api_provider_id')->nullable()->default(NULL);
             $table->integer('api_service_id')->nullable()->default(NULL);
             $table->integer('api_order_id')->nullable()->default(NULL);
+            $table->string('start_count')->default(NULL);
+            $table->string('remain')->default(NULL);
             $table->string('status')->default('PENDING');
             $table->timestamps();
         });
