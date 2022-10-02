@@ -20,4 +20,9 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $guarded = ['id'];
+
+    public function getServiceName()
+    {
+        return $this->hasOne(Service::class, 'id', 'service_id');
+    }
 }
