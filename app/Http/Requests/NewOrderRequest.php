@@ -31,7 +31,7 @@ class NewOrderRequest extends FormRequest
             'categories' => 'required|numeric',
             'services' => 'required|numeric',
             'link' => 'required|min:1|max:5000',
-            'quantity' => 'required|numeric',
+            'quantity' => 'required|numeric|min:1',
         ];
     }
 }
