@@ -34,7 +34,9 @@ class OrderController extends Controller
     }
 
     public function ordersPage(){
-        return view('pages.orders');
+        $orderCount = Order::where('user_id','=', auth()->user()->id)->count();
+        $userOrders = Order::with('getServiceName')->where('user_id','=', auth()->user()->id)->orderByDesc('created_at')->paginate(18);
+        return view('pages.orders', compact('userOrders'))->with('orderCount', $orderCount);
     }
 
     public function createNewOrder(NewOrderRequest $request, Order $order){
@@ -43,6 +45,10 @@ class OrderController extends Controller
         $orderService = Service::whereId($request->services)->first();
         $orderPrice = $orderService->price * (int)$request->quantity / 1000;
         $lastUserBalance = $userBalance - $orderPrice;
+
+        if($request->quantity < 0 || ($request->quantity < $orderService->min) || $orderService->max < $request->quantity){
+            return back()->withErrors(['QuantityError' => 'The quantity you entered for this service is not appropriate. Must be between ' . $orderService->min . ' and ' . $orderService->max . '.']);
+        }
 
         if($userBalance >= $orderPrice && $lastUserBalance >= 0){
             $orderId = DB::transaction(function () use($request, $user, $order, $orderService, $orderPrice, $lastUserBalance) {
