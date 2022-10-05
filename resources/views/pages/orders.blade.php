@@ -1,5 +1,84 @@
 @extends('layout')
 @section('subTitle', 'Orders')
 @section('content')
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">{{$configsArray['title']}} /</span> Orders
+        </h4>
 
+        <div class="card">
+
+            <div class="table-responsive text-nowrap">
+                <style>
+                    table {
+                        border-spacing: 0px;
+                        table-layout: fixed;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                </style>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width: 8%;"><center>ORDER ID</center></th>
+                        <th style="width: 26%;"><center>LINK</center></th>
+                        <th style="width: 26%;"><center>SERVICE NAME</center></th>
+                        <th style="width: 8%;"><center>QUANTITY</center></th>
+                        <th style="width: 10%;"><center>CHARGE</center></th>
+                        <th style="width: 12%;"><center>DATE</center></th>
+                        <th style="width: 10%;"><center>STATUS</center></th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    @forelse($userOrders as $userOrder)
+                                <tr>
+                                    <td><center><b>{{$userOrder->id}}</b></center></td>
+                                    <td style="white-space:pre-wrap; word-wrap:break-word;"><center><a target="_blank" href="{{$userOrder->link}}">{{$userOrder->link}}</a></center></td>
+                                    <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$userOrder->getServiceName->name}}</center></td>
+                                    <td><center>{{$userOrder->quantity}}</center></td>
+                                    <td><center>{{$configsArray['currency_symbol']}}{{round($userOrder->charge, 4)}}</center></td>
+                                    <td><center>{{$userOrder->created_at->diffForHumans()}}</center></td>
+                                    <td><center><span class="badge bg-@php
+                    switch($userOrder->status){
+                        case 'COMPLETED':
+                        echo 'success';
+                        break;
+
+                        case 'INPROGRESS':
+                        echo 'info';
+                        break;
+
+                        case 'PARTIAL':
+                        echo 'warning';
+                        break;
+
+                        case 'CANCELED':
+                        echo 'danger';
+                        break;
+
+                        default:
+                        echo 'primary';
+                    }
+                    @endphp me-1">{{$userOrder->status}}</span></center></td>
+                                </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6"><br>
+                                <center>
+                                    <b>No Orders Found.</b>
+                                </center>
+                                <br></td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+                @if($orderCount > 0)
+                <div class="divider divider-primary">
+                    <div class="divider-text"><b>Total Orders: {{$orderCount}}</b></div>
+                </div>
+                @endif
+                <center>{{ $userOrders->links() }}</center>
+            </div>
+        </div>
+    </div>
 @endsection
