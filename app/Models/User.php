@@ -50,6 +50,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereAuthority($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereContact($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @property string|null $last_login
+ * @property string|null $last_login_ip
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastLoginIp($value)
  */
 class User extends Authenticatable
 {
