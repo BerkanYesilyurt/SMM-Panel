@@ -21,4 +21,8 @@ class ServiceController extends Controller
         return view('pages.services', compact('services', 'categories'));
 
     }
+
+    public function servicesUpdatesPage(){
+        return view('pages.serviceupdates');
+    }
 }
