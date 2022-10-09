@@ -192,13 +192,14 @@
                     </a>
                 </li>
 
+                @if($configsArray['service_updates_page'] == 1)
                 <li class="menu-item{{ request()->is('serviceupdates') || request()->is('serviceupdates/*') ? ' active' : '' }}">
                     <a href="/serviceupdates" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-left-indent"></i>
                         <div data-i18n="Service Updates">Service Updates</div>
                     </a>
                 </li>
-
+                @endif
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Balance</span></li>
 
