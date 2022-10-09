@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -51,3 +52,7 @@ Route::post('/new-order', [OrderController::class, 'createNewOrder'])->middlewar
 Route::get('/massorders', [OrderController::class, 'massOrderPage'])->middleware('auth', 'maintenance');
 
 Route::get('/orders', [OrderController::class, 'ordersPage'])->middleware('auth', 'maintenance');
+
+Route::get('/serviceupdates', [ServiceController::class, 'servicesUpdatesPage'])->middleware('auth', 'maintenance');
+
+Route::get('/api', [ApiController::class, 'apiPage'])->middleware('auth', 'maintenance');
