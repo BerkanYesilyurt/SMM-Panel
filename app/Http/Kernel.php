@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\VerifyPanelInstalled;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,6 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'maintenance' => \App\Http\Middleware\Maintenance::class,
-        'verifypanelinstalled' => VerifyPanelInstalled::class
+        'verifypanelinstalled' => \App\Http\Middleware\VerifyPanelInstalled::class
     ];
 }
