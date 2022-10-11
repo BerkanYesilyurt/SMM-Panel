@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InstallController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
@@ -21,38 +22,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'check'])->middleware('maintenance');
+Route::get('/', [HomeController::class, 'check'])->middleware('verifypanelinstalled', 'maintenance');
+Route::get('/install', [InstallController::class, 'installPage'])->name('install');
 
-Route::get('/login', [HomeController::class, 'showLogin'])->middleware('guest', 'maintenance')->name('login');
-Route::get('/register', [HomeController::class, 'showRegister'])->middleware('guest', 'maintenance')->name('register');
+Route::middleware(['guest', 'maintenance'])->group(function () {
+Route::get('/login', [HomeController::class, 'showLogin'])->name('login');
+Route::get('/register', [HomeController::class, 'showRegister'])->name('register');
 
-Route::post('/login', [UserController::class, 'login'])->middleware('guest', 'maintenance');
-Route::post('/register', [UserController::class, 'register'])->middleware('guest', 'maintenance');
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/register', [UserController::class, 'register']);
+});
 
-Route::get('/logout', [UserController::class, 'logout'])->middleware('auth', 'maintenance');
+Route::middleware(['auth', 'maintenance', 'verifypanelinstalled'])->group(function () {
+Route::get('/logout', [UserController::class, 'logout']);
 
-Route::get('/tickets', [TicketController::class, 'index'])->middleware('auth', 'maintenance');
-Route::post('/tickets', [TicketController::class, 'createTicket'])->middleware('auth', 'maintenance');
-Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages'])->middleware('auth', 'maintenance');
-Route::post('/ticket_message', [TicketController::class, 'newTicketMessage'])->middleware('auth', 'maintenance');
+Route::get('/tickets', [TicketController::class, 'index']);
+Route::post('/tickets', [TicketController::class, 'createTicket']);
+Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages']);
+Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
 
-Route::get('/faq', [FaqController::class, 'faqPage'])->middleware('auth', 'maintenance');
-Route::post('/faq', [FaqController::class, 'createFaq'])->middleware('auth', 'maintenance');
+Route::get('/faq', [FaqController::class, 'faqPage']);
+Route::post('/faq', [FaqController::class, 'createFaq']);
 
-Route::get('/profile', [ProfileController::class, 'profilePage'])->middleware('auth', 'maintenance');
-Route::post('/profile', [ProfileController::class, 'updateProfile'])->middleware('auth', 'maintenance');
+Route::get('/profile', [ProfileController::class, 'profilePage']);
+Route::post('/profile', [ProfileController::class, 'updateProfile']);
 
-Route::get('/generate', [ProfileController::class, 'generateToken'])->middleware('auth', 'maintenance');
+Route::get('/generate', [ProfileController::class, 'generateToken']);
 
-Route::get('/services', [ServiceController::class, 'servicesPage'])->middleware('auth', 'maintenance');
+Route::get('/services', [ServiceController::class, 'servicesPage']);
 
-Route::get('/new-order', [OrderController::class, 'orderPage'])->middleware('auth', 'maintenance')->name('new-order');
-Route::post('/new-order', [OrderController::class, 'createNewOrder'])->middleware('auth', 'maintenance');
+Route::get('/new-order', [OrderController::class, 'orderPage'])->name('new-order');
+Route::post('/new-order', [OrderController::class, 'createNewOrder']);
 
-Route::get('/massorders', [OrderController::class, 'massOrderPage'])->middleware('auth', 'maintenance');
+Route::get('/massorders', [OrderController::class, 'massOrderPage']);
 
-Route::get('/orders', [OrderController::class, 'ordersPage'])->middleware('auth', 'maintenance');
+Route::get('/orders', [OrderController::class, 'ordersPage']);
 
-Route::get('/serviceupdates', [ServiceController::class, 'servicesUpdatesPage'])->middleware('auth', 'maintenance');
+Route::get('/serviceupdates', [ServiceController::class, 'servicesUpdatesPage']);
 
-Route::get('/api', [ApiController::class, 'apiPage'])->middleware('auth', 'maintenance');
+Route::get('/api', [ApiController::class, 'apiPage']);
+});
