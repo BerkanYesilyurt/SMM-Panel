@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'check'])->middleware('verifypanelinstalled', 'maintenance');
 Route::get('/install', [InstallController::class, 'installPage'])->name('install');
 
-Route::middleware(['guest', 'maintenance'])->group(function () {
+Route::middleware(['guest', 'maintenance', 'verifypanelinstalled'])->group(function () {
 Route::get('/login', [HomeController::class, 'showLogin'])->name('login');
 Route::get('/register', [HomeController::class, 'showRegister'])->name('register');
 
