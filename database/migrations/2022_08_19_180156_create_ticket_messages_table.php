@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('ticket_id');
             $table->integer('user_id');
             $table->text('message');
+            $table->integer('seen_by_user');
+            $table->integer('seen_by_support');
             $table->timestamps();
         });
     }
