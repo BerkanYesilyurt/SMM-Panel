@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 class InstallController extends Controller
 {
     public function installPage(){
-        return view('pages.install.index');
+        $configsArray = ConfigController::configs();
+        if($configsArray['is_installed'] != 1){
+            return view('pages.install.index');
+        }else{
+            return redirect('/');
+        }
     }
 }
