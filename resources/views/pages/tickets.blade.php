@@ -35,7 +35,13 @@
                 @forelse($tickets as $ticket)
                 <tr>
                     <td><center><i class="fab fa-angular fa-lg text-danger me-3"></i> <a href="/ticket/{{$ticket->id}}"><strong>{{$ticket->id}}</strong></a></center></td>
-                    <td><center>{{ucfirst($ticket->subject)}}</center></td>
+                    <td><center>{{ucfirst($ticket->subject)}}
+                            @foreach($ticket->ticketMessages->all() as $ticketMessage)
+                                @if($ticketMessage->seen_by_user == 0)
+                                    <b>(New Messages)</b>
+                                    @break
+                                @endif
+                            @endforeach</center></td>
                     <td><center><span class="badge bg-@php
                     switch($ticket->status){
                         case 'ACTIVE':
