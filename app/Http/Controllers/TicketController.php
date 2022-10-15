@@ -51,6 +51,8 @@ class TicketController extends Controller
         $ticketMessages->ticket_id = $ticket->id;
         $ticketMessages->user_id = auth()->user()->id;
         $ticketMessages->message = $request->message;
+        $ticketMessages->seen_by_user = 1;
+        $ticketMessages->seen_by_support = 0;
         $ticketMessages->save();
 
 
@@ -63,6 +65,8 @@ class TicketController extends Controller
 
         if(auth()->user()->id == $relatedTicket->value('user_id')){
             $ticketMessages = $ticketMessage->where('ticket_id', $ticket_id)->orderBy('created_at', 'ASC')->get();
+            TicketMessage::where('ticket_id', $ticket_id)->update(['seen_by_user' => 1]);
+
             return view('pages.ticket-messages', compact('ticketMessages'))
                 ->with('ticket_id', $ticket_id)
                 ->with('status', $relatedTicket->value('status'));
@@ -84,6 +88,8 @@ class TicketController extends Controller
         $ticketMessages->ticket_id = $request->ticket_id;
         $ticketMessages->user_id = auth()->user()->id;
         $ticketMessages->message = $request->message;
+        $ticketMessages->seen_by_user = auth()->user()->id == $relatedTicket->value('user_id') ? 1 : 0;
+        $ticketMessages->seen_by_support = auth()->user()->authority != 'none' ? 1 : 0;
         $ticketMessages->save();
 
         alert()->success('Success!','You have successfully sent the message.')->timerProgressBar();
