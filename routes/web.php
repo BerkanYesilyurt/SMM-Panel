@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
@@ -61,4 +62,8 @@ Route::get('/orders', [OrderController::class, 'ordersPage']);
 Route::get('/serviceupdates', [ServiceController::class, 'servicesUpdatesPage']);
 
 Route::get('/api', [ApiController::class, 'apiPage']);
+});
+
+Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'dashboardPage']);
 });
