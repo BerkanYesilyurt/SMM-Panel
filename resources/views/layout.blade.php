@@ -146,6 +146,17 @@
 
             <div class="menu-inner-shadow"></div>
 
+            @if(auth()->user()->authority == 'admin')
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Admin</span></li>
+                <ul class="menu-inner py-1">
+                    <li class="menu-item">
+                        <a href="/admin/dashboard" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-crown" style="color:#ff3e1d;"></i>
+                            <div data-i18n="Admin Panel" style="color:#ff3e1d;"><b>Switch to Admin Panel</b></div>
+                        </a>
+                    </li>
+            @endif
+
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Profile</span></li>
             <ul class="menu-inner py-1">
                 <li class="menu-item{{ request()->is('profile') || request()->is('profile/*') ? ' active' : '' }}">
