@@ -224,6 +224,15 @@
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Support</span></li>
 
+                @if(auth()->user()->authority == 'support')
+                    <li class="menu-item">
+                        <a href="/admin/support" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-crown" style="color:#ff3e1d;"></i>
+                            <div data-i18n="Support Panel" style="color:#ff3e1d;"><b>Support Panel</b></div>
+                        </a>
+                    </li>
+                @endif
+
                 <li class="menu-item{{ request()->is('tickets') || request()->is('ticket/*') ? ' active' : '' }}">
                     <a href="/tickets" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-chat"></i>
