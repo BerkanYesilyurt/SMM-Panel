@@ -27,41 +27,41 @@ Route::get('/', [HomeController::class, 'check'])->middleware('verifypanelinstal
 Route::get('/install', [InstallController::class, 'installPage'])->name('install');
 
 Route::middleware(['guest', 'maintenance', 'verifypanelinstalled'])->group(function () {
-Route::get('/login', [HomeController::class, 'showLogin'])->name('login');
-Route::get('/register', [HomeController::class, 'showRegister'])->name('register');
+    Route::get('/login', [HomeController::class, 'showLogin'])->name('login');
+    Route::get('/register', [HomeController::class, 'showRegister'])->name('register');
 
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
 });
 
 Route::middleware(['auth', 'maintenance', 'verifypanelinstalled'])->group(function () {
-Route::get('/logout', [UserController::class, 'logout']);
+    Route::get('/logout', [UserController::class, 'logout']);
 
-Route::get('/tickets', [TicketController::class, 'index']);
-Route::post('/tickets', [TicketController::class, 'createTicket']);
-Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages']);
-Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
+    Route::get('/tickets', [TicketController::class, 'index']);
+    Route::post('/tickets', [TicketController::class, 'createTicket']);
+    Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages']);
+    Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
 
-Route::get('/faq', [FaqController::class, 'faqPage']);
-Route::post('/faq', [FaqController::class, 'createFaq']);
+    Route::get('/faq', [FaqController::class, 'faqPage']);
+    Route::post('/faq', [FaqController::class, 'createFaq']);
 
-Route::get('/profile', [ProfileController::class, 'profilePage']);
-Route::post('/profile', [ProfileController::class, 'updateProfile']);
+    Route::get('/profile', [ProfileController::class, 'profilePage']);
+    Route::post('/profile', [ProfileController::class, 'updateProfile']);
 
-Route::get('/generate', [ProfileController::class, 'generateToken']);
+    Route::get('/generate', [ProfileController::class, 'generateToken']);
 
-Route::get('/services', [ServiceController::class, 'servicesPage']);
+    Route::get('/services', [ServiceController::class, 'servicesPage']);
 
-Route::get('/new-order', [OrderController::class, 'orderPage'])->name('new-order');
-Route::post('/new-order', [OrderController::class, 'createNewOrder']);
+    Route::get('/new-order', [OrderController::class, 'orderPage'])->name('new-order');
+    Route::post('/new-order', [OrderController::class, 'createNewOrder']);
 
-Route::get('/massorders', [OrderController::class, 'massOrderPage']);
+    Route::get('/massorders', [OrderController::class, 'massOrderPage']);
 
-Route::get('/orders', [OrderController::class, 'ordersPage']);
+    Route::get('/orders', [OrderController::class, 'ordersPage']);
 
-Route::get('/serviceupdates', [ServiceController::class, 'servicesUpdatesPage']);
+    Route::get('/serviceupdates', [ServiceController::class, 'servicesUpdatesPage']);
 
-Route::get('/api', [ApiController::class, 'apiPage']);
+    Route::get('/api', [ApiController::class, 'apiPage']);
 });
 
 Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function () {
