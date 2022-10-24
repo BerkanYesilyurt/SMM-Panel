@@ -1,6 +1,8 @@
 @extends('pages.admin.layout')
 @section('subTitle', 'Dashboard')
 @section('content')
+    <script src='https://cdn.plot.ly/plotly-2.14.0.min.js'></script>
+
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <!-- Content -->
@@ -31,8 +33,8 @@
                         <div class="col-lg-3 col-md-12 col-6 mb-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <span class="fw-semibold d-block mb-1">Revenue:</span>
-                                    <h3 class="card-title mb-2">{{$config['currency_symbol']}}{{number_format($count['revenue'],2,",",".")}}</h3>
+                                    <span class="fw-semibold d-block mb-1">Total Revenue:</span>
+                                    <h3 class="card-title mb-2">{{$config['currency_symbol']}}{{number_format($count['revenue']['total'],2,",",".")}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +89,51 @@
 
             </div>
 
+            <div id='myDiv'></div>
+            <script>
+                var trace1 = {
+                    x: [@foreach ($count['numberofusers'] as $key => $value)
+                            '{{ $key }}',
+                        @endforeach],
+                    y: [@foreach ($count['numberofusers'] as $key => $value)
+                        '{{ $value }}',
+                        @endforeach],
+                    type: 'bar',
+                    name: 'Users',
+                    marker: {
+                        color: 'rgb(49,130,189)',
+                        opacity: 0.9,
+                    }
+                };
 
+                var trace2 = {
+                    x: [@foreach ($count['numberoforders'] as $key => $value)
+                        '{{ $key }}',
+                        @endforeach],
+                    y: [@foreach ($count['numberoforders'] as $key => $value)
+                        '{{ $value }}',
+                        @endforeach],
+                    type: 'bar',
+                    name: 'Orders',
+                    marker: {
+                        color: 'rgb(204,204,204)',
+                        opacity: 0.8
+                    }
+                };
+
+                var data = [trace1, trace2];
+
+                var layout = {
+                    title: 'User & Order Statistics (Last 1 Year)',
+                    xaxis: {
+                        tickangle: -45
+                    },
+                    barmode: 'group'
+                };
+
+                Plotly.newPlot('myDiv', data, layout);
+
+            </script>
         </div>
     </div>
 @endsection
