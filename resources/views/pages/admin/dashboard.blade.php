@@ -134,6 +134,49 @@
                 Plotly.newPlot('myDiv', data, layout);
 
             </script>
+            <br>
+            <div class="row">
+                <div class="col-lg-12 col-md-4 order-1">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <span class="fw-semibold d-block mb-1">Last 30 Days Revenue:</span>
+                                    <h3 class="card-title mb-2">{{$config['currency_symbol']}}{{number_format($count['revenue']['last30days'],2,",",".")}}</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <span class="fw-semibold d-block mb-1">Last 90 Days Revenue:</span>
+                                    <h3 class="card-title mb-2">{{$config['currency_symbol']}}{{number_format($count['revenue']['last90days'],2,",",".")}}</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <span class="fw-semibold d-block mb-1">Last 180 Days Revenue:</span>
+                                    <h3 class="card-title mb-2">{{$config['currency_symbol']}}{{number_format($count['revenue']['last180days'],2,",",".")}}</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <span class="fw-semibold d-block mb-1">Last 1 Years Revenue:</span>
+                                    <h3 class="card-title mb-2">{{$config['currency_symbol']}}{{number_format($count['revenue']['last365days'],2,",",".")}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
