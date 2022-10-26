@@ -69,4 +69,5 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboardPage']);
 
     Route::get('/admin/system-settings', [SettingsController::class, 'systemSettingsPage']);
+    Route::post('/admin/system-settings', [SettingsController::class, 'updateSystemSettings']);
 });
