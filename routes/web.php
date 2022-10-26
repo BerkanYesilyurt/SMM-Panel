@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
@@ -66,4 +67,6 @@ Route::middleware(['auth', 'maintenance', 'verifypanelinstalled'])->group(functi
 
 Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboardPage']);
+
+    Route::get('/admin/system-settings', [SettingsController::class, 'systemSettingsPage']);
 });
