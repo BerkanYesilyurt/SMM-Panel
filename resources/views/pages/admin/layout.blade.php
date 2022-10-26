@@ -146,7 +146,7 @@
 
             <div class="menu-inner-shadow"></div>
 
-                <li class="menu-header small text-uppercase"><span class="menu-header-text">Admin</span></li>
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Statistics</span></li>
                 <ul class="menu-inner py-1">
                     <li class="menu-item">
                         <a href="/admin/dashboard" class="menu-link">
@@ -154,6 +154,14 @@
                             <div data-i18n="Dashboard">Dashboard</div>
                         </a>
                     </li>
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
+
+                        <li class="menu-item">
+                            <a href="/admin/system-settings" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-cog"></i>
+                                <div data-i18n="Dashboard">System Settings</div>
+                            </a>
+                        </li>
 
 
                 </ul>
