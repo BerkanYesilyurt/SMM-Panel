@@ -13,4 +13,12 @@ class SettingsController extends Controller
             'settings' => Config::all(['name', 'value'])->keyBy('name')->toArray()
         ]);
     }
+
+    public function updateSystemSettings(Request $request){
+        if($request->type == 'maintenancemode'){
+            //TODO
+        }elseif ($request->type == 'firstsection'){
+            //TODO
+        }
+    }
 }
