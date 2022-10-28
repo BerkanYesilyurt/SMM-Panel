@@ -129,6 +129,12 @@
                                 @endforeach
                             </ul>
                         </div>
+                    @elseif(session('message'))
+                        <div class="alert alert-success">
+                            <ul style="margin-bottom: 1px;">
+                                <b>{{session('message')}}</b>
+                            </ul>
+                        </div>
                     @else
                         <center>
                             <h4 class="mb-2">Welcome to {{$configsArray['title']}}! 👋</h4>
