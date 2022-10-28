@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateTicketRequest;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use Illuminate\Http\Request;
@@ -14,15 +15,7 @@ class TicketController extends Controller
         return view('pages.tickets', compact('tickets'));
     }
 
-    public function createTicket(Request $request){
-        $fields = $request->validate([
-            'subject'            => ['required', 'max:100', Rule::in(['order', 'payment', 'request', 'childpanel', 'other'])],
-            'orderid'            => ['required_if:subject,=,order', 'max:180'],
-            'order_request'      => ['required_if:subject,=,order', 'max:100', Rule::in(['refill', 'cancel', 'speed-up', 'other'])],
-            'payid'              => ['required_if:subject,=,payment', 'max:100'],
-            'feature_request'    => ['required_if:subject,=,request', 'max:100', Rule::in(['feature', 'service', 'other'])],
-            'message'            => ['required', 'max:5000']
-        ]);
+    public function createTicket(CreateTicketRequest $request){
 
         $ticket = new Ticket();
 
