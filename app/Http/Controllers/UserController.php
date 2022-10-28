@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\LastLogin;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -47,23 +48,24 @@ class UserController extends Controller
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 
-    public function register(Request $request, User $user){
-        $fields = $request->validate([
-            'name' => ['required', 'min:3', 'max:150'],
-            'email' => ['required', 'email', 'max:150', Rule::unique('users', 'email')],
-            'password' => ['required', 'confirmed', 'min:6', 'max:50'],
-            'contact' => ['required', 'max:150'],
+    public function register(RegisterRequest $request, User $user){
+        $configsArray = ConfigController::configs();
+
+        $newUser = $user->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'contact' => $request->contact,
+            'last_login' => now(),
+            'last_login_ip' => $this->getIpAdress()
         ]);
 
-        $fields['password'] = bcrypt($fields['password']);
-        $fields['last_login'] = now();
-        $fields['last_login_ip'] = $this->getIpAdress();
-
-        $newUser = $user->create($fields);
-        auth()->login($newUser);
-
-        alert()->success('Success!','You have successfully registered and logged in.')->timerProgressBar();
-        return redirect('/');
+        if($configsArray['autologin_after_registration'] == 1){
+            auth()->login($newUser);
+            return redirect('/');
+        }else{
+            return redirect()->route('login')->with('message', 'You have successfully registered!');
+        }
     }
 
     public function logout(Request $request){
