@@ -19,7 +19,14 @@
             </div>
             <br>
         @endif
-
+        @if(session('message'))
+            <div class="alert alert-success">
+                <ul style="margin-bottom: 1px;">
+                        <b>{{session('message')}}</b>
+                </ul>
+            </div>
+            <br>
+        @endif
 
         <div class="card mb-4">
             <h5 class="card-header">Maintenance Mode</h5>
@@ -35,7 +42,7 @@
                     @csrf
                 <input type="hidden" name="type" value="maintenancemode" />
                 <button type="submit"
-                   class="btn btn-danger deactivate-account">Active Maintenance Mode</button>
+                   class="btn {{$settings['maintenance_mode']['value'] == 0 ? 'btn-danger' : 'btn-dark'}} deactivate-account">{{$settings['maintenance_mode']['value'] == 0 ? 'Active Maintenance Mode' : 'Deactive Maintenance Mode'}}</button>
                 </form>
             </div>
         </div>
@@ -68,7 +75,7 @@
                         <h5>Currency</h5>
                         <div class="mb-3 col-md-6">
                             <label for="currency" class="form-label">Currency</label>
-                            <input class="form-control" type="text" id="meta_keywords" name="currency"
+                            <input class="form-control" type="text" id="currency" name="currency"
                                    value="{{$settings['currency']['value']}}">
                         </div>
                         <div class="mb-3 col-md-6">
@@ -102,8 +109,8 @@
                             </select>
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label for="forgot_password" class="form-label">Auto-login After Registration</label>
-                            <select name="forgot_password" id="forgot_password" class="select2 form-select">
+                            <label for="autologin_after_registration" class="form-label">Auto-login After Registration</label>
+                            <select name="autologin_after_registration" id="autologin_after_registration" class="select2 form-select">
                                 <option value="0" @selected($settings['autologin_after_registration']['value'] == 0)>Inactive</option>
                                 <option value="1" @selected($settings['autologin_after_registration']['value'] == 1)>Active</option>
                             </select>
@@ -111,8 +118,8 @@
                         <div class="mb-3 col-md-6">
                             <label for="forgot_password" class="form-label">Forgot Password Option</label>
                             <select name="forgot_password" id="forgot_password" class="select2 form-select">
-                                <option value="0" @selected($settings['directly_login']['value'] == 0)>Inactive</option>
-                                <option value="1" @selected($settings['directly_login']['value'] == 1)>Active</option>
+                                <option value="0" @selected($settings['forgot_password']['value'] == 0)>Inactive</option>
+                                <option value="1" @selected($settings['forgot_password']['value'] == 1)>Active</option>
                             </select>
                         </div>
 
