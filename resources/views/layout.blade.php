@@ -70,6 +70,9 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('assets/js/config.js')}}"></script>
+
+    <!--! Custom Header -->
+    {!! $configsArray['javascript_embed_header'] !!}
 </head>
 
 <body>
@@ -378,6 +381,9 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!--! Custom Footer -->
+{!! $configsArray['javascript_embed_footer'] !!}
 
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
