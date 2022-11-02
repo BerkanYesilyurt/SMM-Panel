@@ -22,7 +22,7 @@
         @if(session('message'))
             <div class="alert alert-success alert-dismissible">
                 <ul style="margin-bottom: 1px; color:#478924;">
-                        <b>{{session('message')}}</b>
+                        <b>{{ empty(session('changedSettingNames')) ? 'You did not make any changes.' : session('message')}}</b>
                         <br>
                         @foreach(session('changedSettingNames') as $changedSettingName)
                             {{$changedSettingName}}{{$loop->last ? '' : ', '}}
