@@ -20,9 +20,12 @@ class Maintenance
         $config = new Config();
         $maintenance_mode = $config->where('name','=', 'maintenance_mode')->value('value');
         if($maintenance_mode){
-            return response()->view('undermaintenance');
+            if(auth()->check() && auth()->user()->authority != 'none'){
+                return $next($request);
+            }else{
+                return response()->view('undermaintenance');
+            }
         }
-
         return $next($request);
     }
 }
