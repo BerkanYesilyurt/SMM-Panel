@@ -12,22 +12,28 @@ class SettingsController extends Controller
 {
     public function systemSettingsPage(){
         return view('pages.admin.system-settings', [
-            'settings' => Config::all(['name', 'value'])->keyBy('name')->toArray()
+            'settings' => Config::all(['name', 'value', 'updated_at'])->keyBy('name')->toArray()
         ]);
     }
 
-    public function setSystemSettingWith($settings){
+    public function setSystemSettingWith($settings, $requestAttributes){
+        $changedSettingNames = [];
         foreach($settings as $settingName => $settingValue){
-            Config::where('name', '=', $settingName)->update(['value' => $settingValue]);
+            if(Config::where('name', '=', $settingName)->value('value') != $settingValue){
+                Config::where('name', '=', $settingName)->update(['value' => $settingValue]);
+                $changedSettingNames[] = $requestAttributes[$settingName];
+            }
         }
+        return $changedSettingNames;
     }
 
     public function updateSystemSettings(UpdateSystemSettingsRequest $request, Config $config)
     {
         if ($request->type == 'maintenancemode'){
             $config->where('name', '=', 'maintenance_mode')->update(['value' => DB::raw('!value')]);
+            $changedSettingNames[] = 'Maintenance Mode';
         }elseif($request->type == 'firstsection'){
-            $this->setSystemSettingWith([
+            $changedSettingNames = $this->setSystemSettingWith([
                 'title' => $request->title,
                 'meta_description' => $request->meta_description,
                 'meta_keywords' => $request->meta_keywords,
@@ -38,9 +44,9 @@ class SettingsController extends Controller
                 'directly_login' => $request->directly_login,
                 'autologin_after_registration' => $request->autologin_after_registration,
                 'forgot_password' => $request->forgot_password,
-            ]);
+            ], $request->attributes());
         }elseif($request->type == 'secondsection'){
-            $this->setSystemSettingWith([
+            $changedSettingNames = $this->setSystemSettingWith([
                 'terms_content' => $request->terms_content ?? null,
                 'policy_content' => $request->policy_content ?? null,
                 'javascript_embed_header' => $request->javascript_embed_header ?? null,
@@ -49,11 +55,15 @@ class SettingsController extends Controller
                 'twitter_link' => $request->twitter_link,
                 'instagram_link' => $request->instagram_link,
                 'youtube_link' => $request->youtube_link,
-            ]);
+            ], $request->attributes());
 
         }else{
             abort(416);
         }
-        return redirect()->back()->with('message', 'You have successfully changed the settings.');
+
+        return redirect()->back()->with([
+            'message' => 'You have successfully changed the following settings:',
+            'changedSettingNames' => $changedSettingNames
+        ]);
     }
 }
