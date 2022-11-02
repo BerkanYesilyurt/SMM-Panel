@@ -154,14 +154,22 @@
                             <div data-i18n="Dashboard">Dashboard</div>
                         </a>
                     </li>
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
 
-                        <li class="menu-item">
-                            <a href="/admin/system-settings" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-cog"></i>
-                                <div data-i18n="Dashboard">System Settings</div>
-                            </a>
-                        </li>
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">User Actions</span></li>
+                    <li class="menu-item">
+                        <a href="/admin/users" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-group"></i>
+                            <div data-i18n="Users">Users</div>
+                        </a>
+                    </li>
+
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
+                    <li class="menu-item">
+                        <a href="/admin/system-settings" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-cog"></i>
+                            <div data-i18n="System Settings">System Settings</div>
+                        </a>
+                    </li>
 
 
                 </ul>
