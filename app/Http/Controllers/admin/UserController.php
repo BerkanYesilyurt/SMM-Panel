@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function usersPage(){
-        return view('pages.admin.users');
+        $users = User::orderByDesc('id')->paginate(25);
+        $userCount = User::count();
+        return view('pages.admin.users', compact('users'))->with('userCount', $userCount);
     }
 }
