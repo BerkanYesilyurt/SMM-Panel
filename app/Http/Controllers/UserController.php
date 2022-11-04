@@ -6,6 +6,7 @@ use App\Events\LastLogin;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -56,7 +57,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'contact' => $request->contact,
-            'last_login' => now(),
+            'last_login' => Carbon::now(),
             'last_login_ip' => $this->getIpAdress()
         ]);
 
