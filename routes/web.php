@@ -73,4 +73,6 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
 
     Route::get('/admin/users', [\App\Http\Controllers\admin\UserController::class, 'usersPage']);
 
+    Route::get('/admin/user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'getUserDetails']);
+    Route::post('/admin/user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'updateUserDetails']);
 });
