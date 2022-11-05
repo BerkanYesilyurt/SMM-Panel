@@ -13,4 +13,12 @@ class UserController extends Controller
         $userCount = User::count();
         return view('pages.admin.users', compact('users'))->with('userCount', $userCount);
     }
+
+    public function getUserDetails(User $user){
+        return view('pages.admin.user', compact('user'));
+    }
+
+    public function updateUserDetails(User $user){
+
+    }
 }
