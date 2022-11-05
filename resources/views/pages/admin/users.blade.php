@@ -56,9 +56,9 @@
                             <td><center>{{$configsArray['currency_symbol']}}{{round($user->balance, 4)}}</center></td>
                             <td><center>{{$user->created_at->diffForHumans()}}</center></td>
                             <td><center>
-                                    <button type="button" onclick="changeModal(this)" data-username="{{$user->name}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                                        <span class="tf-icons bx bx-edit"></span>&nbsp; Edit User
-                                    </button></center>
+                            <a href="/admin/user/{{$user->id}}/edit" target="_blank" class="btn btn-sm btn-primary">
+                                <span class="tf-icons bx bx-edit"></span>&nbsp; Edit User
+                            </a></center>
                             </td>
                         </tr>
                     @empty
@@ -81,29 +81,4 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCenterTitle">User Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col mb-3" id="modalUserName">
-                            <b>Loading..</b>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        function changeModal(element){
-            document.getElementById('modalUserName').innerHTML = '<h5><b>' + element.dataset.username + '</b></h5>';
-        }
-    </script>
 @endsection
