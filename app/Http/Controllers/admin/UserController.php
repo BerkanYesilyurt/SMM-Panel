@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class UserController extends Controller
     }
 
     public function getUserDetails(User $user){
-        return view('pages.admin.user', compact('user'));
+        $config = ConfigController::configs();
+        return view('pages.admin.user', compact('user', 'config'));
     }
 
     public function updateUserDetails(User $user){
