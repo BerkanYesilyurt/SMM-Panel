@@ -96,15 +96,28 @@
                             <label for="status" class="form-label">Status</label>
                             <select name="status" id="status" class="select2 form-select">
                                 @foreach(App\Enums\UserStatusEnum::values() as $key => $value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
+                                    <option value="{{ $key }}" @selected($user->status == $value)>{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="mb-3 col-md-6">
-                            <label for="api_key" class="form-label">API Key</label>
+                            <label for="api_key" class="form-label">API Key - <a onclick="generateAPI()" style="color: #000000; cursor:hand;cursor:pointer;"><b>GENERATE</b></a></label>
                             <input class="form-control" type="text" id="api_key" name="api_key"
                                    value="{{$user->api_key}}">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="set_new_password" class="form-label">Set New Password</label>
+                            <select name="set_new_password" id="set_new_password" class="select2 form-select" onchange="setDisabledAttrForNewPassword()">
+                                <option value="0" selected>No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="password" class="form-label">New Password - <a onclick="generatePassword()" style="color: #000000; cursor:hand;cursor:pointer;"><b>GENERATE</b></a></label>
+                            <input class="form-control" type="text" id="password" name="password" disabled>
                         </div>
 
                         <div class="mb-3 col-md-4">
@@ -135,4 +148,33 @@
 
     </div>
 </div>
+
+<script>
+    function generateAPI() {
+        var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var Length = 55;
+        var api_key = "";
+        for (var i = 1; i <= Length; i++) {
+            var randomNumber = Math.floor(Math.random() * chars.length);
+            api_key += chars.substring(randomNumber, randomNumber +1);
+        }
+        document.getElementById("api_key").value = api_key;
+    }
+
+    function generatePassword(){
+        var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var Length = 16;
+        var password = "";
+        for (var i = 1; i <= Length; i++) {
+            var randomNumber = Math.floor(Math.random() * chars.length);
+            password += chars.substring(randomNumber, randomNumber +1);
+        }
+        if(!document.getElementById("password").disabled){
+        document.getElementById("password").value = password;
+        }
+    }
+    function setDisabledAttrForNewPassword() {
+        document.getElementById("password").disabled = document.getElementById("set_new_password").value != 1 ? true : false;
+    }
+</script>
 @endsection
