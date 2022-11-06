@@ -145,6 +145,34 @@
                 </form>
             </div>
         </div>
+        <div class="card mb-4">
+            <h5 class="card-header">User Balance</h5>
+            <div class="card-body">
+                <form action="/admin/user/{{$user->id}}/edit" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(10)">ADD {{$config['currency_symbol']}}10</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(20)">ADD {{$config['currency_symbol']}}20</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(50)">ADD {{$config['currency_symbol']}}50</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(100)">ADD {{$config['currency_symbol']}}100</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(10)">SUB {{$config['currency_symbol']}}10</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(20)">SUB {{$config['currency_symbol']}}20</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(50)">SUB {{$config['currency_symbol']}}50</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(100)">SUB {{$config['currency_symbol']}}100</span><br><br>
+                            <label for="balance" class="form-label">Balance:</label>
+                            <input class="form-control" type="number" id="balance" name="balance"
+                                   value="{{$user->balance}}">
+                            <br><span class="badge bg-success">Current: {{$config['currency_symbol']}}{{$user->balance}}</span>
+                        </div>
+
+                        <div class="mt-2">
+                            <button type="submit" class="btn btn-primary me-2">Update Balance</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
     </div>
 </div>
@@ -175,6 +203,16 @@
     }
     function setDisabledAttrForNewPassword() {
         document.getElementById("password").disabled = document.getElementById("set_new_password").value != 1 ? true : false;
+    }
+
+    function addBalance(amount){
+        document.getElementById("balance").value = Number(document.getElementById("balance").value) + amount;
+    }
+
+    function subBalance(amount){
+        if((Number(document.getElementById("balance").value) - amount) >= 0){
+        document.getElementById("balance").value = Number(document.getElementById("balance").value) - amount;
+        }
     }
 </script>
 @endsection
