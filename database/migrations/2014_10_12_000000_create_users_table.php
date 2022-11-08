@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\UserAuthorityEnum;
+use App\Enums\UserStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,8 +23,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('contact');
             $table->string('api_key')->nullable();
-            $table->string('authority')->default('none');
-            $table->string('status')->default('ACTIVE');
+            $table->string('authority')->default(UserAuthorityEnum::none->value);
+            $table->string('status')->default(UserStatusEnum::ACTIVE->value);
             $table->string('timezone')->nullable();
             $table->string('activation_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
