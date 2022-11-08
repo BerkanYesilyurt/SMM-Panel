@@ -4,6 +4,7 @@ namespace App\Providers;
 
 
 use App\Http\Controllers\ConfigController;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class ConfigServiceProvider extends ServiceProvider
@@ -25,7 +26,10 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configsArray = ConfigController::configs();
-        view()->share('configsArray', $configsArray);
+        if (Schema::hasTable('configs'))
+        {
+            $configsArray = ConfigController::configs();
+            view()->share('configsArray', $configsArray);
+        }
     }
 }
