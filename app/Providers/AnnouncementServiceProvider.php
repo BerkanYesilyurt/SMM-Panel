@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\AnnouncementController;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AnnouncementServiceProvider extends ServiceProvider
@@ -24,7 +25,10 @@ class AnnouncementServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $announcementArray = AnnouncementController::announcements();
-        view()->share('announcementArray', $announcementArray);
+        if (Schema::hasTable('announcements'))
+        {
+            $announcementArray = AnnouncementController::announcements();
+            view()->share('announcementArray', $announcementArray);
+        }
     }
 }
