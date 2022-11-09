@@ -149,7 +149,7 @@
 
             <div class="menu-inner-shadow"></div>
 
-            @if(auth()->user()->authority == 'admin')
+            @if(auth()->user()->authority == \App\Enums\UserAuthorityEnum::admin->value)
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Admin</span></li>
                 <ul class="menu-inner py-1">
                     <li class="menu-item">
@@ -227,7 +227,7 @@
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Support</span></li>
 
-                @if(auth()->user()->authority == 'support')
+                @if(auth()->user()->authority == \App\Enums\UserAuthorityEnum::support->value)
                     <li class="menu-item">
                         <a href="/admin/support" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-crown" style="color:#ff3e1d;"></i>
@@ -305,7 +305,7 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
-                                                <small class="text-muted">{{ auth()->user()->authority == 'none' ? 'USER' : strtoupper(auth()->user()->authority) }}</small>
+                                                <small class="text-muted">{{ auth()->user()->authority == \App\Enums\UserAuthorityEnum::none->value ? 'USER' : strtoupper(\App\Enums\UserAuthorityEnum::from(auth()->user()->authority)->name) }}</small>
                                             </div>
                                         </div>
                                     </a>

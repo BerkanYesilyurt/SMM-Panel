@@ -40,18 +40,18 @@
                             <td><center><span class="badge bg-@php
                     switch($user->authority){
 
-                        case 'support':
+                        case \App\Enums\UserAuthorityEnum::support->value:
                         echo 'warning';
                         break;
 
-                        case 'admin':
+                        case \App\Enums\UserAuthorityEnum::admin->value:
                         echo 'danger';
                         break;
 
                         default:
                         echo 'success';
                     }
-                    @endphp me-1">{{$user->authority == 'none' ? 'USER' : $user->authority}}</span></center></td>
+                    @endphp me-1">{{$user->authority == \App\Enums\UserAuthorityEnum::none->value ? 'USER' : strtoupper(\App\Enums\UserAuthorityEnum::from($user->authority)->name)}}</span></center></td>
                             <td><center>{{$user->status}}</center></td>
                             <td><center>{{$configsArray['currency_symbol']}}{{round($user->balance, 4)}}</center></td>
                             <td><center>{{$user->created_at->diffForHumans()}}</center></td>

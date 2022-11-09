@@ -212,7 +212,7 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
-                                                <small class="text-muted">{{ auth()->user()->authority == 'none' ? 'USER' : strtoupper(auth()->user()->authority) }}</small>
+                                                <small class="text-muted">{{ auth()->user()->authority == \App\Enums\UserAuthorityEnum::none->value ? 'USER' : strtoupper(\App\Enums\UserAuthorityEnum::from(auth()->user()->authority)->name) }}</small>
                                             </div>
                                         </div>
                                     </a>

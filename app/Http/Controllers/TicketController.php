@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserAuthorityEnum;
 use App\Http\Requests\CreateTicketRequest;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
@@ -82,7 +83,7 @@ class TicketController extends Controller
         $ticketMessages->user_id = auth()->user()->id;
         $ticketMessages->message = $request->message;
         $ticketMessages->seen_by_user = auth()->user()->id == $relatedTicket->value('user_id') ? 1 : 0;
-        $ticketMessages->seen_by_support = auth()->user()->authority != 'none' ? 1 : 0;
+        $ticketMessages->seen_by_support = auth()->user()->authority != UserAuthorityEnum::none->value ? 1 : 0;
         $ticketMessages->save();
 
         alert()->success('Success!','You have successfully sent the message.')->timerProgressBar();

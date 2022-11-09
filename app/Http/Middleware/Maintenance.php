@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserAuthorityEnum;
 use App\Models\Config;
 use Closure;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class Maintenance
         $config = new Config();
         $maintenance_mode = $config->where('name','=', 'maintenance_mode')->value('value');
         if($maintenance_mode){
-            if(auth()->check() && auth()->user()->authority != 'none'){
+            if(auth()->check() && auth()->user()->authority != UserAuthorityEnum::none->value){
                 return $next($request);
             }else{
                 return response()->view('undermaintenance');
