@@ -19,6 +19,16 @@
             </div>
             <br>
         @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                <ul style="margin-bottom: 1px; color:#478924;">
+                    <b>{{session('message')}}</b>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+            <br>
+        @endif
         <div class="card mb-4">
             <h5 class="card-header">User Details (ID: {{$user->id}})</h5>
             <div class="card-body">
@@ -96,7 +106,7 @@
                             <label for="status" class="form-label">Status</label>
                             <select name="status" id="status" class="select2 form-select">
                                 @foreach(App\Enums\UserStatusEnum::values() as $key => $value)
-                                    <option value="{{ $key }}" @selected($user->status == $value)>{{ $value }}</option>
+                                    <option value="{{ $key }}" @selected($user->status == $key)>{{ $value }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -148,7 +158,7 @@
         <div class="card mb-4">
             <h5 class="card-header">User Balance</h5>
             <div class="card-body">
-                <form action="/admin/user/{{$user->id}}/edit" method="POST">
+                <form action="/admin/user/{{$user->id}}/balance-update" method="POST">
                     @csrf
                     <div class="row">
                         <div class="mb-3 col-md-6">
@@ -162,7 +172,7 @@
                             <span class="badge bg-dark cursor-pointer" onclick="subBalance(100)">SUB {{$config['currency_symbol']}}100</span><br><br>
                             <label for="balance" class="form-label">Balance:</label>
                             <input class="form-control" type="number" id="balance" name="balance"
-                                   value="{{$user->balance}}">
+                                   value="{{(int)$user->balance}}">
                             <br><span class="badge bg-success">Current: {{$config['currency_symbol']}}{{$user->balance}}</span>
                         </div>
 
