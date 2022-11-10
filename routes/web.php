@@ -75,4 +75,7 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
 
     Route::get('/admin/user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'getUserDetails']);
     Route::post('/admin/user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'updateUserDetails']);
+
+    Route::post('/admin/user/{user}/balance-update', [\App\Http\Controllers\admin\UserController::class, 'updateUserBalance']);
+
 });
