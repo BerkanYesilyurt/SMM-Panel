@@ -162,6 +162,26 @@
                             <div data-i18n="Users">Users</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="/admin/orders" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-list-ul"></i>
+                            <div data-i18n="Orders">Orders</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Panel</span></li>
+                    <li class="menu-item">
+                        <a href="/admin/categories" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Categories">Categories</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/services" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                            <div data-i18n="Services">Services</div>
+                        </a>
+                    </li>
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
                     <li class="menu-item">
