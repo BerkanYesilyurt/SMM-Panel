@@ -32,4 +32,19 @@ class CategoryController extends Controller
 
         return back()->with('message', 'You have successfully edited category details.');
     }
+
+    public function createNewCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:1|max:250',
+            'status' => ['required', new Enum(CategoryStatusEnum::class)]
+        ]);
+
+        Category::create([
+            'name' => $request->name,
+            'status' => $request->status
+        ]);
+
+        return back()->with('message', 'You have successfully created new category.');
+    }
 }
