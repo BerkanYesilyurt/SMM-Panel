@@ -4,6 +4,9 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> Categories
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenterNewCategory" style="float:right;">
+                <span class="tf-icons bx bx-plus"></span>&nbsp; New Category
+            </button>
         </h4>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -49,9 +52,11 @@
                             <td><center><b>{{$category->id}}</b></center></td>
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$category->name}}</center></td>
                             <td><center><span class="badge bg-{{$category->status == \App\Enums\CategoryStatusEnum::ACTIVE->value ? 'success' : 'danger'}} me-1">{{$category->status == \App\Enums\CategoryStatusEnum::ACTIVE->value ? 'ACTIVE' : 'INACTIVE'}}</span></center></td>
-                            <td><center><button type="button" onclick="changeModal(this)" data-categoryid="{{$category->id}}" data-categoryname="{{$category->name}}" data-categorystatus="{{$category->status}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                            <td><center>
+                                    <button type="button" onclick="changeModal(this)" data-categoryid="{{$category->id}}" data-categoryname="{{$category->name}}" data-categorystatus="{{$category->status}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
                                         <span class="tf-icons bx bx-pencil"></span>&nbsp; Change Details
-                                    </button></center>
+                                    </button>
+                                </center>
                             </td>
                         </tr>
                     @empty
@@ -106,6 +111,41 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalCenterNewCategory" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterNewCategoryTitle">New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="createnewcategory" action="/admin/new-category">
+                        @csrf
+
+                        <div class="col mb-3">
+                            <label for="name" class="form-label">Category Name:</label>
+                            <textarea class="form-control" rows="5" maxlength="250" name="name" id="name" style="width: 100%; resize: none;" aria-label="With textarea"></textarea>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="status" class="form-label">Category Status:</label>
+                            <select id="status" class="form-control" name="status">
+                                @foreach(App\Enums\CategoryStatusEnum::values() as $key => $value)
+                                    <option value="{{$key}}">{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col mb-3">
+                            <button class="btn btn-primary" onclick="createNewCategory(); this.disabled = true;" style="color: white; width: 100%;">Create Category</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         function changeModal(element){
             document.getElementById('id').value = element.dataset.categoryid;
@@ -115,6 +155,10 @@
 
         function submit(){
             document.getElementById("form").submit();
+        }
+
+        function createNewCategory(){
+            document.getElementById("createnewcategory").submit();
         }
     </script>
 @endsection
