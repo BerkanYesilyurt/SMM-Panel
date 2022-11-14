@@ -47,4 +47,15 @@ class CategoryController extends Controller
 
         return back()->with('message', 'You have successfully created new category.');
     }
+
+    public function deleteCategory(Request $request)
+    {
+        $request->validate([
+            'delete_id' => 'required|numeric',
+        ]);
+
+        Category::findOrFail($request->delete_id)->delete();
+
+        return back()->with('message', 'You have successfully deleted category.');
+    }
 }
