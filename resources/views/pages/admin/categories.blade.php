@@ -53,6 +53,9 @@
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$category->name}}</center></td>
                             <td><center><span class="badge bg-{{$category->status == \App\Enums\CategoryStatusEnum::ACTIVE->value ? 'success' : 'danger'}} me-1">{{$category->status == \App\Enums\CategoryStatusEnum::ACTIVE->value ? 'ACTIVE' : 'INACTIVE'}}</span></center></td>
                             <td><center>
+                                    <button type="button" onclick="prepareForDelete(this)" data-categoryid="{{$category->id}}" data-categoryname="{{$category->name}}" data-categorystatus="{{$category->status}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteCategory">
+                                        <span class="tf-icons bx bx-trash"></span>
+                                    </button>
                                     <button type="button" onclick="changeModal(this)" data-categoryid="{{$category->id}}" data-categoryname="{{$category->name}}" data-categorystatus="{{$category->status}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
                                         <span class="tf-icons bx bx-pencil"></span>&nbsp; Change Details
                                     </button>
@@ -146,11 +149,42 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalCenterDeleteCategory" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterDeleteTitle">Delete Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="deletecategory" action="/admin/delete-category">
+                        @csrf
+                        <input type="hidden" name="delete_id" id="delete_id">
+
+                        <div class="col mb-3">
+                            <span id="prepareForDelete"></span>
+                        </div>
+
+                        <div class="col mb-3">
+                            <button class="btn btn-danger" onclick="deleteCategory(); this.disabled = true;" style="color: white; width: 100%;">Delete Category</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         function changeModal(element){
             document.getElementById('id').value = element.dataset.categoryid;
             document.getElementById('name').value = element.dataset.categoryname;
             document.getElementById('status').value = element.dataset.categorystatus;
+        }
+
+        function prepareForDelete(element){
+            document.getElementById('delete_id').value = element.dataset.categoryid;
+            document.getElementById('prepareForDelete').innerHTML = '<b>' + element.dataset.categoryname + '(ID: ' + element.dataset.categoryid + ') </b>will be deleted. Are you sure?';
         }
 
         function submit(){
@@ -159,6 +193,10 @@
 
         function createNewCategory(){
             document.getElementById("createnewcategory").submit();
+        }
+
+        function deleteCategory(){
+            document.getElementById("deletecategory").submit();
         }
     </script>
 @endsection
