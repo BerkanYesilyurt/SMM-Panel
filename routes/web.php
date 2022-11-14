@@ -82,4 +82,6 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
     Route::post('/admin/categories', [\App\Http\Controllers\admin\CategoryController::class, 'updateCategory']);
 
     Route::post('/admin/new-category', [\App\Http\Controllers\admin\CategoryController::class, 'createNewCategory']);
+
+    Route::post('/admin/delete-category', [\App\Http\Controllers\admin\CategoryController::class, 'deleteCategory']);
 });
