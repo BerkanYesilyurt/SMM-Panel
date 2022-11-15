@@ -217,13 +217,9 @@
         $("#Categories").on("change", function(){
             clearAll();
             defaultDescription();
-            var $target = $("#Services").val(""),
-                category = $(this).val();
 
-            $target
-                .toggleClass("hidden", category === "")
-                .find("option:gt(0)").addClass("hidden")
-                .siblings().filter("[data-category="+category+"]").removeClass("hidden");
+            $("#Services").find("option").addClass("hidden");
+            $("#Services option[data-category^='" + $(this).val() + "']").removeClass("hidden");
 
             $("#Services").val($("#Services option:first").val());
         });
