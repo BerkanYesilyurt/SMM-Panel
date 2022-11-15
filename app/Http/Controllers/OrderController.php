@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CategoryStatusEnum;
 use App\Http\Requests\NewOrderRequest;
 use App\Models\Category;
 use App\Models\Order;
@@ -17,8 +18,10 @@ class OrderController extends Controller
         $services = [];
 
         foreach(Category::all() as $category){
-            $categories[$category->id] = $category->name;
-            $services[$category->id] = Category::find($category->id)->getServicesWithCategory();
+            if($category->status == CategoryStatusEnum::ACTIVE->value){
+                $categories[$category->id] = $category->name;
+                $services[$category->id] = Category::find($category->id)->getServicesWithCategory();
+            }
         }
 
         $count = [
