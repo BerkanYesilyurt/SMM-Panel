@@ -135,7 +135,7 @@
                             <label for="status" class="form-label">Category Status:</label>
                             <select id="status" class="form-control" name="status">
                                 @foreach(App\Enums\CategoryStatusEnum::values() as $key => $value)
-                                    <option value="{{$key}}">{{$value}}</option>
+                                    <option value="{{$key}}" @selected($value == App\Enums\CategoryStatusEnum::ACTIVE->name)>{{$value}}</option>
                                 @endforeach
                             </select>
                         </div>
