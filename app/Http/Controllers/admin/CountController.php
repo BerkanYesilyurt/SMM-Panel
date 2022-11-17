@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\Category;
@@ -52,14 +53,14 @@ class CountController extends Controller
     }
 
     private function countTotalRevenue(){
-        $this->count['revenue']['total'] = Order::whereNot('status','=','CANCELED')->sum('charge');
+        $this->count['revenue']['total'] = Order::whereNot('status','=',OrderStatusEnum::CANCELED->value)->sum('charge');
     }
 
     private function countRevenue(){
-       $this->count['revenue']['last30days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])->whereNot('status','=','CANCELED')->sum('charge');
-       $this->count['revenue']['last90days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(90), Carbon::now()])->whereNot('status','=','CANCELED')->sum('charge');
-       $this->count['revenue']['last180days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(180), Carbon::now()])->whereNot('status','=','CANCELED')->sum('charge');
-       $this->count['revenue']['last365days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(365), Carbon::now()])->whereNot('status','=','CANCELED')->sum('charge');
+       $this->count['revenue']['last30days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(30), Carbon::now()])->whereNot('status','=', OrderStatusEnum::CANCELED->value)->sum('charge');
+       $this->count['revenue']['last90days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(90), Carbon::now()])->whereNot('status','=', OrderStatusEnum::CANCELED->value)->sum('charge');
+       $this->count['revenue']['last180days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(180), Carbon::now()])->whereNot('status','=', OrderStatusEnum::CANCELED->value)->sum('charge');
+       $this->count['revenue']['last365days'] = Order::whereBetween('created_at', [Carbon::now()->subDays(365), Carbon::now()])->whereNot('status','=', OrderStatusEnum::CANCELED->value)->sum('charge');
     }
 
     private function countNumberOfUsers(){
