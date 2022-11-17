@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CategoryStatusEnum;
+use App\Enums\OrderStatusEnum;
 use App\Http\Requests\NewOrderRequest;
 use App\Models\Category;
 use App\Models\Order;
@@ -65,8 +66,10 @@ class OrderController extends Controller
                     'type' => $orderService->api_provider_id ? 'api' : 'manual',
                     'api_provider_id' => $orderService->api_provider_id ?? null,
                     'api_service_id' => $orderService->api_service_id ?? null,
-                    'api_order_id' => null,
-                    'status' => 'PENDING',
+                    //'api_order_id' => null,
+                    //'start_count' => null,
+                    //'remain' => null,
+                    'status' => OrderStatusEnum::PENDING->value,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
