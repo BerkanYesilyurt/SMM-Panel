@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ServiceStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,9 +23,9 @@ return new class extends Migration
             $table->integer('min');
             $table->integer('max');
             $table->string('type')->default('manual');
-            $table->integer('api_provider_id')->nullable()->default(NULL);
-            $table->integer('api_service_id')->nullable()->default(NULL);
-            $table->string('status')->default('ACTIVE');
+            $table->integer('api_provider_id')->nullable();
+            $table->integer('api_service_id')->nullable();
+            $table->string('status')->default(ServiceStatusEnum::ACTIVE->value);
             $table->timestamps();
         });
     }
