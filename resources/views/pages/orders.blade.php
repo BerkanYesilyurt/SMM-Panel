@@ -40,26 +40,26 @@
                                     <td><center>{{$userOrder->created_at->diffForHumans()}}</center></td>
                                     <td><center><span class="badge bg-@php
                     switch($userOrder->status){
-                        case 'COMPLETED':
+                        case \App\Enums\OrderStatusEnum::COMPLETED->value:
                         echo 'success';
                         break;
 
-                        case 'INPROGRESS':
+                        case \App\Enums\OrderStatusEnum::INPROGRESS->value:
                         echo 'info';
                         break;
 
-                        case 'PARTIAL':
+                        case \App\Enums\OrderStatusEnum::PARTIAL->value:
                         echo 'warning';
                         break;
 
-                        case 'CANCELED':
+                        case \App\Enums\OrderStatusEnum::CANCELED->value:
                         echo 'danger';
                         break;
 
                         default:
                         echo 'primary';
                     }
-                    @endphp me-1">{{$userOrder->status}}</span></center></td>
+                    @endphp me-1">{{\App\Enums\OrderStatusEnum::values()[$userOrder->status]}}</span></center></td>
                                 </tr>
                     @empty
                         <tr>
