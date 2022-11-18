@@ -84,4 +84,6 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
     Route::post('/admin/new-category', [\App\Http\Controllers\admin\CategoryController::class, 'createNewCategory']);
 
     Route::post('/admin/delete-category', [\App\Http\Controllers\admin\CategoryController::class, 'deleteCategory']);
+
+    Route::get('/admin/orders', [\App\Http\Controllers\admin\OrderController::class, 'ordersPage']);
 });
