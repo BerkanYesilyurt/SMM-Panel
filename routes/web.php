@@ -78,11 +78,11 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
 
     Route::post('/admin/user/{user}/balance-update', [\App\Http\Controllers\admin\UserController::class, 'updateUserBalance']);
 
+    Route::get('/admin/services', [\App\Http\Controllers\admin\ServiceController::class, 'servicesPage']);
+
     Route::get('/admin/categories', [\App\Http\Controllers\admin\CategoryController::class, 'categoriesPage']);
     Route::post('/admin/categories', [\App\Http\Controllers\admin\CategoryController::class, 'updateCategory']);
-
     Route::post('/admin/new-category', [\App\Http\Controllers\admin\CategoryController::class, 'createNewCategory']);
-
     Route::post('/admin/delete-category', [\App\Http\Controllers\admin\CategoryController::class, 'deleteCategory']);
 
     Route::get('/admin/orders', [\App\Http\Controllers\admin\OrderController::class, 'ordersPage']);
