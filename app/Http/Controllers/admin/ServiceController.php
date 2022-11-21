@@ -16,4 +16,19 @@ class ServiceController extends Controller
             'categories' => Category::all()
         ]);
     }
+
+    public function updateService(Request $request)
+    {
+        //TODO
+    }
+
+    public function createNewService(Request $request)
+    {
+        //TODO
+    }
+
+    public function deleteService(Request $request)
+    {
+        //TODO
+    }
 }
