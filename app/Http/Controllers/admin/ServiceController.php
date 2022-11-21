@@ -29,6 +29,12 @@ class ServiceController extends Controller
 
     public function deleteService(Request $request)
     {
-        //TODO
+        $request->validate([
+            'delete_id' => 'required|numeric',
+        ]);
+
+        Service::findOrFail($request->delete_id)->delete();
+
+        return back()->with('message', 'You have successfully deleted service.');
     }
 }
