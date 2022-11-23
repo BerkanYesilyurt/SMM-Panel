@@ -93,7 +93,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="form" action="/admin/services">
+                    <form method="POST" id="form" action="/admin/services" spellcheck="false">
                         @csrf
                         <input type="hidden" name="id" id="updateserviceid">
 
@@ -103,8 +103,13 @@
                         </div>
 
                         <div class="col mb-3">
-                            <label for="updateservicedescription" class="form-label">Service Description:</label>
+                            <label for="updateservicedescription" class="form-label">Service Description:
+                                <span class="badge bg-dark cursor-pointer" style="margin-left: 5px;" onclick="addTag('updateservicedescription', 'refill')">REFILL</span>
+                                <span class="badge bg-dark cursor-pointer" onclick="addTag('updateservicedescription', 'starttime')">START TIME</span>
+                                <span class="badge bg-dark cursor-pointer" onclick="addTag('updateservicedescription', 'speed')">SPEED</span>
+                            </label>
                             <textarea class="form-control" rows="4" maxlength="1000" name="description" id="updateservicedescription" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                            <span class="form-label" style="text-transform: none">Tags will not appear in the description and must be used <b>once</b>. Default: No DATA</span>
                         </div>
 
                         <div class="col mb-3">
@@ -158,7 +163,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="createnewservice" action="/admin/new-service">
+                    <form method="POST" id="createnewservice" action="/admin/new-service" spellcheck="false">
                         @csrf
                         <div class="col mb-3">
                             <label for="newservicename" class="form-label">Service Name:</label>
@@ -166,8 +171,13 @@
                         </div>
 
                         <div class="col mb-3">
-                            <label for="newservicedescription" class="form-label">Service Description:</label>
+                            <label for="newservicedescription" class="form-label">Service Description:
+                                <span class="badge bg-dark cursor-pointer" style="margin-left: 5px;" onclick="addTag('newservicedescription', 'refill')">REFILL</span>
+                                <span class="badge bg-dark cursor-pointer" onclick="addTag('newservicedescription', 'starttime')">START TIME</span>
+                                <span class="badge bg-dark cursor-pointer" onclick="addTag('newservicedescription', 'speed')">SPEED</span>
+                            </label>
                             <textarea class="form-control" rows="4" maxlength="1000" name="description" id="newservicedescription" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                            <span class="form-label" style="text-transform: none">Tags will not appear in the description and must be used <b>once</b>. Default: No DATA</span>
                         </div>
 
                         <div class="col mb-3">
@@ -266,6 +276,21 @@
 
         function deleteService(){
             document.getElementById("deleteservice").submit();
+        }
+
+        function addTag(toWhere, type){
+            let content;
+            if(type == 'refill'){
+                content = ' {refill}{/refill}';
+            }else if(type == 'starttime'){
+                content = ' {starttime}{/starttime}';
+            }else if(type == 'speed'){
+                content = ' {speed}{/speed}';
+            }
+
+            if(content){
+                document.getElementById(toWhere).value += content;
+            }
         }
     </script>
 @endsection
