@@ -62,7 +62,7 @@
                                     <button type="button" onclick="prepareForDelete(this)" data-serviceid="{{$service->id}}" data-servicename="{{$service->name}}" data-servicestatus="{{$service->status}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteService">
                                         <span class="tf-icons bx bx-trash"></span>
                                     </button>
-                                    <button type="button" onclick="changeModal(this)" data-serviceid="{{$service->id}}" data-categoryid="{{$service->category->id}}" data-servicename="{{$service->name}}" data-servicestatus="{{$service->status}}" data-serviceprice="{{$service->price}}" data-servicemin="{{$service->min}}" data-servicemax="{{$service->max}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                                    <button type="button" onclick="changeModal(this)" data-serviceid="{{$service->id}}" data-categoryid="{{$service->category->id}}" data-servicename="{{$service->name}}" data-servicedescription="{{$service->description}}" data-servicestatus="{{$service->status}}" data-serviceprice="{{$service->price}}" data-servicemin="{{$service->min}}" data-servicemax="{{$service->max}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
                                         <span class="tf-icons bx bx-pencil"></span>&nbsp; Change Details
                                     </button>
                                 </center>
@@ -99,7 +99,12 @@
 
                         <div class="col mb-3">
                             <label for="updateservicename" class="form-label">Service Name:</label>
-                            <textarea class="form-control" rows="5" maxlength="250" name="name" id="updateservicename" style="width: 100%; resize: none;" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" rows="2" maxlength="250" name="name" id="updateservicename" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updateservicedescription" class="form-label">Service Description:</label>
+                            <textarea class="form-control" rows="4" maxlength="1000" name="description" id="updateservicedescription" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
                         </div>
 
                         <div class="col mb-3">
@@ -157,7 +162,12 @@
                         @csrf
                         <div class="col mb-3">
                             <label for="newservicename" class="form-label">Service Name:</label>
-                            <textarea class="form-control" rows="5" maxlength="250" name="name" id="newservicename" style="width: 100%; resize: none;" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" rows="2" maxlength="250" name="name" id="newservicename" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="newservicedescription" class="form-label">Service Description:</label>
+                            <textarea class="form-control" rows="4" maxlength="1000" name="description" id="newservicedescription" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
                         </div>
 
                         <div class="col mb-3">
@@ -238,6 +248,7 @@
             document.getElementById('updateserviceprice').value = element.dataset.serviceprice;
             document.getElementById('updateservicemin').value = element.dataset.servicemin;
             document.getElementById('updateservicemax').value = element.dataset.servicemax;
+            document.getElementById('updateservicedescription').value = element.dataset.servicedescription;
         }
 
         function prepareForDelete(element){
