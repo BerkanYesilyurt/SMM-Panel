@@ -4,16 +4,25 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> Services
+            @if(count($categories) > 0)
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenterNewService" style="float:right;">
                 <span class="tf-icons bx bx-plus"></span>&nbsp; New Service
             </button>
+            @endif
         </h4>
-        @if ($errors->any())
+        @if($errors->any())
             <div class="alert alert-danger">
                 <ul style="margin-bottom: 1px;">
                     @foreach ($errors->all() as $error)
                         <li><b>{{$error}}</b></li>
                     @endforeach
+                </ul>
+            </div>
+        @endif
+        @if(count($categories) == 0)
+            <div class="alert alert-danger">
+                <ul style="margin-bottom: 1px;">
+                    <li><b>Before add a new service, you need to create a category. <a href="/admin/categories">Categories Page</a></b></li>
                 </ul>
             </div>
         @endif
@@ -131,7 +140,7 @@
                         </div>
 
                         <div class="col mb-3">
-                            <label for="updateserviceprice" class="form-label">SERVICE PRICE:</label>
+                            <label for="updateserviceprice" class="form-label">SERVICE PRICE: (ex: 12.25)</label>
                             <input type="text" id="updateserviceprice" name="price" class="form-control" placeholder="Price" required>
                         </div>
 
@@ -199,7 +208,7 @@
                         </div>
 
                         <div class="col mb-3">
-                            <label for="newserviceprice" class="form-label">SERVICE PRICE:</label>
+                            <label for="newserviceprice" class="form-label">SERVICE PRICE: (ex: 12.25)</label>
                             <input type="text" id="newserviceprice" name="price" class="form-control" placeholder="Price" required>
                         </div>
 
