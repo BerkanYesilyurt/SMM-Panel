@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('service_id');
             $table->integer('new_service_id')->nullable();
-            $table->integer('old_price')->nullable();
-            $table->integer('new_price')->nullable();
+            $table->string('old_price')->nullable();
+            $table->string('new_price')->nullable();
             $table->text('description')->nullable();
             $table->integer('public')->nullable();
             $table->integer('show_id_changes')->nullable();
