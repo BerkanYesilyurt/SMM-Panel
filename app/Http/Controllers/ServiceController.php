@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Enums\CategoryStatusEnum;
 use App\Models\Category;
-use App\Models\Service;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
