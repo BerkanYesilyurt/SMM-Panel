@@ -6,8 +6,10 @@ use App\Enums\ServiceStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Service;
+use App\Models\ServiceUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Enum;
 
 class ServiceController extends Controller
@@ -20,7 +22,7 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function updateService(Request $request, Service $service)
+    public function updateService(Request $request, Service $service, ServiceUpdate $serviceUpdate)
     {
         $fields = $request->validate([
             'id' => 'required|numeric|exists:services,id',
@@ -33,10 +35,22 @@ class ServiceController extends Controller
             'max' => 'integer|digits_between:1,9|gte:min'
         ]);
 
-        $filteredFields = Arr::except($fields, ['id']);
-        $service->find($request->id)->update($filteredFields);
-        return back()->with('message', 'You have successfully updated the service.');
+        $currentService = $service->find($request->id);
 
+        DB::transaction(function () use($fields, $currentService, $request, $serviceUpdate){
+            $filteredFields = Arr::except($fields, ['id']);
+
+            if(abs($currentService->price - $request->price) > PHP_FLOAT_EPSILON){
+                $serviceUpdate->create([
+                    'service_id' => $request->id,
+                    'old_price' => floatval($currentService->price),
+                    'new_price' => floatval($request->price),
+                ]);
+            }
+
+            $currentService->update($filteredFields);
+        });
+        return back()->with('message', 'You have successfully updated the service.');
     }
 
     public function createNewService(Request $request, Service $service)
