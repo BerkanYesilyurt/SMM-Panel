@@ -38,6 +38,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUserId($value)
+ * @property string|null $start_count
+ * @property string|null $remain
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereRemain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereStartCount($value)
  */
 class Order extends Model
 {

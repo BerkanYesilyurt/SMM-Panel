@@ -24,6 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|TicketMessage whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TicketMessage whereUserId($value)
  * @mixin \Eloquent
+ * @property int $seen_by_user
+ * @property int $seen_by_support
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketMessage whereSeenBySupport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TicketMessage whereSeenByUser($value)
  */
 class TicketMessage extends Model
 {
