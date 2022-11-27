@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('service_updates', function (Blueprint $table) {
             $table->id();
             $table->integer('service_id');
-            $table->integer('new_service_id');
-            $table->integer('old_price');
-            $table->integer('new_price');
-            $table->text('description');
-            $table->integer('public');
-            $table->integer('show_id_changes');
-            $table->integer('show_price_changes');
+            $table->integer('new_service_id')->nullable();
+            $table->integer('old_price')->nullable();
+            $table->integer('new_price')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('public')->nullable();
+            $table->integer('show_id_changes')->nullable();
+            $table->integer('show_price_changes')->nullable();
             $table->timestamps();
         });
     }
