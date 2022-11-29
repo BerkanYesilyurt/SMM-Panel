@@ -22,6 +22,13 @@ class ServiceController extends Controller
         ]);
     }
 
+    public function serviceUpdatesPage()
+    {
+        return view('pages.admin.serviceupdates', [
+            'serviceupdates' => ServiceUpdate::with('service')->get()
+        ]);
+    }
+
     public function updateService(Request $request, Service $service, ServiceUpdate $serviceUpdate)
     {
         $fields = $request->validate([
