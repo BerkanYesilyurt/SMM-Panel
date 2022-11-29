@@ -182,6 +182,12 @@
                             <div data-i18n="Services">Services</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="/admin/servicesupdates" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-left-indent"></i>
+                            <div data-i18n="Service Updates">Service Updates</div>
+                        </a>
+                    </li>
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
                     <li class="menu-item">
