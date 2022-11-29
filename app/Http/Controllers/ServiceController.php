@@ -23,7 +23,7 @@ class ServiceController extends Controller
 
     }
 
-    public function servicesUpdatesPage(){
+    public function serviceUpdatesPage(){
         $configsArray = ConfigController::configs();
         if($configsArray['service_updates_page'] == 1){
             return view('pages.serviceupdates');

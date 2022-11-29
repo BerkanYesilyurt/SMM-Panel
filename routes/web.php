@@ -60,7 +60,7 @@ Route::middleware(['auth', 'maintenance', 'verifypanelinstalled'])->group(functi
 
     Route::get('/orders', [OrderController::class, 'ordersPage']);
 
-    Route::get('/serviceupdates', [ServiceController::class, 'servicesUpdatesPage']);
+    Route::get('/serviceupdates', [ServiceController::class, 'serviceUpdatesPage']);
 
     Route::get('/api', [ApiController::class, 'apiPage']);
 });
