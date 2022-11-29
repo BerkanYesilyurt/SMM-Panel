@@ -41,4 +41,9 @@ class ServiceUpdate extends Model
 
     protected $table = 'service_updates';
     protected $guarded = ['id'];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }
