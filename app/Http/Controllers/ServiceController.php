@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\CategoryStatusEnum;
 use App\Models\Category;
+use App\Models\ServiceUpdate;
 
 class ServiceController extends Controller
 {
@@ -26,7 +27,9 @@ class ServiceController extends Controller
     public function serviceUpdatesPage(){
         $configsArray = ConfigController::configs();
         if($configsArray['service_updates_page'] == 1){
-            return view('pages.serviceupdates');
+            return view('pages.serviceupdates', [
+                'serviceupdates' => ServiceUpdate::with('service')->get()
+            ]);
         }else{
             abort(404);
         }
