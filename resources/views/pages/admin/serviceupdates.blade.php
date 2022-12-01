@@ -31,18 +31,35 @@
                     <small class="text-light fw-semibold">The portion of the service updates that will be displayed to the user is set here.</small>
                     <div class="demo-inline-spacing mt-3">
                         <div class="list-group">
-                            @foreach($serviceupdates as $serviceupdate)
+                            <form action="/admin/servicesupdates" method="POST">
+                            @csrf
+
+                            @forelse($serviceupdates as $serviceupdate)
                                 @if(isset($serviceupdate->old_price) && isset($serviceupdate->new_price))
                                 <label class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" value="{{$serviceupdate->id}}">
+                                    <input class="form-check-input me-1" type="checkbox" name="id[]" value="{{$serviceupdate->id}}">
                                     {{$serviceupdate->service->name}} (ID: {{$serviceupdate->service_id}})
                                     @if($serviceupdate->old_price && $serviceupdate->new_price)
                                         price <b>{{$serviceupdate->new_price > $serviceupdate->old_price ? 'increased to' : 'reduced to'}}</b>
-                                        {{floatval($serviceupdate->new_price)}}
+                                        {{$configsArray['currency_symbol'] . floatval($serviceupdate->new_price)}}
                                     @endif
+                                    @if($serviceupdate->description)
+                                        <br><i class="bx bx-chevrons-right"></i><b>Additional Info:</b> {!! $serviceupdate->description !!}
+                                    @endif
+                                    <br>
+                                    <i class="bx bx-bookmark-alt-plus"></i>
+                                    <b>
+                                    {!! $serviceupdate->public ? '<font color="green">Public</font>' : '<font color="red">Not Public</font>'  !!} -
+                                    {!! $serviceupdate->show_price_changes ? '<font color="green">Price Changes Visible</font>' : '<font color="red">Price Changes Invisible</font>' !!}
+                                    </b>
                                 </label>
                                 @endif
-                            @endforeach
+                            @empty
+                                <center>
+                                    <b>No Updates Found.</b>
+                                </center>
+                            @endforelse
+                            </form>
                         </div>
                     </div>
                 </div>
