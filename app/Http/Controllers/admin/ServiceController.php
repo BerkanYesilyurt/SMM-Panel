@@ -86,4 +86,9 @@ class ServiceController extends Controller
 
         return back()->with('message', 'You have successfully deleted service.');
     }
+
+    public function updateServiceUpdates(Request $request)
+    {
+        //TODO
+    }
 }
