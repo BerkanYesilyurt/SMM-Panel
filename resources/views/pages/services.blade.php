@@ -38,7 +38,7 @@
                         <tr>
                             <td><center><b>{{$service->id}}</b></center></td>
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$service->name}}</center></td>
-                            <td><center>{{$configsArray['currency_symbol']}}{{$service->price}}</center></td>
+                            <td><center>{{$configsArray['currency_symbol']}}{{floatval($service->price)}}</center></td>
                             <td><center>{{$service->min}}</center></td>
                             <td><center>{{$service->max}}</center></td>
                             <td><center><button type="button" onclick="changeModal(this)" data-servicename="{{$service->name}}" data-servicedescription="<x-services :description='$service->description'/>" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
