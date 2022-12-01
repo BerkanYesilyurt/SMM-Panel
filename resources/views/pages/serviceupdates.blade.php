@@ -13,7 +13,7 @@
                         <div class="demo-inline-spacing mt-3">
                             <div class="list-group">
                                 @forelse($serviceupdates as $serviceupdate)
-                                    @if(isset($serviceupdate->old_price) && isset($serviceupdate->new_price) && $serviceupdate->public)
+                                    @if(($serviceupdate->description || (isset($serviceupdate->old_price) && isset($serviceupdate->new_price))) && $serviceupdate->public)
                                         <label class="list-group-item">
                                             <small class="text-{{$serviceupdate->new_price > $serviceupdate->old_price ? 'success' : ($serviceupdate->old_price > $serviceupdate->new_price ? 'danger' : 'warning')}} fw-semibold">
                                                 <i class="bx bx-{{$serviceupdate->new_price > $serviceupdate->old_price ? 'up-arrow-alt' : ($serviceupdate->old_price > $serviceupdate->new_price ? 'down-arrow-alt' : 'minus')}}"></i>
@@ -22,6 +22,9 @@
                                             @if($serviceupdate->old_price && $serviceupdate->new_price && $serviceupdate->show_price_changes)
                                                 price <b>{{$serviceupdate->new_price > $serviceupdate->old_price ? 'increased to' : 'reduced to'}}</b>
                                                 {{$configsArray['currency_symbol'] . floatval($serviceupdate->new_price)}}.
+                                            @endif
+                                            @if($serviceupdate->description)
+                                                <br><i class="bx bx-chevrons-right"></i><b>Additional:</b> {!! $serviceupdate->description !!}
                                             @endif
                                         </label>
                                     @endif
