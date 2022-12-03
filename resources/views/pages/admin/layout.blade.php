@@ -189,6 +189,14 @@
                         </a>
                     </li>
 
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Support</span></li>
+                    <li class="menu-item">
+                        <a href="/admin/announcements" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-info-square"></i>
+                            <div data-i18n="Announcements">Announcements</div>
+                        </a>
+                    </li>
+
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
                     <li class="menu-item">
                         <a href="/admin/system-settings" class="menu-link">
