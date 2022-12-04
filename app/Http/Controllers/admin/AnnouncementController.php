@@ -14,4 +14,14 @@ class AnnouncementController extends Controller
             'announcements' => Announcement::all()
         ]);
     }
+
+    public function updateAnnouncement(Request $request)
+    {
+        //TODO
+    }
+
+    public function createNewAnnouncement(Request $request)
+    {
+        //TODO
+    }
 }
