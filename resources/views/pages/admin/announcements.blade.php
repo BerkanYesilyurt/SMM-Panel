@@ -36,6 +36,7 @@
 
                 <form action="/admin/announcements" method="POST" id="form{{$announcement->id}}">
                 @csrf
+                <input type="hidden" name="id" value="{{$announcement->id}}" />
                 <div id="accordion{{$announcement->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$announcement->id}}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <label class="form-label">Current Title:</label><br>
@@ -79,12 +80,12 @@
 
                         <div class="col mb-3">
                             <label for="titlenew" class="form-label">Announcement Title:</label>
-                            <textarea class="form-control" rows="2" maxlength="250" name="title" id="titlenew" style="width: 100%; resize: none;" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" rows="2" maxlength="250" name="title" id="titlenew" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
                         </div>
 
                         <div class="col mb-3">
                             <label for="descriptionnew" class="form-label">Announcement Description:</label>
-                            <textarea class="form-control" rows="3" maxlength="250" name="description" id="descriptionnew" style="width: 100%; resize: none;" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" rows="3" maxlength="250" name="description" id="descriptionnew" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
                         </div>
 
                         <div class="col mb-3">
