@@ -282,7 +282,10 @@
                 <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                     <marquee direction="left" onmouseover="this.stop();" onmouseout="this.start();">
                         @foreach($announcementArray as $announcementTitle => $announcementDescription)
-                            <b>{{$announcementTitle}}</b> &raquo; {{ $announcementDescription ?? ''}}
+                            <b>{{$announcementTitle}}</b> &raquo; {!!  $announcementDescription ?? '' !!}
+                            @if(!$loop->last)
+                            &nbsp;&nbsp; &#9679; &nbsp;&nbsp;
+                            @endif
                         @endforeach
                     </marquee>
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
