@@ -34,11 +34,13 @@
                     </button>
                 </h2>
 
-                <form action="/admin/announcements" method="POST" id="form{{$announcement->id}}">
-                @csrf
-                <input type="hidden" name="id" value="{{$announcement->id}}" />
+
                 <div id="accordion{{$announcement->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$announcement->id}}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
+                        <form action="/admin/announcements" method="POST" id="form{{$announcement->id}}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$announcement->id}}" />
+
                         <label class="form-label">Current Title:</label><br>
                         {!! $announcement->title !!}
                         <br><br>
@@ -52,9 +54,12 @@
                         <textarea class="form-control" rows="2" maxlength="1000" name="description" id="description{{$announcement->id}}" style="width: 100%; resize: vertical;" aria-label="With textarea">{!! $announcement->description !!}</textarea>
                         <br>
                         <button type="submit" class="btn btn-primary" onclick="this.disabled = true; form{{$announcement->id}}.submit();" style="color: white; width: 100%;">Update Announcement</button>
+
+                        </form>
+                        <br>
+                        <button class="btn btn-danger" onclick="prepareForDelete(this)" style="color: white; width: 100%;" data-announcementtitle="{!! $announcement->title !!}" data-announcementid="{{$announcement->id}}" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteAnnouncement">Delete Announcement</button>
                     </div>
                 </div>
-                </form>
             </div><br>
         @empty
             <tr>
@@ -97,9 +102,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalCenterDeleteAnnouncement" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Announcement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="deleteannouncement" action="/admin/delete-announcement">
+                        @csrf
+                        <input type="hidden" name="delete_id" id="delete_id">
+
+                        <div class="col mb-3">
+                            <span id="prepareForDelete"></span>
+                        </div>
+
+                        <div class="col mb-3">
+                            <button class="btn btn-danger" onclick="deleteAnnouncement(); this.disabled = true;" style="color: white; width: 100%;">Delete Announcement</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         function createNewAnnouncement(){
             document.getElementById("createnewannouncement").submit();
+        }
+
+        function prepareForDelete(element){
+            document.getElementById('delete_id').value = element.dataset.announcementid;
+            document.getElementById('prepareForDelete').innerHTML = '<b>' + element.dataset.announcementtitle + ' (ID: ' + element.dataset.announcementid + ') </b>will be deleted. Are you sure?';
+        }
+
+        function deleteAnnouncement(){
+            document.getElementById("deleteannouncement").submit();
         }
     </script>
 @endsection
