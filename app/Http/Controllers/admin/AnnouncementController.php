@@ -39,4 +39,15 @@ class AnnouncementController extends Controller
         Announcement::create($fields);
         return back()->with('message', 'You have successfully created an announcement.');
     }
+
+    public function deleteAnnouncement(Request $request)
+    {
+        $request->validate([
+            'delete_id' => 'required|numeric|exists:announcements,id',
+        ]);
+
+        Announcement::findOrFail($request->delete_id)->delete();
+
+        return back()->with('message', 'You have successfully deleted announcement.');
+    }
 }
