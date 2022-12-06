@@ -89,6 +89,7 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
     Route::get('/admin/announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'announcementsPage']);
     Route::post('/admin/announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'updateAnnouncement']);
     Route::post('/admin/new-announcement', [\App\Http\Controllers\admin\AnnouncementController::class, 'createNewAnnouncement']);
+    Route::post('/admin/delete-announcement', [\App\Http\Controllers\admin\AnnouncementController::class, 'deleteAnnouncement']);
 
     Route::get('/admin/categories', [\App\Http\Controllers\admin\CategoryController::class, 'categoriesPage']);
     Route::post('/admin/categories', [\App\Http\Controllers\admin\CategoryController::class, 'updateCategory']);
