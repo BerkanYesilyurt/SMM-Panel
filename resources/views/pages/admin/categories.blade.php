@@ -184,7 +184,7 @@
 
         function prepareForDelete(element){
             document.getElementById('delete_id').value = element.dataset.categoryid;
-            document.getElementById('prepareForDelete').innerHTML = '<b>' + element.dataset.categoryname + '(ID: ' + element.dataset.categoryid + ') </b>will be deleted. Are you sure?';
+            document.getElementById('prepareForDelete').innerHTML = '<b>' + element.dataset.categoryname + '(ID: ' + element.dataset.categoryid + ') </b>and <b>all related services with this category</b> will be deleted. Are you sure?';
         }
 
         function submit(){
