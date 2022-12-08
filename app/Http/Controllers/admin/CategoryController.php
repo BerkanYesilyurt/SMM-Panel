@@ -5,7 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Enums\CategoryStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Enum;
 
 class CategoryController extends Controller
@@ -54,8 +56,11 @@ class CategoryController extends Controller
             'delete_id' => 'required|numeric',
         ]);
 
-        Category::findOrFail($request->delete_id)->delete();
+        DB::transaction(function () use($request){
+            Category::findOrFail($request->delete_id)->delete();
+            Service::where('category_id', '=', $request->delete_id)->delete();
+        });
 
-        return back()->with('message', 'You have successfully deleted category.');
+        return back()->with('message', 'You have successfully deleted category and related services.');
     }
 }
