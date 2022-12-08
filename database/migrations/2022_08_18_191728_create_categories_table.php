@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('name');
             $table->string('status')->default(CategoryStatusEnum::ACTIVE->value);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

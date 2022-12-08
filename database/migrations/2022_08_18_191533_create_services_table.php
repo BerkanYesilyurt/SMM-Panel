@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('api_service_id')->nullable();
             $table->string('status')->default(ServiceStatusEnum::ACTIVE->value);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
