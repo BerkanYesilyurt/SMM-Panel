@@ -28,7 +28,9 @@
             <div class="row">
                 <!-- List group checkbox -->
                 <div class="col-lg-12">
+                    @if(count($serviceupdates))
                     <small class="text-light fw-semibold">The portion of the service updates that will be displayed to the user is set here.</small>
+                    @endif
                     <div class="demo-inline-spacing mt-3">
                         <div class="list-group">
                             <form action="/admin/servicesupdates" method="POST">
