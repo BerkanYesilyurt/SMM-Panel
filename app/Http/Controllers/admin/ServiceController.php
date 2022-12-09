@@ -39,19 +39,23 @@ class ServiceController extends Controller
             'status' => ['required', new Enum(ServiceStatusEnum::class)],
             'price' => 'required|numeric|min:0.01|max:99999',
             'min' => 'integer|digits_between:1,9',
-            'max' => 'integer|digits_between:1,9|gte:min'
+            'max' => 'integer|digits_between:1,9|gte:min',
+            'serviceupdate_description' => 'nullable|min:1|max:1000'
         ]);
 
         $currentService = $service->find($request->id);
 
         DB::transaction(function () use($fields, $currentService, $request, $serviceUpdate){
-            $filteredFields = Arr::except($fields, ['id']);
+            $filteredFields = Arr::except($fields, ['id', 'serviceupdate_description']);
 
             if(abs($currentService->price - $request->price) > PHP_FLOAT_EPSILON){
                 $serviceUpdate->create([
                     'service_id' => $request->id,
                     'old_price' => floatval($currentService->price),
                     'new_price' => floatval($request->price),
+                    'public' => $request->serviceupdate_public ? true : null,
+                    'show_price_changes' => $request->serviceupdate_showprice ? true : null,
+                    'description' => $request->serviceupdate_description ?? null
                 ]);
             }
 
