@@ -154,6 +154,22 @@
                             <input type="text" id="updateservicemax" name="max" class="form-control" placeholder="Maximum" required>
                         </div>
 
+                        <div class="divider divider-primary">
+                            <div class="divider-text">Optional Options For Service Updates Page</div>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="serviceupdate_description" class="form-label">SERVICE UPDATE DESCRIPTION:</label>
+                            <input type="text" id="serviceupdate_description" name="serviceupdate_description" class="form-control" placeholder="Service Update Description - Note to Users">
+                        </div>
+
+                        <div class="col mb-3">
+                        <input type="checkbox" id="serviceupdate_public" name="serviceupdate_public" value="1">
+                        <label for="serviceupdate_public"> Public</label><br>
+                        <input type="checkbox" id="serviceupdate_showprice" name="serviceupdate_showprice" value="1">
+                        <label for="serviceupdate_showprice"> Show price changes</label><br>
+                        </div>
+
                         <div class="col mb-3">
                             <button class="btn btn-primary" onclick="submit(); this.disabled = true;" style="color: white; width: 100%;" id="submitbutton">Update Service</button>
                         </div>
