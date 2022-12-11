@@ -86,6 +86,8 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function (
     Route::get('/admin/servicesupdates', [\App\Http\Controllers\admin\ServiceController::class, 'serviceUpdatesPage']);
     Route::post('/admin/servicesupdates', [\App\Http\Controllers\admin\ServiceController::class, 'updateServiceUpdates']);
 
+    Route::get('/admin/faq', [\App\Http\Controllers\admin\FaqController::class, 'faqPage']);
+
     Route::get('/admin/announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'announcementsPage']);
     Route::post('/admin/announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'updateAnnouncement']);
     Route::post('/admin/new-announcement', [\App\Http\Controllers\admin\AnnouncementController::class, 'createNewAnnouncement']);
