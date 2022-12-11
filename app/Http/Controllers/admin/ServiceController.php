@@ -10,7 +10,9 @@ use App\Models\ServiceUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use Str;
 
 class ServiceController extends Controller
 {
@@ -93,6 +95,44 @@ class ServiceController extends Controller
 
     public function updateServiceUpdates(Request $request)
     {
-        //TODO
+        $request->validate([
+            'id' => 'required',
+            'id.*' => 'numeric|exists:service_updates,id',
+            'action' => ['required', Rule::in(['delete_all', 'delete_description', 'set_public', 'set_notpublic', 'set_pricepublic',  'set_pricenotpublic'])]
+        ]);
+
+        $action = match ($request->action){
+            'delete_all' => $this->deleteServiceUpdates($request),
+            'delete_description' => $this->updateServiceUpdatesDescription($request),
+            'set_public' => $this->setServiceUpdatesAs('entire_record', true, $request),
+            'set_notpublic' => $this->setServiceUpdatesAs('entire_record', false, $request),
+            'set_pricepublic' => $this->setServiceUpdatesAs('price', true, $request),
+            'set_pricenotpublic' => $this->setServiceUpdatesAs('price', false, $request)
+        };
+
+        if($action){
+            return back()->with('message', 'DONE!');
+        }
+        return back()->with('message', 'ERROR!');
     }
+
+    private function deleteServiceUpdates($request){
+        ServiceUpdate::whereIn('id', $request->id)->delete();
+        return true;
+    }
+
+    private function updateServiceUpdatesDescription($request){
+        ServiceUpdate::whereIn('id', $request->id)->update(['description' => NULL]);
+        return true;
+    }
+
+    private function setServiceUpdatesAs($it, $public, $request){
+        if($it == 'entire_record'){
+            ServiceUpdate::whereIn('id', $request->id)->update(['public' => $public]);
+        }elseif($it == 'price'){
+            ServiceUpdate::whereIn('id', $request->id)->update(['show_price_changes' => $public]);
+        }
+        return true;
+    }
+
 }
