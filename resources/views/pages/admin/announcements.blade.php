@@ -62,13 +62,24 @@
                 </div>
             </div><br>
         @empty
-            <tr>
-                <td colspan="5"><br>
-                    <center>
-                        <b>No Announcements Found.</b>
-                    </center>
-                    <br></td>
-            </tr>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="demo-inline-spacing mt-3">
+                                <tr>
+                                    <td colspan="5">
+                                        <center>
+                                            <b>No Announcements Found.</b>
+                                        </center>
+                                        <br>
+                                    </td>
+                                </tr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endforelse
     </div>
 
