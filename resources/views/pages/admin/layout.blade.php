@@ -196,6 +196,18 @@
                             <div data-i18n="Announcements">Announcements</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="/admin/tickets" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-chat"></i>
+                            <div data-i18n="Tickets">Tickets</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/faq" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-question-mark"></i>
+                            <div data-i18n="FAQ">FAQ</div>
+                        </a>
+                    </li>
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Settings</span></li>
                     <li class="menu-item">
