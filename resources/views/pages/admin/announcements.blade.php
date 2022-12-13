@@ -40,17 +40,19 @@
                         <form action="/admin/announcements" method="POST" id="form{{$announcement->id}}">
                         @csrf
                         <input type="hidden" name="id" value="{{$announcement->id}}" />
-
-                        <label class="form-label">Current Title:</label><br>
+                        <hr>
+                        <label class="form-label fw-bolder">Current Title:</label><br>
                         {!! $announcement->title !!}
                         <br><br>
-                        <label for="title{{$announcement->id}}" class="form-label">Title:</label>
+                        <label for="title{{$announcement->id}}" class="form-label fw-bolder">Title:</label>
                         <textarea class="form-control" rows="2" maxlength="1000" name="title" id="title{{$announcement->id}}" style="width: 100%; resize: vertical;" aria-label="With textarea">{!! $announcement->title !!}</textarea>
-                        <br><br>
-                        <label class="form-label">Current Description:</label><br>
+                        <br>
+                        <hr>
+                        <br>
+                        <label class="form-label fw-bolder">Current Description:</label><br>
                         {!! $announcement->description !!}
                         <br><br>
-                        <label for="description{{$announcement->id}}" class="form-label">Description:</label>
+                        <label for="description{{$announcement->id}}" class="form-label fw-bolder">Description:</label>
                         <textarea class="form-control" rows="2" maxlength="1000" name="description" id="description{{$announcement->id}}" style="width: 100%; resize: vertical;" aria-label="With textarea">{!! $announcement->description !!}</textarea>
                         <br>
                         <button type="submit" class="btn btn-primary" onclick="this.disabled = true; form{{$announcement->id}}.submit();" style="color: white; width: 100%;">Update Announcement</button>
