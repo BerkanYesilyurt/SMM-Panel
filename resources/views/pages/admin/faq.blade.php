@@ -45,7 +45,7 @@
                             {!! $faq->question !!}
                             <br><br>
                             <label for="question{{$faq->id}}" class="form-label fw-bolder">Question:</label>
-                            <textarea class="form-control" rows="2" maxlength="1000" name="question" id="question{{$faq->id}}" style="width: 100%; resize: vertical;" aria-label="With textarea">{!! $faq->question !!}</textarea>
+                            <textarea class="form-control" rows="3" maxlength="1000" name="question" id="question{{$faq->id}}" style="width: 100%; resize: vertical;" aria-label="With textarea">{!! $faq->question !!}</textarea>
                             <br>
                             <hr>
                             <br>
@@ -53,7 +53,7 @@
                             {!! $faq->answer !!}
                             <br><br>
                             <label for="answer{{$faq->id}}" class="form-label fw-bolder">Answer:</label>
-                            <textarea class="form-control" rows="2" maxlength="1000" name="answer" id="answer{{$faq->id}}" style="width: 100%; resize: vertical;" aria-label="With textarea">{!! $faq->answer !!}</textarea>
+                            <textarea class="form-control" rows="6" maxlength="1000" name="answer" id="answer{{$faq->id}}" style="width: 100%; resize: vertical;" aria-label="With textarea">{!! $faq->answer !!}</textarea>
                             <br>
                             <button type="submit" class="btn btn-primary" onclick="this.disabled = true; form{{$faq->id}}.submit();" style="color: white; width: 100%;">Update F.A.Q.</button>
 
@@ -98,12 +98,12 @@
 
                         <div class="col mb-3">
                             <label for="questionnew" class="form-label">Question:</label>
-                            <textarea class="form-control" rows="2" maxlength="250" name="question" id="questionnew" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" rows="3" maxlength="250" name="question" id="questionnew" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
                         </div>
 
                         <div class="col mb-3">
                             <label for="answernew" class="form-label">Answer:</label>
-                            <textarea class="form-control" rows="3" maxlength="250" name="answer" id="answernew" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" rows="6" maxlength="250" name="answer" id="answernew" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
                         </div>
 
                         <div class="col mb-3">
