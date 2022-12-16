@@ -35,4 +35,9 @@ class TicketMessage extends Model
 
     protected $table = 'ticket_messages';
 
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
 }
