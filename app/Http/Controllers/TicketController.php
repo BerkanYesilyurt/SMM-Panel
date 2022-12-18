@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TicketStatusEnum;
 use App\Enums\UserAuthorityEnum;
 use App\Http\Requests\CreateTicketRequest;
 use App\Models\Ticket;
@@ -55,15 +56,15 @@ class TicketController extends Controller
     }
 
     public function ticketMessages($ticket_id, Ticket $ticket, TicketMessage $ticketMessage){
-        $relatedTicket = $ticket->where('id', $ticket_id);
+        $relatedTicket = $ticket->where('id', $ticket_id)->first();
 
-        if(auth()->user()->id == $relatedTicket->value('user_id')){
+        if(auth()->user()->id == $relatedTicket->user_id){
             $ticketMessages = $ticketMessage->where('ticket_id', $ticket_id)->orderBy('created_at', 'ASC')->get();
             TicketMessage::where('ticket_id', $ticket_id)->update(['seen_by_user' => 1]);
 
             return view('pages.ticket-messages', compact('ticketMessages'))
                 ->with('ticket_id', $ticket_id)
-                ->with('status', $relatedTicket->value('status'));
+                ->with('status', $relatedTicket->status);
         }else{
             return redirect('/');
         }
@@ -76,14 +77,14 @@ class TicketController extends Controller
             'message'            => ['required', 'max:5000']
         ]);
 
-        $relatedTicket = $ticket->where('id', $request->ticket_id);
-        if(auth()->user()->id == $relatedTicket->value('user_id')){
+        $relatedTicket = $ticket->where('id', $request->ticket_id)->first();
+        if(auth()->user()->id == $relatedTicket->user_id && $relatedTicket->status != TicketStatusEnum::CLOSED->value){
         $ticketMessages = new TicketMessage();
         $ticketMessages->ticket_id = $request->ticket_id;
         $ticketMessages->user_id = auth()->user()->id;
         $ticketMessages->message = $request->message;
-        $ticketMessages->seen_by_user = auth()->user()->id == $relatedTicket->value('user_id') ? 1 : 0;
-        $ticketMessages->seen_by_support = auth()->user()->authority != UserAuthorityEnum::none->value ? 1 : 0;
+        $ticketMessages->seen_by_user = 1;
+        $ticketMessages->seen_by_support = 0;
         $ticketMessages->save();
 
         alert()->success('Success!','You have successfully sent the message.')->timerProgressBar();
