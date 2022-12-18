@@ -44,18 +44,18 @@
                             @endforeach</center></td>
                     <td><center><span class="badge bg-@php
                     switch($ticket->status){
-                        case 'ACTIVE':
+                        case \App\Enums\TicketStatusEnum::ACTIVE->value:
                         echo 'success';
                         break;
 
-                        case 'CLOSED':
+                        case \App\Enums\TicketStatusEnum::CLOSED->value:
                         echo 'danger';
                         break;
 
                         default:
                         echo 'primary';
                     }
-                    @endphp me-1">{{$ticket->status}}</span></center></td>
+                    @endphp me-1">{{\App\Enums\TicketStatusEnum::from($ticket->status)->name}}</span></center></td>
                     <td><center>{{$ticket->created_at->diffForHumans()}}</center></td>
                     <td>
                     <center>

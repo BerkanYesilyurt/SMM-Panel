@@ -26,7 +26,7 @@
                 </div>
                 <br>
             @endif
-            @if($status == "CLOSED")
+            @if($status == \App\Enums\TicketStatusEnum::CLOSED->value)
                 <span class="badge bg-danger" style="width: 100%; padding-top: 30px; padding-bottom: 30px; margin-bottom: 30px;">
                         No further messages are accepted as this ticket is closed.
                     </span>
@@ -73,7 +73,7 @@
 
 
             </div>
-            @if($status != "CLOSED")
+            @if($status != \App\Enums\TicketStatusEnum::CLOSED->value)
             <form action="/ticket_message" method="POST">
                 @csrf
             <div class="input-group">

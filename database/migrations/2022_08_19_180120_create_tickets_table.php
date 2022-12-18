@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TicketStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('pay_type')->nullable();
             $table->string('pay_id')->nullable();
             $table->string('feature_request')->nullable();
-            $table->string('status')->default('ACTIVE');
+            $table->string('status')->default(TicketStatusEnum::ACTIVE->value);
             $table->timestamps();
         });
     }
