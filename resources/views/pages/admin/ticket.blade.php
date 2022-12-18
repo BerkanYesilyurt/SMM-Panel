@@ -25,7 +25,16 @@
                 </div>
                 <br>
             @endif
-            @if($status == "CLOSED")
+            @if(session('message'))
+                <div class="alert alert-success alert-dismissible">
+                    <ul style="margin-bottom: 1px; color:#478924;">
+                        <b>{{session('message')}}</b>
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    </button>
+                </div>
+            @endif
+            @if($status == \App\Enums\TicketStatusEnum::CLOSED->value)
                 <span class="badge bg-danger" style="width: 100%; padding-top: 30px; padding-bottom: 30px; margin-bottom: 30px;">
                     THE STATUS OF THIS TICKET IS CLOSED. WHEN SENDING A NEW MESSAGE, YOU MUST CONSIDER THAT THE USER CANNOT ANSWER IT.
                     </span>
@@ -68,7 +77,7 @@
 
             </div>
 
-            <form action="/ticket_message" method="POST">
+            <form action="/admin/ticket_message" method="POST">
                 @csrf
                 <div class="input-group">
                     <span class="input-group-text">New Message</span>
