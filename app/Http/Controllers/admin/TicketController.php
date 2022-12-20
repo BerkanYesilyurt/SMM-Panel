@@ -12,7 +12,7 @@ class TicketController extends Controller
     public function ticketPage()
     {
         return view('pages.admin.tickets', [
-            'tickets' => Ticket::with('ticketMessages', 'user')->get()
+            'tickets' => Ticket::with('ticketMessages', 'user')->orderBy('created_at', 'DESC')->get()
         ]);
     }
 
@@ -23,7 +23,24 @@ class TicketController extends Controller
         return view('pages.admin.ticket', [
             'ticketMessages' => TicketMessage::with('owner')->where('ticket_id', $ticket->id)->orderBy('created_at', 'ASC')->get(),
             'ticket_id' => $ticket->id,
-            'status' => $ticket->value('status')
+            'status' => $ticket->status
         ]);
+    }
+
+    public function newTicketMessage(Request $request){
+        $request->validate([
+            'ticket_id'            => ['required', 'digits_between:1,10', 'exists:tickets,id'],
+            'message'            => ['required', 'max:5000']
+        ]);
+
+        $ticketMessages = new TicketMessage();
+        $ticketMessages->ticket_id = $request->ticket_id;
+        $ticketMessages->user_id = auth()->user()->id;
+        $ticketMessages->message = $request->message;
+        $ticketMessages->seen_by_user = 0;
+        $ticketMessages->seen_by_support = 1;
+        $ticketMessages->save();
+
+        return back()->with('message', 'You have successfully sent the message!');
     }
 }
