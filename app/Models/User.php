@@ -94,4 +94,9 @@ class User extends Authenticatable
         'email_verified_at',
         'last_login'
     ];
+
+    public function is_banned()
+    {
+        return $this->hasMany(UserBan::class, 'user_id', 'id');
+    }
 }
