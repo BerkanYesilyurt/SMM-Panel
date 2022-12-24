@@ -12,6 +12,11 @@ use Illuminate\Validation\Rule;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isticketbanned');
+    }
+
     public function index(Ticket $ticket){
         $tickets = $ticket->where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
         return view('pages.tickets', compact('tickets'));
