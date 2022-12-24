@@ -35,7 +35,7 @@ Route::middleware(['guest', 'maintenance', 'verifypanelinstalled'])->group(funct
     Route::post('/register', [UserController::class, 'register']);
 });
 
-Route::middleware(['auth', 'maintenance', 'verifypanelinstalled'])->group(function () {
+Route::middleware(['auth', 'maintenance', 'verifypanelinstalled', 'isaccountbanned'])->group(function () {
     Route::get('/logout', [UserController::class, 'logout']);
 
     Route::get('/tickets', [TicketController::class, 'index']);
