@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\isTicketBanned;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,6 +66,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'maintenance' => \App\Http\Middleware\Maintenance::class,
         'verifypanelinstalled' => \App\Http\Middleware\VerifyPanelInstalled::class,
-        'isadmin' => \App\Http\Middleware\isAdmin::class
+        'isadmin' => \App\Http\Middleware\isAdmin::class,
+        'isticketbanned' => \App\Http\Middleware\isTicketBanned::class,
+        'isaccountbanned' => \App\Http\Middleware\isAccountBanned::class
     ];
 }
