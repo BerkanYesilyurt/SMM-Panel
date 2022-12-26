@@ -88,6 +88,7 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->prefix('/admin/'
 
     Route::get('tickets', [\App\Http\Controllers\admin\TicketController::class, 'ticketPage']);
     Route::get('ticket/{ticket}', [\App\Http\Controllers\admin\TicketController::class, 'ticketMessages']);
+    Route::post('ticket/{ticket}', [\App\Http\Controllers\admin\TicketController::class, 'updateTicketStatus']);
     Route::post('ticket_message', [\App\Http\Controllers\admin\TicketController::class, 'newTicketMessage']);
 
     Route::get('faq', [\App\Http\Controllers\admin\FaqController::class, 'faqPage']);
