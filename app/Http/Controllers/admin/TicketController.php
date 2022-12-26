@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\TicketStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Enum;
 
 class TicketController extends Controller
 {
@@ -21,6 +23,7 @@ class TicketController extends Controller
         TicketMessage::where('ticket_id', $ticket->id)->update(['seen_by_support' => 1]);
 
         return view('pages.admin.ticket', [
+            'ticket' => $ticket,
             'ticketMessages' => TicketMessage::with('owner')->where('ticket_id', $ticket->id)->orderBy('created_at', 'ASC')->get(),
             'ticket_id' => $ticket->id,
             'status' => $ticket->status
@@ -42,5 +45,15 @@ class TicketController extends Controller
         $ticketMessages->save();
 
         return back()->with('message', 'You have successfully sent the message!');
+    }
+
+    public function updateTicketStatus(Request $request, Ticket $ticket)
+    {
+        $request->validate([
+            'status' => ['required', new Enum(TicketStatusEnum::class)]
+        ]);
+
+        $ticket->update(['status' => $request->status]);
+        return back()->with('message', 'You have successfully updated the ticket status!');
     }
 }
