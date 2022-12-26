@@ -65,45 +65,45 @@ Route::middleware(['auth', 'maintenance', 'verifypanelinstalled', 'isaccountbann
     Route::get('/api', [ApiController::class, 'apiPage']);
 });
 
-Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'dashboardPage']);
+Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->prefix('/admin/')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'dashboardPage']);
 
-    Route::get('/admin/system-settings', [SettingsController::class, 'systemSettingsPage']);
-    Route::post('/admin/system-settings', [SettingsController::class, 'updateSystemSettings']);
+    Route::get('system-settings', [SettingsController::class, 'systemSettingsPage']);
+    Route::post('system-settings', [SettingsController::class, 'updateSystemSettings']);
 
-    Route::get('/admin/users', [\App\Http\Controllers\admin\UserController::class, 'usersPage']);
+    Route::get('users', [\App\Http\Controllers\admin\UserController::class, 'usersPage']);
 
-    Route::get('/admin/user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'getUserDetails']);
-    Route::post('/admin/user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'updateUserDetails']);
+    Route::get('user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'getUserDetails']);
+    Route::post('user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'updateUserDetails']);
 
-    Route::post('/admin/user/{user}/balance-update', [\App\Http\Controllers\admin\UserController::class, 'updateUserBalance']);
+    Route::post('user/{user}/balance-update', [\App\Http\Controllers\admin\UserController::class, 'updateUserBalance']);
 
-    Route::get('/admin/services', [\App\Http\Controllers\admin\ServiceController::class, 'servicesPage']);
-    Route::post('/admin/services', [\App\Http\Controllers\admin\ServiceController::class, 'updateService']);
-    Route::post('/admin/new-service', [\App\Http\Controllers\admin\ServiceController::class, 'createNewService']);
-    Route::post('/admin/delete-service', [\App\Http\Controllers\admin\ServiceController::class, 'deleteService']);
+    Route::get('services', [\App\Http\Controllers\admin\ServiceController::class, 'servicesPage']);
+    Route::post('services', [\App\Http\Controllers\admin\ServiceController::class, 'updateService']);
+    Route::post('new-service', [\App\Http\Controllers\admin\ServiceController::class, 'createNewService']);
+    Route::post('delete-service', [\App\Http\Controllers\admin\ServiceController::class, 'deleteService']);
 
-    Route::get('/admin/servicesupdates', [\App\Http\Controllers\admin\ServiceController::class, 'serviceUpdatesPage']);
-    Route::post('/admin/servicesupdates', [\App\Http\Controllers\admin\ServiceController::class, 'updateServiceUpdates']);
+    Route::get('servicesupdates', [\App\Http\Controllers\admin\ServiceController::class, 'serviceUpdatesPage']);
+    Route::post('servicesupdates', [\App\Http\Controllers\admin\ServiceController::class, 'updateServiceUpdates']);
 
-    Route::get('/admin/tickets', [\App\Http\Controllers\admin\TicketController::class, 'ticketPage']);
-    Route::get('/admin/ticket/{ticket}', [\App\Http\Controllers\admin\TicketController::class, 'ticketMessages']);
-    Route::post('/admin/ticket_message', [\App\Http\Controllers\admin\TicketController::class, 'newTicketMessage']);
+    Route::get('tickets', [\App\Http\Controllers\admin\TicketController::class, 'ticketPage']);
+    Route::get('ticket/{ticket}', [\App\Http\Controllers\admin\TicketController::class, 'ticketMessages']);
+    Route::post('ticket_message', [\App\Http\Controllers\admin\TicketController::class, 'newTicketMessage']);
 
-    Route::get('/admin/faq', [\App\Http\Controllers\admin\FaqController::class, 'faqPage']);
-    Route::post('/admin/faq', [\App\Http\Controllers\admin\FaqController::class, 'updateFaq']);
-    Route::post('/admin/new-faq', [\App\Http\Controllers\admin\FaqController::class, 'createNewFaq']);
-    Route::post('/admin/delete-faq', [\App\Http\Controllers\admin\FaqController::class, 'deleteFaq']);
+    Route::get('faq', [\App\Http\Controllers\admin\FaqController::class, 'faqPage']);
+    Route::post('faq', [\App\Http\Controllers\admin\FaqController::class, 'updateFaq']);
+    Route::post('new-faq', [\App\Http\Controllers\admin\FaqController::class, 'createNewFaq']);
+    Route::post('delete-faq', [\App\Http\Controllers\admin\FaqController::class, 'deleteFaq']);
 
-    Route::get('/admin/announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'announcementsPage']);
-    Route::post('/admin/announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'updateAnnouncement']);
-    Route::post('/admin/new-announcement', [\App\Http\Controllers\admin\AnnouncementController::class, 'createNewAnnouncement']);
-    Route::post('/admin/delete-announcement', [\App\Http\Controllers\admin\AnnouncementController::class, 'deleteAnnouncement']);
+    Route::get('announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'announcementsPage']);
+    Route::post('announcements', [\App\Http\Controllers\admin\AnnouncementController::class, 'updateAnnouncement']);
+    Route::post('new-announcement', [\App\Http\Controllers\admin\AnnouncementController::class, 'createNewAnnouncement']);
+    Route::post('delete-announcement', [\App\Http\Controllers\admin\AnnouncementController::class, 'deleteAnnouncement']);
 
-    Route::get('/admin/categories', [\App\Http\Controllers\admin\CategoryController::class, 'categoriesPage']);
-    Route::post('/admin/categories', [\App\Http\Controllers\admin\CategoryController::class, 'updateCategory']);
-    Route::post('/admin/new-category', [\App\Http\Controllers\admin\CategoryController::class, 'createNewCategory']);
-    Route::post('/admin/delete-category', [\App\Http\Controllers\admin\CategoryController::class, 'deleteCategory']);
+    Route::get('categories', [\App\Http\Controllers\admin\CategoryController::class, 'categoriesPage']);
+    Route::post('categories', [\App\Http\Controllers\admin\CategoryController::class, 'updateCategory']);
+    Route::post('new-category', [\App\Http\Controllers\admin\CategoryController::class, 'createNewCategory']);
+    Route::post('delete-category', [\App\Http\Controllers\admin\CategoryController::class, 'deleteCategory']);
 
-    Route::get('/admin/orders', [\App\Http\Controllers\admin\OrderController::class, 'ordersPage']);
+    Route::get('orders', [\App\Http\Controllers\admin\OrderController::class, 'ordersPage']);
 });
