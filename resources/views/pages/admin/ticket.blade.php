@@ -15,6 +15,7 @@
                     <span class="tf-icons bx bx-arrow-back"></span>&nbsp; Go Back
                 </button>
             </h4>
+
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul style="margin-bottom: 1px;">
@@ -34,6 +35,22 @@
                     </button>
                 </div>
             @endif
+
+            <form action="/admin/ticket/{{$ticket_id}}" method="POST">
+                @csrf
+                <div class="input-group">
+                    <select name="status" class="form-select form-select-lg">
+                        @foreach(App\Enums\TicketStatusEnum::values() as $key => $value)
+                            <option value="{{ $key }}" @selected($ticket->status == $key)>{{ $value }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="tf-icons bx bx-right-arrow"></span>&nbsp; Update Ticket Status
+                    </button>
+                </div>
+            </form>
+            <br>
+
             @if($status == \App\Enums\TicketStatusEnum::CLOSED->value)
                 <span class="badge bg-danger" style="width: 100%; padding-top: 30px; padding-bottom: 30px; margin-bottom: 30px;">
                     THE STATUS OF THIS TICKET IS CLOSED. WHEN SENDING A NEW MESSAGE, YOU MUST CONSIDER THAT THE USER CANNOT ANSWER IT.
