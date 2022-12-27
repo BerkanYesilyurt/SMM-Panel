@@ -55,7 +55,7 @@
 <div class="container-xxl container-p-y">
     <div class="misc-wrapper">
         <h1 class="mb-2 mx-2">ERROR!</h1>
-        <br>
+        <h1 class="mb-2 mx-2">YOU ARE BANNED!</h1><br>
         <h5 class="mb-2 mx-2">{!! getBanDateMessage('account') !!}</h5>
     </div>
 </div>
