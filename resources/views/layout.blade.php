@@ -236,12 +236,14 @@
                     </li>
                 @endif
 
+                @if(!checkBan('ticket'))
                 <li class="menu-item{{ request()->is('tickets') || request()->is('ticket/*') ? ' active' : '' }}">
                     <a href="/tickets" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-chat"></i>
                         <div data-i18n="Tickets">Tickets</div>
                     </a>
                 </li>
+                @endif
 
                 <li class="menu-item{{ request()->is('faq') || request()->is('faq/*') ? ' active' : '' }}">
                     <a href="/faq" class="menu-link">
