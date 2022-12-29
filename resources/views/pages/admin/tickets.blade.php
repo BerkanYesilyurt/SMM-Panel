@@ -46,6 +46,8 @@
                             <td><center>{{$ticket->created_at->diffForHumans()}}</center></td>
                             <td>
                                 <center>
+                                    <form action="/admin/ban" method="POST">
+                                    @csrf
                                     <a class="btn btn-info" href="/admin/ticket/{{$ticket->id}}">Show Ticket</a>
                                     <a href="/admin/user/{{$ticket->id}}/edit" target="_blank" class="btn btn-primary"
                                             data-bs-toggle="tooltip" data-bs-offset="0,4"
@@ -54,6 +56,13 @@
                                             data-bs-original-title="<i class='bx bx-face' ></i><br><span>{{$ticket->user->name}}</span><br><br><i class='bx bx-envelope' ></i><br> <span>{{$ticket->user->email}}</span>">
                                         <i class='bx bx-user' ></i>
                                     </a>
+                                    <a href="/admin/ban/{{$ticket->user->id}}/ticket" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                            data-bs-placement="right" data-bs-html="true"
+                                            title=""
+                                            data-bs-original-title="<span>Ban this user from using a ticket.</span>">
+                                        <i class='bx bx-block' ></i>
+                                    </a>
+                                    </form>
                                 </center>
                             </td>
                         </tr>
