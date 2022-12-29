@@ -107,4 +107,8 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->prefix('/admin/'
     Route::post('delete-category', [\App\Http\Controllers\admin\CategoryController::class, 'deleteCategory']);
 
     Route::get('orders', [\App\Http\Controllers\admin\OrderController::class, 'ordersPage']);
+
+    Route::get('ban/{user}/{type}', [\App\Http\Controllers\admin\BanController::class, 'banPage']);
+    Route::post('ban', [\App\Http\Controllers\admin\BanController::class, 'ban']);
+    Route::post('delete-ban', [\App\Http\Controllers\admin\BanController::class, 'deleteBan']);
 });
