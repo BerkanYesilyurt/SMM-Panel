@@ -97,7 +97,26 @@
                                 <li class="d-flex mb-4 pb-1">
                                     <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
 
-                                        <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);"><b><center>TODO: User Details</center></b></div>
+                                        <div class="d-flex w-100">
+                                            <div class="me-2">
+                                                <a class="text-muted d-block mb-1">Name</a>
+                                                <h5 class="mb-0">{{$user->name}} (<a href="/admin/user/{{$user->id}}/edit" target="_blank">Profile</a>)</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex w-100">
+                                            <div class="me-2">
+                                                <a class="text-muted d-block mb-1">Email</a>
+                                                <h5 class="mb-0">{{$user->email}}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex w-100">
+                                            <div class="me-2">
+                                                <a class="text-muted d-block mb-1">Balance</a>
+                                                <h5 class="mb-0">{{$configsArray['currency_symbol']}}{{floatval($user->balance)}}</h5>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </li>
