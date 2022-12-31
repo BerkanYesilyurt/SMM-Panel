@@ -28,4 +28,5 @@ class UserBan extends Model
     protected $table = 'user_bans';
     protected $guarded = ['id'];
     protected $dates = ['until_at'];
+    public $timestamps = false;
 }
