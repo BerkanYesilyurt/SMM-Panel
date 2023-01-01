@@ -150,6 +150,7 @@
 
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary me-2">Edit User</button>
+                            <a href="/admin/ban/{{$user->id}}/account" class="btn btn-danger me-2">Ban User</a>
                         </div>
                     </div>
                 </form>
