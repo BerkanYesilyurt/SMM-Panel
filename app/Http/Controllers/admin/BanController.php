@@ -20,9 +20,19 @@ class BanController extends Controller
         ]);
     }
 
-    public function ban()
+    public function ban(Request $request)
     {
+        $fields = $request->validate([
+            'user_id' => ['required', Rule::exists('users','id')],
+            'type' => [new Enum(UserBanTypesEnum::class), Rule::unique('user_bans','type')->where(function ($query) use ($request){
+                $query->where('user_id', $request->user_id);
+            })],
+            'permanent' => 'required|boolean',
+            'until_at' => 'required|date|date_format:Y-m-d'
+        ]);
 
+        UserBan::create($fields);
+        return back()->with('message', 'You have successfully banned the user.');
     }
 
     public function deleteBan(Request $request)
