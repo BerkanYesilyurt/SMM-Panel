@@ -20,14 +20,14 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th style="width: 8%;"><center>ID</center></th>
+                        <th style="width: 5%;"><center>ID</center></th>
                         <th style="width: 20%;"><center>NAME</center></th>
                         <th style="width: 20%;"><center>E-MAIL</center></th>
                         <th style="width: 10%;"><center>AUTHORITY</center></th>
                         <th style="width: 10%;"><center>STATUS</center></th>
                         <th style="width: 8%;"><center>BALANCE</center></th>
                         <th style="width: 12%;"><center>CREATED AT</center></th>
-                        <th style="width: 12%;"><center>EDIT</center></th>
+                        <th style="width: 15%;"><center>EDIT</center></th>
 
                     </tr>
                     </thead>
@@ -58,7 +58,8 @@
                             <td><center>
                             <a href="/admin/user/{{$user->id}}/edit" target="_blank" class="btn btn-sm btn-primary">
                                 <span class="tf-icons bx bx-edit"></span>&nbsp; Edit User
-                            </a></center>
+                            </a>
+                            <a href="/admin/ban/{{$user->id}}/account" target="_blank" class="btn btn-sm btn-danger"><i class="tf-icons bx bx-block"></i></a></center>
                             </td>
                         </tr>
                     @empty
