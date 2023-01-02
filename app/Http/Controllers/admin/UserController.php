@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function usersPage(){
-        $users = User::orderByDesc('id')->paginate(25);
+        $users = User::paginate(50);
         $userCount = User::count();
         return view('pages.admin.users', compact('users'))->with('userCount', $userCount);
     }
