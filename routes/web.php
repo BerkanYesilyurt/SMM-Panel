@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\SettingsController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InstallController;
 use App\Http\Controllers\OrderController;
@@ -61,6 +62,8 @@ Route::middleware(['auth', 'maintenance', 'verifypanelinstalled', 'isaccountbann
     Route::get('/orders', [OrderController::class, 'ordersPage']);
 
     Route::get('/serviceupdates', [ServiceController::class, 'serviceUpdatesPage']);
+
+    Route::get('/addfunds', [FinanceController::class, 'addFundsPage']);
 
     Route::get('/api', [ApiController::class, 'apiPage']);
 });
