@@ -18,9 +18,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->string('icon');
             $table->string('status')->default(ActiveInactiveState::ACTIVE->value);
             $table->string('config_key')->nullable();
             $table->string('config_value')->nullable();
+            $table->string('is_manual')->default(ActiveInactiveState::ACTIVE->value);
             $table->text('content')->nullable();
             $table->timestamps();
         });
