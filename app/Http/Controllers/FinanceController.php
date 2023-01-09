@@ -17,7 +17,8 @@ class FinanceController extends Controller
     public function paymentMethodPage(PaymentMethod $paymentMethod)
     {
         return view('pages.payment-method', [
-            'paymentMethod' => $paymentMethod
+            'paymentMethod' => $paymentMethod,
+            'paymentMethods' => PaymentMethod::all()
         ]);
     }
 }
