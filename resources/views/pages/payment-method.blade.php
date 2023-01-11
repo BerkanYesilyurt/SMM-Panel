@@ -26,12 +26,15 @@
 
                             <div class="row">
                                 <div class="mb-3 col-md-6">
+                                    <form action="/addfunds/{{$paymentMethod->slug}}" method="POST">
+                                    @csrf
                                     <label for="amount" class="form-label">Amount</label>
-                                    <input class="form-control" type="text" id="amount" name="amount" placeholder="Example: 50" autofocus="">
+                                    <input class="form-control" type="number" step="0.01" id="amount" name="amount" placeholder="Example: 50" autofocus="">
 
                                     <div class="mt-3">
                                         <button type="submit" class="btn btn-primary me-2">PAY</button>
                                     </div>
+                                    </form>
                                 </div>
                                 @if($paymentMethod->content)
                                     <div class="mb-3 col-md-6">
