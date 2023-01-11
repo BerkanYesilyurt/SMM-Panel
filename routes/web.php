@@ -65,6 +65,7 @@ Route::middleware(['auth', 'maintenance', 'verifypanelinstalled', 'isaccountbann
 
     Route::get('/addfunds', [FinanceController::class, 'addFundsPage']);
     Route::get('/addfunds/{paymentMethod:slug}', [FinanceController::class, 'paymentMethodPage']);
+    Route::post('/addfunds/{paymentMethod:slug}', [FinanceController::class, 'pay']);
 
     Route::get('/api', [ApiController::class, 'apiPage']);
 });
