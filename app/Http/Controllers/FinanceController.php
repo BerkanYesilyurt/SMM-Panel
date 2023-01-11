@@ -21,4 +21,20 @@ class FinanceController extends Controller
             'paymentMethods' => PaymentMethod::all()
         ]);
     }
+
+    public function pay(PaymentMethod $paymentMethod, Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:'.$paymentMethod->min_amount.'|max:'.$paymentMethod->max_amount
+        ]);
+
+        $this->createPaymentLog($paymentMethod->id, $request->amount);
+
+        //TODO: payment
+    }
+
+    public function createPaymentLog($payment_id, $amount)
+    {
+        //TODO: createPaymentLog
+    }
 }
