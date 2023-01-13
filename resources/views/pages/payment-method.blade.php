@@ -10,6 +10,16 @@
 
         <div class="row">
             <div class="col-md-12">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul style="margin-bottom: 1px;">
+                            @foreach ($errors->all() as $error)
+                                <li><b>{{$error}}</b></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <br>
+                @endif
                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                     @foreach($paymentMethods as $item)
                         <li class="nav-item">
