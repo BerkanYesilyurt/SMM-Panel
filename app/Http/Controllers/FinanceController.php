@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentStatusEnum;
+use App\Models\PaymentLog;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 
@@ -33,8 +35,23 @@ class FinanceController extends Controller
         //TODO: payment
     }
 
-    public function createPaymentLog($payment_id, $amount)
+    public function createPaymentLog($payment_method_id, $amount)
     {
-        //TODO: createPaymentLog
+        $user = auth()->user();
+        $details = [];
+        $details['user_id'] = $user->id;
+        $details['email'] = $user->email;
+        $details['balance'] = $user->balance;
+        $details['last_login'] = $user->last_login;
+        $details['last_login_ip'] = $user->last_login_ip;
+
+        PaymentLog::create([
+            'user_id' => $user->id,
+            'payment_method_id' => $payment_method_id,
+            'currency' => ConfigController::configs()['currency'],
+            'amount' => $amount,
+            'details' => $details,
+            'status' => PaymentStatusEnum::PENDING->value
+        ]);
     }
 }
