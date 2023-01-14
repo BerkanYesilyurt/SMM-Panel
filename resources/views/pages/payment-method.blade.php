@@ -35,19 +35,29 @@
                     <div class="card-body">
 
                             <div class="row">
+
+                                @if(!$paymentMethod->is_manual)
                                 <div class="mb-3 col-md-6">
                                     <form action="/addfunds/{{$paymentMethod->slug}}" method="POST">
                                     @csrf
                                     <label for="amount" class="form-label">Amount</label>
-                                    <input class="form-control" type="number" step="0.01" id="amount" name="amount" placeholder="Example: 50" autofocus="">
+                                    <input class="form-control mb-2" type="number" step="0.01" id="amount" name="amount" placeholder="Example: 20" autofocus="">
+
+
+                                    <span class="badge bg-danger"><b>Minimum Amount: {{$configsArray['currency_symbol'] . $paymentMethod->min_amount}}</b></span>
+                                    @if($paymentMethod->max_amount)
+                                    <span class="badge bg-success"><b>Maximum Amount: {{$configsArray['currency_symbol'] . $paymentMethod->max_amount}}</b></span>
+                                    @endif
 
                                     <div class="mt-3">
                                         <button type="submit" class="btn btn-primary me-2">PAY</button>
                                     </div>
                                     </form>
                                 </div>
+                                @endif
+
                                 @if($paymentMethod->content)
-                                    <div class="mb-3 col-md-6">
+                                    <div class="mb-3 col-md-{{$paymentMethod->is_manual ? '12' : '6'}}">
                                         {!! $paymentMethod->content !!}
                                     </div>
                                 @endif
