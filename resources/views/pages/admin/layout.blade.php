@@ -189,6 +189,16 @@
                         </a>
                     </li>
 
+
+
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">Finance</span></li>
+                    <li class="menu-item">
+                        <a href="/admin/payment-methods" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-store"></i>
+                            <div data-i18n="Payment Methods">Payment Methods</div>
+                        </a>
+                    </li>
+
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Support</span></li>
                     <li class="menu-item">
                         <a href="/admin/announcements" class="menu-link">
