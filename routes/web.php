@@ -113,6 +113,8 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->prefix('/admin/'
 
     Route::get('orders', [\App\Http\Controllers\admin\OrderController::class, 'ordersPage']);
 
+    Route::get('payment-methods', [\App\Http\Controllers\admin\FinanceController::class, 'paymentMethodsPage']);
+
     Route::get('ban/{user}/{type}', [\App\Http\Controllers\admin\BanController::class, 'banPage']);
     Route::post('ban', [\App\Http\Controllers\admin\BanController::class, 'ban']);
     Route::post('delete-ban', [\App\Http\Controllers\admin\BanController::class, 'deleteBan']);
