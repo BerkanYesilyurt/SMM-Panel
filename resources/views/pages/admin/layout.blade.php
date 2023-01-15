@@ -150,7 +150,7 @@
                 <ul class="menu-inner py-1">
                     <li class="menu-item">
                         <a href="/admin/dashboard" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
+                            <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                             <div data-i18n="Dashboard">Dashboard</div>
                         </a>
                     </li>
