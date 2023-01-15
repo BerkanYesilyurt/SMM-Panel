@@ -20,4 +20,9 @@ class PaymentLog extends Model
     protected $casts = [
         'details' => 'array'
     ];
+
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
 }
