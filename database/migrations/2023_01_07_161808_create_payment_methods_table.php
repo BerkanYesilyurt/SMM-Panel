@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('is_manual')->default(ActiveInactiveState::ACTIVE->value);
             $table->text('content')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
