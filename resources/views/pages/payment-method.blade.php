@@ -3,7 +3,6 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
 
-
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">{{$configsArray['title']}} /</span> Add Funds
         </h4>
@@ -65,6 +64,43 @@
 
                     </div>
                 </div>
+
+                <div class="card mb-4">
+                    <h5 class="card-header">Payment History</h5>
+
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="list-group list-group-flush">
+                                @foreach(auth()->user()->payment_logs as $paymentLog)
+                                    <a class="list-group-item list-group-item-action fs-6">
+                                        <b>Payment ID: {{$paymentLog->id}}</b> &nbsp; &raquo; &nbsp;
+                                        {{$paymentLog->created_at->format('d F Y - H:i ')}} &nbsp; &raquo; &nbsp;
+                                        {{$paymentLog->amount . ' ' . $paymentLog->currency}} &nbsp; &raquo; &nbsp;
+                                        <span class="badge bg-@php
+                                        switch($paymentLog->status){
+                                            case \App\Enums\PaymentStatusEnum::COMPLETED->value:
+                                            echo 'success';
+                                            break;
+
+                                            case \App\Enums\PaymentStatusEnum::PENDING->value:
+                                            echo 'warning';
+                                            break;
+
+                                            default:
+                                            echo 'danger';
+                                        }
+                                        @endphp
+                                        ">
+                                        {{\App\Enums\PaymentStatusEnum::from($paymentLog->status)->name}}</span>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
