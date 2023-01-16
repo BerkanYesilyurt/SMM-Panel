@@ -95,6 +95,15 @@ class User extends Authenticatable
         'last_login'
     ];
 
+    protected $with = [
+        'payment_logs',
+        'is_banned'
+    ];
+
+    public function payment_logs()
+    {
+        return $this->hasMany(PaymentLog::class);
+    }
     public function is_banned()
     {
         return $this->hasMany(UserBan::class, 'user_id', 'id');
