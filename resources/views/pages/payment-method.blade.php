@@ -76,7 +76,7 @@
                                     <a class="list-group-item list-group-item-action fs-6">
                                         <b>Payment ID: {{$paymentLog->id}}</b> &nbsp; &raquo; &nbsp;
                                         {{$paymentLog->created_at->format('d F Y - H:i ')}} &nbsp; &raquo; &nbsp;
-                                        {{$paymentLog->amount . ' ' . $paymentLog->currency}} &nbsp; &raquo; &nbsp;
+                                        {{floatval($paymentLog->amount) . ' ' . $paymentLog->currency}} &nbsp; &raquo; &nbsp;
                                         <span class="badge bg-@php
                                         switch($paymentLog->status){
                                             case \App\Enums\PaymentStatusEnum::COMPLETED->value:
