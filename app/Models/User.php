@@ -102,7 +102,7 @@ class User extends Authenticatable
 
     public function payment_logs()
     {
-        return $this->hasMany(PaymentLog::class);
+        return $this->hasMany(PaymentLog::class)->orderBy('created_at');
     }
     public function is_banned()
     {
