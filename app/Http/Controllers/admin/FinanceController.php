@@ -15,4 +15,19 @@ class FinanceController extends Controller
             'paymentMethods' => PaymentMethod::all()
         ]);
     }
+
+    public function createPaymentMethod()
+    {
+        //TODO
+    }
+
+    public function updatePaymentMethod()
+    {
+        //TODO
+    }
+
+    public function deletePaymentMethod()
+    {
+        //TODO
+    }
 }
