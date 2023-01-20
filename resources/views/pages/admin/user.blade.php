@@ -3,7 +3,6 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
 
-
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Admin Panel /</span> Edit User
     </h4>
@@ -163,18 +162,18 @@
                     @csrf
                     <div class="row">
                         <div class="mb-3 col-md-6">
-                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(10)">ADD {{$config['currency_symbol']}}10</span>
-                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(20)">ADD {{$config['currency_symbol']}}20</span>
-                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(50)">ADD {{$config['currency_symbol']}}50</span>
-                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(100)">ADD {{$config['currency_symbol']}}100</span>
-                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(10)">SUB {{$config['currency_symbol']}}10</span>
-                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(20)">SUB {{$config['currency_symbol']}}20</span>
-                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(50)">SUB {{$config['currency_symbol']}}50</span>
-                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(100)">SUB {{$config['currency_symbol']}}100</span><br><br>
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(10)">ADD {{$configsArray['currency_symbol']}}10</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(20)">ADD {{$configsArray['currency_symbol']}}20</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(50)">ADD {{$configsArray['currency_symbol']}}50</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="addBalance(100)">ADD {{$configsArray['currency_symbol']}}100</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(10)">SUB {{$configsArray['currency_symbol']}}10</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(20)">SUB {{$configsArray['currency_symbol']}}20</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(50)">SUB {{$configsArray['currency_symbol']}}50</span>
+                            <span class="badge bg-dark cursor-pointer" onclick="subBalance(100)">SUB {{$configsArray['currency_symbol']}}100</span><br><br>
                             <label for="balance" class="form-label">Balance:</label>
                             <input class="form-control" type="number" id="balance" name="balance"
                                    value="{{(int)$user->balance}}">
-                            <br><span class="badge bg-success">Current: {{$config['currency_symbol']}}{{$user->balance}}</span>
+                            <br><span class="badge bg-success">Current: {{$configsArray['currency_symbol']}}{{$user->balance}}</span>
                         </div>
 
                         <div class="mt-2">
@@ -182,6 +181,42 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <h5 class="card-header">Payment History</h5>
+
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="list-group list-group-flush">
+                        @foreach($user->payment_logs as $paymentLog)
+                            <a class="list-group-item list-group-item-action" style="font-size: 90% !important;">
+                                <b>Payment ID: {{$paymentLog->id}}</b> &nbsp; &raquo; &nbsp;
+                                {{$paymentLog->created_at->format('d F Y - H:i ')}} &nbsp; &raquo; &nbsp;
+                                {{floatval($paymentLog->amount) . ' ' . $paymentLog->currency}} &nbsp; &raquo; &nbsp;
+                                <span class="badge bg-@php
+                                    switch($paymentLog->status){
+                                        case \App\Enums\PaymentStatusEnum::COMPLETED->value:
+                                        echo 'success';
+                                        break;
+
+                                        case \App\Enums\PaymentStatusEnum::PENDING->value:
+                                        echo 'warning';
+                                        break;
+
+                                        default:
+                                        echo 'danger';
+                                    }
+                                    @endphp
+                                    ">
+                                    {{\App\Enums\PaymentStatusEnum::from($paymentLog->status)->name}}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+
             </div>
         </div>
 
