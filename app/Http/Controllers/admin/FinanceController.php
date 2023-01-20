@@ -26,8 +26,13 @@ class FinanceController extends Controller
         //TODO
     }
 
-    public function deletePaymentMethod()
+    public function deletePaymentMethod(Request $request)
     {
-        //TODO
+        $request->validate([
+            'delete_id' => 'required|numeric|exists:payment_methods,id',
+        ]);
+
+        PaymentMethod::where('id', $request->delete_id)->delete();
+        return back()->with('message', 'You have successfully deleted the payment method.');
     }
 }
