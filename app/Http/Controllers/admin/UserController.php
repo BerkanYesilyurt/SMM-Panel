@@ -17,8 +17,7 @@ class UserController extends Controller
     }
 
     public function getUserDetails(User $user){
-        $config = ConfigController::configs();
-        return view('pages.admin.user', compact('user', 'config'));
+        return view('pages.admin.user', compact('user'));
     }
 
     public function updateUserDetails(UpdateUserDetailsRequest $request, User $user){
