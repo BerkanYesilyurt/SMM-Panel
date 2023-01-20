@@ -33,6 +33,8 @@ class FinanceController extends Controller
         $this->createPaymentLog($paymentMethod->id, $request->amount);
 
         //TODO: payment
+
+        return back()->with('message', 'You have successfully added funds to your account.');
     }
 
     public function createPaymentLog($payment_method_id, $amount)
