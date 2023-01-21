@@ -122,12 +122,12 @@
 
                         <div class="col mb-3">
                             <label for="newpaymentmethodname" class="form-label">Payment Method Name:</label>
-                            <textarea class="form-control" rows="2" maxlength="250" name="name" id="newpaymentmethodname" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                            <textarea class="form-control" rows="2" maxlength="150" name="name" id="newpaymentmethodname" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
                         </div>
 
                         <div class="col mb-3">
-                            <label for="newpaymentmethodicon" class="form-label">Payment Method Icon:</label>
-                            <input type="text" id="newpaymentmethodicon" name="icon" maxlength="250" class="form-control" placeholder="Icon" required>
+                            <label for="newpaymentmethodicon" class="form-label">Payment Method Icon: (<a href="https://boxicons.com/" target="_blank">Icons</a>)</label>
+                            <input type="text" id="newpaymentmethodicon" name="icon" maxlength="150" class="form-control" placeholder="Icon (Example: bxl-paypal)" required>
                         </div>
 
                         <div class="col mb-3">
@@ -141,22 +141,22 @@
 
                         <div class="col mb-3">
                             <label for="newpaymentmethodconfigkey" class="form-label">Payment Method Config Key:</label>
-                            <input type="text" id="newpaymentmethodconfigkey" name="config_key" maxlength="250" class="form-control" placeholder="Config Key" required>
+                            <input type="text" id="newpaymentmethodconfigkey" name="config_key" maxlength="150" class="form-control" placeholder="Config Key" required>
                         </div>
 
                         <div class="col mb-3">
                             <label for="newpaymentmethodconfigvalue" class="form-label">Payment Method Config Value:</label>
-                            <input type="text" id="newpaymentmethodconfigvalue" name="config_value" maxlength="250" class="form-control" placeholder="Config Value" required>
+                            <input type="text" id="newpaymentmethodconfigvalue" name="config_value" maxlength="150" class="form-control" placeholder="Config Value" required>
                         </div>
 
                         <div class="col mb-3">
                             <label for="newpaymentmethodminamount" class="form-label">Payment Method Min Amount:</label>
-                            <input type="text" id="newpaymentmethodminamount" name="min_amount" maxlength="250" class="form-control" placeholder="Minumum Amount" required>
+                            <input type="text" id="newpaymentmethodminamount" name="min_amount" maxlength="150" class="form-control" placeholder="Minumum Amount (Example: 12.5)" required>
                         </div>
 
                         <div class="col mb-3">
                             <label for="newpaymentmethodmaxamount" class="form-label">Payment Method Max Amount:</label>
-                            <input type="text" id="newpaymentmethodmaxamount" name="max_amount" maxlength="250" class="form-control" placeholder="Maximum Amount" required>
+                            <input type="text" id="newpaymentmethodmaxamount" name="max_amount" maxlength="150" class="form-control" placeholder="Maximum Amount(Example: 100)" required>
                         </div>
 
                         <div class="col mb-3">
@@ -166,6 +166,8 @@
                                     <option value="{{$key}}" @selected($value == App\Enums\ActiveInactiveState::ACTIVE->name)>{{$value}}</option>
                                 @endforeach
                             </select>
+                            <span class="form-label" style="text-transform: none">This option defines the visibility of left payment area.
+                            If it is active, only content will be shown and all payment information must be written in the content area.</span>
                         </div>
 
                         <div class="col mb-3">
