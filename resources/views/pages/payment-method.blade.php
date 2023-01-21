@@ -21,11 +21,13 @@
                 @endif
                 <ul class="nav nav-pills flex-column flex-md-row mb-3">
                     @foreach($paymentMethods as $item)
-                        <li class="nav-item">
-                            <a class="nav-link {{$item->slug == $paymentMethod->slug ? 'active' : ''}}" href="/addfunds/{{$item->slug}}">
-                                <i class="bx {{$item->icon}} me-1"></i> {{$item->name}}
-                            </a>
-                        </li>
+                        @if($item->status == \App\Enums\ActiveInactiveState::ACTIVE->value)
+                            <li class="nav-item">
+                                <a class="nav-link {{$item->slug == $paymentMethod->slug ? 'active' : ''}}" href="/addfunds/{{$item->slug}}">
+                                    <i class="bx {{$item->icon}} me-1"></i> {{$item->name}}
+                                </a>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
                 <div class="card mb-4">

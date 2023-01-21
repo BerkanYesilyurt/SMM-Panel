@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActiveInactiveState;
 use App\Enums\PaymentStatusEnum;
 use App\Models\PaymentLog;
 use App\Models\PaymentMethod;
@@ -12,16 +13,19 @@ class FinanceController extends Controller
     public function addFundsPage()
     {
         return view('pages.addfunds', [
-            'paymentMethods' => PaymentMethod::all()
+            'paymentMethods' => PaymentMethod::where('status', ActiveInactiveState::ACTIVE->value)->get()
         ]);
     }
 
     public function paymentMethodPage(PaymentMethod $paymentMethod)
     {
-        return view('pages.payment-method', [
-            'paymentMethod' => $paymentMethod,
-            'paymentMethods' => PaymentMethod::all()
-        ]);
+        if($paymentMethod->status == ActiveInactiveState::ACTIVE->value){
+            return view('pages.payment-method', [
+                'paymentMethod' => $paymentMethod,
+                'paymentMethods' => PaymentMethod::all()
+            ]);
+        }
+        abort(404);
     }
 
     public function pay(PaymentMethod $paymentMethod, Request $request)
