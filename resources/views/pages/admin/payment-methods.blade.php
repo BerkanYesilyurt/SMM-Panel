@@ -91,13 +91,64 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="form" action="">
+                    <form method="POST" id="form" action="/admin/payment-methods">
                         @csrf
                         <input type="hidden" name="id" id="id">
 
-                        <!--
-                        TODO: UPDATE MODAL
-                        -->
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodname" class="form-label">Payment Method Name:</label>
+                            <textarea class="form-control" rows="2" maxlength="150" name="name" id="updatepaymentmethodname" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodicon" class="form-label">Payment Method Icon: (<a href="https://boxicons.com/" target="_blank">Icons</a>)</label>
+                            <input type="text" id="updatepaymentmethodicon" name="icon" maxlength="150" class="form-control" placeholder="Icon (Example: bxl-paypal)" required>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodstatus" class="form-label">Payment Method Status:</label>
+                            <select id="updatepaymentmethodstatus" class="form-control" name="status">
+                                @foreach(App\Enums\ActiveInactiveState::values() as $key => $value)
+                                    <option value="{{$key}}" @selected($value == App\Enums\ActiveInactiveState::ACTIVE->name)>{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodconfigkey" class="form-label">Payment Method Config Key:</label>
+                            <input type="text" id="updatepaymentmethodconfigkey" name="config_key" maxlength="150" class="form-control" placeholder="Config Key" required>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodconfigvalue" class="form-label">Payment Method Config Value:</label>
+                            <input type="text" id="updatepaymentmethodconfigvalue" name="config_value" maxlength="150" class="form-control" placeholder="Config Value" required>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodminamount" class="form-label">Payment Method Min Amount:</label>
+                            <input type="text" id="updatepaymentmethodminamount" name="min_amount" maxlength="150" class="form-control" placeholder="Minumum Amount (Example: 12.5)" required>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodmaxamount" class="form-label">Payment Method Max Amount:</label>
+                            <input type="text" id="updatepaymentmethodmaxamount" name="max_amount" maxlength="150" class="form-control" placeholder="Maximum Amount(Example: 100)" required>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodismanual" class="form-label">Is Payment Method Manual:</label>
+                            <select id="updatepaymentmethodismanual" class="form-control" name="is_manual">
+                                @foreach(App\Enums\ActiveInactiveState::values() as $key => $value)
+                                    <option value="{{$key}}" @selected($value == App\Enums\ActiveInactiveState::ACTIVE->name)>{{$value}}</option>
+                                @endforeach
+                            </select>
+                            <span class="form-label" style="text-transform: none">This option defines the visibility of left payment area.
+                            If it is active, only content will be shown and all payment information must be written in the content area.</span>
+                        </div>
+
+                        <div class="col mb-3">
+                            <label for="updatepaymentmethodcontent" class="form-label">Payment Method Content:</label>
+                            <textarea class="form-control" rows="5" name="content" id="updatepaymentmethodcontent" style="width: 100%; resize: vertical;" aria-label="With textarea"></textarea>
+                        </div>
 
                         <div class="col mb-3">
                             <button class="btn btn-primary" onclick="submit(); this.disabled = true;" style="color: white; width: 100%;" id="submitbutton">Update Payment Method</button>
@@ -213,10 +264,16 @@
     <script>
         function changeModal(element){
             var paymentmethod = JSON.parse(element.dataset.paymentmethod);
-            console.log(paymentmethod.slug);
-            document.getElementById('id').value = element.dataset.paymentmethodid;
-            document.getElementById('name').value = element.dataset.paymentmethodname;
-            document.getElementById('status').value = element.dataset.paymentmethodstatus;
+            document.getElementById('id').value = paymentmethod.id;
+            document.getElementById('updatepaymentmethodname').value = paymentmethod.name;
+            document.getElementById('updatepaymentmethodicon').value = paymentmethod.icon;
+            document.getElementById('updatepaymentmethodstatus').value = paymentmethod.status;
+            document.getElementById('updatepaymentmethodconfigkey').value = paymentmethod.config_key;
+            document.getElementById('updatepaymentmethodconfigvalue').value = paymentmethod.config_value;
+            document.getElementById('updatepaymentmethodminamount').value = paymentmethod.min_amount;
+            document.getElementById('updatepaymentmethodmaxamount').value = paymentmethod.max_amount;
+            document.getElementById('updatepaymentmethodismanual').value = paymentmethod.is_manual;
+            document.getElementById('updatepaymentmethodcontent').value = paymentmethod.content;
         }
 
         function prepareForDelete(element){
