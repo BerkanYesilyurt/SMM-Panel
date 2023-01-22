@@ -34,14 +34,33 @@ class FinanceController extends Controller
         ]);
 
         $fields['slug'] = Str::slug($request->name);
-        PaymentMethod::create($fields);
-
-        return back()->with('message', 'You have successfully created the payment method.');
+        if(!PaymentMethod::where('slug', $fields['slug'])->exists()){
+            PaymentMethod::create($fields);
+            return back()->with('message', 'You have successfully created the payment method.');
+        }
+        return back()->withErrors(["slugExists" => "There is a payment method for this name, please choose a different name."]);
     }
 
-    public function updatePaymentMethod()
+    public function updatePaymentMethod(Request $request)
     {
-        //TODO
+        $fields = $request->validate([
+            'name' => 'required|alpha|min:1|max:150',
+            'icon' => 'required|min:1|max:150',
+            'status' => new Enum(ActiveInactiveState::class),
+            'config_key' => 'nullable|min:1|max:150',
+            'config_value' => 'nullable|min:1|max:150',
+            'min_amount' => 'required|numeric|min:0.01|max:99999',
+            'max_amount' => 'required|numeric|min:0.01|max:99999|gte:min_amount',
+            'is_manual' => new Enum(ActiveInactiveState::class),
+            'content' => 'nullable|min:1|max:5000'
+        ]);
+
+        $fields['slug'] = Str::slug($request->name);
+        if(!PaymentMethod::where('slug', $fields['slug'])->exists()){
+            PaymentMethod::findOrFail($request->id)->update($fields);
+            return back()->with('message', 'You have successfully updated the payment method.');
+        }
+        return back()->withErrors(["slugExists" => "There is a payment method for this name, please choose a different name."]);
     }
 
     public function deletePaymentMethod(Request $request)
