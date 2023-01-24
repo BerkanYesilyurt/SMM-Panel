@@ -64,7 +64,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6"><br>
+                            <td colspan="8"><br>
                                 <center>
                                     <b>No Users Found.</b>
                                 </center>
