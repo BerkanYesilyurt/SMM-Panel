@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\TicketStatusEnum;
 use App\Enums\UserAuthorityEnum;
 use App\Http\Requests\CreateTicketRequest;
+use App\Models\PaymentMethod;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use Illuminate\Http\Request;
@@ -18,8 +19,13 @@ class TicketController extends Controller
     }
 
     public function index(Ticket $ticket){
-        $tickets = $ticket->where('user_id', auth()->user()->id)->orderBy('created_at', 'DESC')->get();
-        return view('pages.tickets', compact('tickets'));
+        $tickets = $ticket->with('ticketMessages')
+            ->where('user_id', auth()->user()->id)
+            ->paginate(15);
+        return view('pages.tickets', [
+            'tickets' => $tickets,
+            'paymentMethods' => PaymentMethod::all()
+        ]);
     }
 
     public function createTicket(CreateTicketRequest $request){
