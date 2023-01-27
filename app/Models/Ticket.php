@@ -55,4 +55,9 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function unseenMessageByUser()
+    {
+        return $this->ticketMessages()->where('seen_by_user', 0)->count() > 0;
+    }
+
 }
