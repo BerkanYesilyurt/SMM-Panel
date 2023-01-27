@@ -36,12 +36,9 @@
                 <tr>
                     <td><center><i class="fab fa-angular fa-lg text-danger me-3"></i> <a href="/ticket/{{$ticket->id}}"><strong>{{$ticket->id}}</strong></a></center></td>
                     <td><center>{{ucfirst($ticket->subject)}}
-                            @foreach($ticket->ticketMessages->all() as $ticketMessage)
-                                @if($ticketMessage->seen_by_user == 0)
+                                @if($ticket->unseenMessageByUser())
                                     <b>(New Messages)</b>
-                                    @break
-                                @endif
-                            @endforeach</center></td>
+                                @endif</center></td>
                     <td><center><span class="badge bg-@php
                     switch($ticket->status){
                         case \App\Enums\TicketStatusEnum::ACTIVE->value:
@@ -76,6 +73,7 @@
             </table>
         </div>
     </div>
+        <center><br>{{ $tickets->links() }}</center>
     </div>
 
     <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
@@ -133,14 +131,9 @@
                         <div class="mt-3" id="payment-group" style="display: none;">
                             <label for="payment" class="form-label">PAYMENT:</label>
                             <select id="payment" name="payment" class="form-control" placeholder="Payment">
-                                <option value="paypal" selected="">Paypal</option>
-                                <option value="skrill">Skrill</option>
-                                <option value="payoneer">Payoneer</option>
-                                <option value="perfect-money">Perfect Money</option>
-                                <option value="western-union">Western Union</option>
-                                <option value="btc">BTC</option>
-                                <option value="crypto-currency">Crypto Currency</option>
-                                <option value="other">Other</option>
+                                @foreach($paymentMethods as $paymentMethod)
+                                <option value="{{$paymentMethod->slug}}" selected="">{{$paymentMethod->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mt-3" id="paymentid-group" style="display: none;">
