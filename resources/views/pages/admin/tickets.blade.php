@@ -23,12 +23,9 @@
                         <tr>
                             <td><center><i class="fab fa-angular fa-lg text-danger me-3"></i> <a href="/admin/ticket/{{$ticket->id}}"><strong>{{$ticket->id}}</strong></a></center></td>
                             <td><center>{{ucfirst($ticket->subject)}}
-                                    @foreach($ticket->ticketMessages->all() as $ticketMessage)
-                                        @if($ticketMessage->seen_by_support == 0)
-                                            <b>(New Messages)</b>
-                                            @break
-                                        @endif
-                                    @endforeach</center></td>
+                                    @if($ticket->unseenMessageBySupport())
+                                        <b>(New Messages)</b>
+                                    @endif</center></td>
                             <td><center><span class="badge bg-@php
                     switch($ticket->status){
                         case \App\Enums\TicketStatusEnum::ACTIVE->value:
@@ -49,7 +46,7 @@
                                     <form action="/admin/ban" method="POST">
                                     @csrf
                                     <a class="btn btn-info" href="/admin/ticket/{{$ticket->id}}">Show Ticket</a>
-                                    <a href="/admin/user/{{$ticket->id}}/edit" target="_blank" class="btn btn-primary"
+                                    <a href="/admin/user/{{$ticket->user_id}}/edit" target="_blank" class="btn btn-primary"
                                             data-bs-toggle="tooltip" data-bs-offset="0,4"
                                             data-bs-placement="right" data-bs-html="true"
                                             title=""
@@ -79,5 +76,6 @@
                 </table>
             </div>
         </div>
+        <center><br>{{ $tickets->links() }}</center>
     </div>
 @endsection
