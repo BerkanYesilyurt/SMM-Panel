@@ -6,7 +6,7 @@
             <span class="text-muted fw-light">{{$configsArray['title']}} /</span> Add Funds
         </h4>
 
-        @forelse($paymentMethods as $paymentMethod)
+        @foreach($paymentMethods as $paymentMethod)
             <a href="/addfunds/{{$paymentMethod->slug}}">
                 <div class="card icon-card cursor-pointer text-center mb-4 mx-2" style="font-size: 1.3rem;">
                     <div class="card-body"> <i class="bx {{$paymentMethod->icon}} mb-2" style="font-size: 2.5rem;"></i>
@@ -14,15 +14,14 @@
                     </div>
                 </div>
             </a>
-        @empty
-            <tr>
-                <td colspan="5"><br>
-                    <center>
-                        <b>No Payment Method Found.</b>
-                    </center>
-                    <br></td>
-            </tr>
-        @endforelse
+        @endforeach
+        <a href="/addfunds/history">
+            <div class="card icon-card cursor-pointer text-center mb-4 mx-2" style="font-size: 1.3rem;">
+                <div class="card-body"> <i class="bx bx-history mb-2" style="font-size: 2.5rem;"></i>
+                    <p class="icon-name text-capitalize text-truncate mb-0">Payment History</p>
+                </div>
+            </div>
+        </a>
 
     </div>
 @endsection
