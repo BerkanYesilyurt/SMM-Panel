@@ -59,5 +59,9 @@ class Ticket extends Model
     {
         return $this->ticketMessages()->where('seen_by_user', 0)->count() > 0;
     }
+    public function unseenMessageBySupport()
+    {
+        return $this->ticketMessages()->where('seen_by_support', 0)->count() > 0;
+    }
 
 }
