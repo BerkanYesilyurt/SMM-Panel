@@ -14,7 +14,7 @@ class TicketController extends Controller
     public function ticketPage()
     {
         return view('pages.admin.tickets', [
-            'tickets' => Ticket::with('ticketMessages', 'user')->orderBy('created_at', 'DESC')->get()
+            'tickets' => Ticket::with('ticketMessages', 'user')->orderBy('created_at', 'DESC')->paginate(25)
         ]);
     }
 
