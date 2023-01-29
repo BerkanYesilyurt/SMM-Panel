@@ -29,6 +29,11 @@
                             </li>
                         @endif
                     @endforeach
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addfunds/history">
+                            <i class="bx bx-history me-1"></i> Payment History
+                        </a>
+                    </li>
                 </ul>
                 <div class="card mb-4">
                     <h5 class="card-header">{{$paymentMethod->name}}</h5>
@@ -66,43 +71,6 @@
 
                     </div>
                 </div>
-
-                <div class="card mb-4">
-                    <h5 class="card-header">Payment History</h5>
-
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="list-group list-group-flush">
-                                @foreach(auth()->user()->payment_logs as $paymentLog)
-                                    <a class="list-group-item list-group-item-action fs-6">
-                                        <b>Payment ID: {{$paymentLog->id}}</b> &nbsp; &raquo; &nbsp;
-                                        {{$paymentLog->created_at->format('d F Y - H:i ')}} &nbsp; &raquo; &nbsp;
-                                        {{floatval($paymentLog->amount) . ' ' . $paymentLog->currency}} &nbsp; &raquo; &nbsp;
-                                        <span class="badge bg-@php
-                                        switch($paymentLog->status){
-                                            case \App\Enums\PaymentStatusEnum::COMPLETED->value:
-                                            echo 'success';
-                                            break;
-
-                                            case \App\Enums\PaymentStatusEnum::PENDING->value:
-                                            echo 'warning';
-                                            break;
-
-                                            default:
-                                            echo 'danger';
-                                        }
-                                        @endphp
-                                        ">
-                                        {{\App\Enums\PaymentStatusEnum::from($paymentLog->status)->name}}</span>
-                                    </a>
-                                @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
