@@ -28,6 +28,14 @@ class FinanceController extends Controller
         abort(404);
     }
 
+    public function paymentHistoryPage()
+    {
+        return view('pages.paymenthistory', [
+            'paymentMethods' => PaymentMethod::where('status', ActiveInactiveState::ACTIVE->value)->get(),
+            'paymentLogs' => auth()->user()->payment_logs()->paginate(20)
+        ]);
+    }
+
     public function pay(PaymentMethod $paymentMethod, Request $request)
     {
         $request->validate([
