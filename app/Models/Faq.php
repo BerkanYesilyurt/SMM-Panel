@@ -28,7 +28,6 @@ class Faq extends Model
     use HasFactory;
 
     protected $table = 'faq';
-
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
 }
