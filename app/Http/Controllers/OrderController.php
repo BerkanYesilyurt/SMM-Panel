@@ -39,7 +39,7 @@ class OrderController extends Controller
 
     public function ordersPage(){
         $orderCount = Order::where('user_id','=', auth()->user()->id)->count();
-        $userOrders = Order::with('getServiceName')->where('user_id','=', auth()->user()->id)->orderByDesc('created_at')->paginate(18);
+        $userOrders = Order::with('getServiceName')->where('user_id','=', auth()->user()->id)->paginate(18);
         return view('pages.orders', compact('userOrders'))->with('orderCount', $orderCount);
     }
 
