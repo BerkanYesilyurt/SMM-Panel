@@ -140,7 +140,9 @@
 
                                 <div class="mt-2 mb-3">
                                     <label for="Quantity" class="form-label">Quantity</label>
-                                    <input id="Quantity" name="quantity" class="form-control form-control-lg" type="number" placeholder="Quantity" required>
+                                    <input id="Quantity" name="quantity" class="form-control form-control-lg"
+                                           onkeydown="return ['Backspace','Delete','ArrowLeft','ArrowRight'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"
+                                           type="number" placeholder="Quantity" required>
                                     <div class="form-text" style="padding-top: 8px;">
                                         <span class="badge bg-success hidden" id="serviceMin" style="font-size:1em;"><b>Min: 100</b></span>
                                         <span class="badge bg-danger hidden" id="serviceMax" style="font-size:1em;"><b>Max: 500</b></span>
@@ -153,7 +155,7 @@
                                 </div>
 
                                 <div class="mt-2 mb-3">
-                                <button class="btn btn-primary btn-lg" type="submit" style="width: 100%;">SUBMIT</button>
+                                <button class="btn btn-primary btn-lg" type="submit" style="width: 100%;" onclick="submit(); this.disabled = true;">SUBMIT</button>
                                 </div>
                                 </form>
                             </div>
@@ -190,6 +192,9 @@
     </div>
 <x-servicedescription :services="$servicesList" />
 <script>
+    function submit(){
+        document.getElementById("neworder").submit();
+    }
 
     function defaultDescription(){
         $("#serviceDescription")
@@ -260,9 +265,11 @@
         });
 
         $('#Quantity').on('input', function() {
-            var servicePrice = $('#Services').find(':selected').data('price');
-            var total = ($('#Quantity').val() / 1000) * servicePrice;
-            $('#Charge').val("{{$configsArray['currency_symbol']}}" + total.toFixed(4));
+            if($.isNumeric($('#Quantity').val())){
+                var servicePrice = $('#Services').find(':selected').data('price');
+                var total = ($('#Quantity').val() / 1000) * servicePrice;
+                $('#Charge').val("{{$configsArray['currency_symbol']}}" + total.toFixed(4));
+            }
         });
     });
 </script>
