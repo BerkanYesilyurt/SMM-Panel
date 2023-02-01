@@ -47,7 +47,7 @@ class Service extends Model
 
     protected $table = 'services';
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id', 'id');
