@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Enums\ActiveInactiveState;
 use App\Models\Config;
 use App\Models\Faq;
+use App\Models\PaymentMethod;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -122,12 +122,29 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        $paymentmethods = [
+            [
+                'name' => 'PayPal',
+                'slug' => 'paypal',
+                'icon' => 'bxl-paypal',
+                'status' => ActiveInactiveState::ACTIVE->value,
+                'min_amount' => '1',
+                'max_amount' => '1000',
+                'is_manual' => ActiveInactiveState::INACTIVE->value,
+                'content' => '<br><center>Your payments will be added to your balance instantly.</center>',
+            ]
+        ];
+
         collect($configs)->each(function ($config){
             Config::create($config);
         });
 
         collect($faqs)->each(function ($faq){
             Faq::create($faq);
+        });
+
+        collect($paymentmethods)->each(function ($paymentmethod){
+            PaymentMethod::create($paymentmethod);
         });
     }
 }
