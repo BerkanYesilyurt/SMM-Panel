@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -49,9 +51,11 @@ class Handler extends ExceptionHandler
                 return response()->json(['error' => 'Incorrect request!'], 404);
             }
         });
+    }
 
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+    public function render($request, Throwable $e)
+    {
+        createErrorLog($request, $e);
+        return parent::render($request, $e);
     }
 }
