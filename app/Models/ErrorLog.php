@@ -15,5 +15,6 @@ use Illuminate\Database\Eloquent\Model;
 class ErrorLog extends Model
 {
     protected $table = 'error_logs';
-    protected $guarded = ['*'];
+    protected $guarded = ['id'];
+    protected $casts = ['trace' => 'array'];
 }
