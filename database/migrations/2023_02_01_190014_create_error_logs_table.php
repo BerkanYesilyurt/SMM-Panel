@@ -18,9 +18,10 @@ return new class extends Migration
             $table->integer('user_id')->nullable();
             $table->string('user_ip')->nullable();
             $table->text('user_agent')->nullable();
-            $table->string('method')->nullable();
+            $table->string('method', 30)->nullable();
             $table->string('referer')->nullable();
             $table->text('url')->nullable();
+            $table->string('status_code', 30)->nullable();
             $table->text('message')->nullable();
             $table->text('filename')->nullable();
             $table->text('line')->nullable();
