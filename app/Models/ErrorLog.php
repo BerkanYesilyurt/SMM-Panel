@@ -17,4 +17,9 @@ class ErrorLog extends Model
     protected $table = 'error_logs';
     protected $guarded = ['id'];
     protected $casts = ['trace' => 'array'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
