@@ -104,6 +104,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(PaymentLog::class)->orderBy('created_at');
     }
+
+    public function error_logs()
+    {
+        return $this->hasMany(ErrorLog::class);
+    }
+
     public function is_banned()
     {
         return $this->hasMany(UserBan::class, 'user_id', 'id');
