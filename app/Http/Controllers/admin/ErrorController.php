@@ -10,7 +10,7 @@ class ErrorController extends Controller
     public function errorLogsPage()
     {
         return view('pages.admin.errors', [
-            'errors' => ErrorLog::with('user')->paginate(50)
+            'errors' => ErrorLog::paginate(50)
         ]);
     }
 }
