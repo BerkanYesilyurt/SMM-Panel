@@ -191,7 +191,7 @@
 
                 <div class="row">
                     <div class="list-group list-group-flush">
-                        @foreach($user->payment_logs as $paymentLog)
+                        @forelse($user->payment_logs as $paymentLog)
                             <a class="list-group-item list-group-item-action" style="font-size: 90% !important;">
                                 <b>Payment ID: {{$paymentLog->id}}</b> &nbsp; &raquo; &nbsp;
                                 {{$paymentLog->created_at->format('d F Y - H:i ')}} &nbsp; &raquo; &nbsp;
@@ -213,7 +213,9 @@
                                     ">
                                     {{\App\Enums\PaymentStatusEnum::from($paymentLog->status)->name}}</span>
                             </a>
-                        @endforeach
+                        @empty
+                            No payment records founds.
+                        @endforelse
                     </div>
                 </div>
 
