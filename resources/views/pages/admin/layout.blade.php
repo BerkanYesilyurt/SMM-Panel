@@ -226,8 +226,12 @@
                             <div data-i18n="System Settings">System Settings</div>
                         </a>
                     </li>
-
-
+                    <li class="menu-item">
+                        <a href="/admin/errors" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-error"></i>
+                            <div data-i18n="Error Logs">Error Logs</div>
+                        </a>
+                    </li>
                 </ul>
         </aside>
         <!-- / Menu -->
