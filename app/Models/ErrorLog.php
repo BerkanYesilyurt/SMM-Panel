@@ -16,7 +16,7 @@ class ErrorLog extends Model
 {
     protected $table = 'error_logs';
     protected $guarded = ['id'];
-    protected $casts = ['trace' => 'array'];
+    protected $casts = ['trace' => 'json'];
 
     public function user()
     {
