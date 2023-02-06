@@ -13,10 +13,10 @@ function createErrorLog($request, $e){
             'referer' => $request->headers->get('referer'),
             'url' => $request->fullUrl(),
             'status_code' => $e instanceof HttpExceptionInterface ? $e->getStatusCode() : NULL,
-            'message' => $e->getMessage(),
+            'message' => strlen($e->getMessage()) > 1 ? $e->getMessage() : NULL,
             'filename' => $e->getFile(),
             'line' => $e->getLine(),
-            'trace' => $e->getTrace(),
+            'trace' => array_slice($e->getTrace(), 0, 15),
         ]);
     }
 }
