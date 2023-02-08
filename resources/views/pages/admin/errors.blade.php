@@ -32,7 +32,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5"><br>
+                            <td colspan="6"><br>
                                 <center>
                                     <b>No Errors Found.</b>
                                 </center>
