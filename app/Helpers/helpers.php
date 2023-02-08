@@ -3,6 +3,7 @@
 use App\Enums\UserBanTypesEnum;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 if (!function_exists('checkBan')){
     function checkBan($type, $user = NULL):bool {
@@ -36,5 +37,17 @@ if (!function_exists('getBanDateMessage')) {
             }
         }
         return null;
+    }
+}
+
+if (!function_exists('hasTables')) {
+    function hasTables(array $tables)
+    {
+        foreach($tables as $table){
+            if(!Schema::hasTable($table)){
+                return false;
+            }
+        }
+        return true;
     }
 }
