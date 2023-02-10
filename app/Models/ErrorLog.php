@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ErrorLog extends Model
 {
+    use MassPrunable;
+
     protected $table = 'error_logs';
     protected $guarded = ['id'];
     protected $casts = ['trace' => 'json'];
@@ -21,5 +24,10 @@ class ErrorLog extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function prunable()
+    {
+        return static::where('created_at', '<', now()->subMonth());
     }
 }
