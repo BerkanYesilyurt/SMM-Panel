@@ -159,13 +159,17 @@
                     <li class="menu-item">
                         <a href="/admin/users" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-group"></i>
-                            <div data-i18n="Users">Users</div>
+                            <div data-i18n="Users">Users
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['users'])}}</span>
+                            </div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="/admin/orders" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-list-ul"></i>
-                            <div data-i18n="Orders">Orders</div>
+                            <div data-i18n="Orders">Orders
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['orders'])}}</span>
+                            </div>
                         </a>
                     </li>
 
@@ -173,19 +177,25 @@
                     <li class="menu-item">
                         <a href="/admin/categories" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-collection"></i>
-                            <div data-i18n="Categories">Categories</div>
+                            <div data-i18n="Categories">Categories
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['categories'])}}</span>
+                            </div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="/admin/services" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
-                            <div data-i18n="Services">Services</div>
+                            <div data-i18n="Services">Services
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['services'])}}</span>
+                            </div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="/admin/servicesupdates" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-left-indent"></i>
-                            <div data-i18n="Service Updates">Service Updates</div>
+                            <div data-i18n="Service Updates">Service Updates
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['service_updates'])}}</span>
+                            </div>
                         </a>
                     </li>
 
@@ -195,7 +205,9 @@
                     <li class="menu-item">
                         <a href="/admin/payment-methods" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-store"></i>
-                            <div data-i18n="Payment Methods">Payment Methods</div>
+                            <div data-i18n="Payment Methods">Payment Methods
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['payment_methods'])}}</span>
+                            </div>
                         </a>
                     </li>
 
@@ -203,19 +215,25 @@
                     <li class="menu-item">
                         <a href="/admin/announcements" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-info-square"></i>
-                            <div data-i18n="Announcements">Announcements</div>
+                            <div data-i18n="Announcements">Announcements
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['announcements'])}}</span>
+                            </div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="/admin/tickets" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-chat"></i>
-                            <div data-i18n="Tickets">Tickets</div>
+                            <div data-i18n="Tickets">Tickets
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['tickets'])}}</span>
+                            </div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="/admin/faq" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-question-mark"></i>
-                            <div data-i18n="FAQ">FAQ</div>
+                            <div data-i18n="FAQ">FAQ
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['faq'])}}</span>
+                            </div>
                         </a>
                     </li>
 
@@ -229,7 +247,9 @@
                     <li class="menu-item">
                         <a href="/admin/errors" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-error"></i>
-                            <div data-i18n="Error Logs">Error Logs</div>
+                            <div data-i18n="Error Logs">Error Logs
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['errors'])}}</span>
+                            </div>
                         </a>
                     </li>
                 </ul>
