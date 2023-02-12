@@ -19,7 +19,7 @@ class SettingsController extends Controller
     public function setSystemSettingWith($settings, $requestAttributes){
         $changedSettingNames = [];
         foreach($settings as $settingName => $settingValue){
-            if(Config::where('name', '=', $settingName)->value('value') != $settingValue){
+            if(configValue($settingName) != $settingValue){
                 Config::where('name', '=', $settingName)->update(['value' => $settingValue]);
                 $changedSettingNames[] = $requestAttributes[$settingName];
             }
