@@ -1,9 +1,17 @@
 <?php
 
 use App\Enums\UserBanTypesEnum;
+use App\Models\Config;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
+
+if (!function_exists('configValue')) {
+    function configValue(string $name)
+    {
+        return Config::where('name', '=', $name)->value('value');
+    }
+}
 
 if (!function_exists('checkBan')){
     function checkBan($type, $user = NULL):bool {
