@@ -133,6 +133,17 @@
                                 <option value="1" @selected($settings['forgot_password']['value'] == 1)>Active</option>
                             </select>
                         </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="errorlogs_delete" class="form-label">Deletion Period of Error Logs - <b>{{date('d F Y H:i', strtotime($settings['errorlogs_delete']['updated_at']))}}</b></label>
+                            <select name="errorlogs_delete" id="errorlogs_delete" class="select2 form-select">
+                                <option value="1" @selected($settings['errorlogs_delete']['value'] == 1)>1 Day</option>
+                                <option value="3" @selected($settings['errorlogs_delete']['value'] == 3)>3 Days</option>
+                                <option value="7" @selected($settings['errorlogs_delete']['value'] == 7)>1 Week</option>
+                                <option value="14" @selected($settings['errorlogs_delete']['value'] == 14)>2 Weeks</option>
+                                <option value="30" @selected($settings['errorlogs_delete']['value'] == 30)>1 Month</option>
+                                <option value="365" @selected($settings['errorlogs_delete']['value'] == 365)>1 Year</option>
+                            </select>
+                        </div>
 
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary me-2">Change System Settings</button>
