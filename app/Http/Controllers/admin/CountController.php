@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Enums\OrderStatusEnum;
+use App\Enums\TicketStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\Category;
@@ -33,7 +34,7 @@ class CountController extends Controller
 
     private function countTickets(){
         $this->count['tickets'] = Ticket::count();
-        $this->count['opentickets'] = Ticket::whereNot('status', '=', 'CLOSED')->count();
+        $this->count['opentickets'] = Ticket::whereNot('status', '=', TicketStatusEnum::CLOSED->value)->count();
     }
 
     private function countOrders(){
