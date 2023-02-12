@@ -76,6 +76,10 @@ class DatabaseSeeder extends Seeder
                 'value' => '1'
             ],
             [
+                'name' => 'errorlogs_delete',
+                'value' => '7'
+            ],
+            [
                 'name' => 'terms_content',
                 'value' => 'We reserve the right to change these terms of service without notice. You are expected to read all terms of service before placing any order to insure you are up to date with any changes or any future changes.',
             ],
