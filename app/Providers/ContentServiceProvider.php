@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ConfigController;
+use Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,12 +29,16 @@ class ContentServiceProvider extends ServiceProvider
     {
         if(hasTables(['announcements']))
         {
-            $announcementArray = AnnouncementController::announcements();
+            $announcementArray = Cache::remember('announcementArray', 600, function () {
+                return AnnouncementController::announcements();
+            });
             view()->share('announcementArray', $announcementArray);
         }
         if(hasTables(['configs']))
         {
-            $configsArray = ConfigController::configs();
+            $configsArray = Cache::remember('configsArray', 180, function () {
+                return ConfigController::configs();
+            });
             view()->share('configsArray', $configsArray);
         }
         if(hasTables([
