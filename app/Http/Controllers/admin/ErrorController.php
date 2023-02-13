@@ -13,4 +13,10 @@ class ErrorController extends Controller
             'errors' => ErrorLog::orderBy('created_at')->paginate(50)
         ]);
     }
+
+    public function deleteErrorLogs()
+    {
+        ErrorLog::truncate();
+        return back()->with('message', 'You have successfully deleted all error logs.');
+    }
 }
