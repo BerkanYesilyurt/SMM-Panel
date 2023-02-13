@@ -3,8 +3,23 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
+            <form action="/admin/delete-errors" method="POST">
+            @csrf
             <span class="text-muted fw-light">Admin Panel /</span> Error Logs
+                <button type="submit" class="btn btn-primary" style="float:right;">
+                    <span class="tf-icons bx bx-trash"></span>&nbsp; Delete All Logs
+                </button>
+            </form>
         </h4>
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                <ul style="margin-bottom: 1px; color:#478924;">
+                    <b>{{session('message')}}</b>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+        @endif
 
         <div class="card">
 
