@@ -124,4 +124,6 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->prefix('/admin/'
     Route::post('delete-ban', [\App\Http\Controllers\admin\BanController::class, 'deleteBan']);
 
     Route::get('errors', [\App\Http\Controllers\admin\ErrorController::class, 'errorLogsPage']);
+    Route::post('delete-errors', [\App\Http\Controllers\admin\ErrorController::class, 'deleteErrorLogs']);
+
 });
