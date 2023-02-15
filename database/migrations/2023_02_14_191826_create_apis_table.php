@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('apis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('key');
             $table->string('action');
             $table->text('order_endpoint');
             $table->string('order_method');
