@@ -14,6 +14,13 @@ class ErrorController extends Controller
         ]);
     }
 
+    public function errorDetailsPage(ErrorLog $error)
+    {
+        return view('pages.admin.error', [
+            'error' => $error->load('user')
+        ]);
+    }
+
     public function deleteErrorLogs()
     {
         ErrorLog::truncate();
