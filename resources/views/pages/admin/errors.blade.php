@@ -33,6 +33,7 @@
                         <th><center>Status Code</center></th>
                         <th><center>Method</center></th>
                         <th><center>Date</center></th>
+                        <th><center>Actions</center></th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -44,10 +45,13 @@
                             <td><center>{!!$error->status_code ? '<span class="badge bg-danger">' . $error->status_code . '</span>' :  '-' !!}</center></td>
                             <td><center><span class="badge bg-{{$error->method == 'GET' ? 'info' : 'primary'}}">{{$error->method}}</span></center></td>
                             <td><center>{{$error->created_at->diffForHumans()}}</center></td>
+                            <td><center><a href="/admin/error/{{$error->id}}" target="_blank" class="btn btn-sm btn-danger">
+                                        <span class="tf-icons bx bx-detail"></span>&nbsp; Error Details
+                                    </a></center></td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6"><br>
+                            <td colspan="7"><br>
                                 <center>
                                     <b>No Errors Found.</b>
                                 </center>
