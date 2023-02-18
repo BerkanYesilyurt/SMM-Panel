@@ -73,11 +73,6 @@
                     @endforelse
                     </tbody>
                 </table>
-                @if($userCount > 0)
-                    <div class="divider divider-primary">
-                        <div class="divider-text"><b>Total Users: {{$userCount}}</b></div>
-                    </div>
-                @endif
                 <center>{{ $users->links() }}</center>
             </div>
         </div>

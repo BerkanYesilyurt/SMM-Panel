@@ -72,11 +72,6 @@
                     @endforelse
                     </tbody>
                 </table>
-                @if($orderCount > 0)
-                    <div class="divider divider-primary">
-                        <div class="divider-text"><b>Total Orders: {{$orderCount}}</b></div>
-                    </div>
-                @endif
                 <center>{{ $orders->links() }}</center>
             </div>
         </div>
