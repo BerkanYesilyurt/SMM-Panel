@@ -18,9 +18,7 @@ class Maintenance
      */
     public function handle(Request $request, Closure $next)
     {
-        $config = new Config();
-        $maintenance_mode = $config->where('name','=', 'maintenance_mode')->value('value');
-        if($maintenance_mode){
+        if(configValue('maintenance_mode')){
             if(auth()->check() && auth()->user()->authority != UserAuthorityEnum::none->value){
                 return $next($request);
             }else{

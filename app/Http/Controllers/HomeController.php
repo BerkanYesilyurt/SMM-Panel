@@ -12,17 +12,14 @@ class HomeController extends Controller
         $this->middleware('maintenance');
     }
 
-    public function check(Config $config){
-    $directly_login = $config->where('name','=', 'directly_login')->value('value');
-
+    public function check(){
     if(auth()->check()){
         return redirect()->route('new-order');
-    }elseif($directly_login){
+    }elseif(configValue('directly_login')){
         return redirect()->route('login');
     }else{
         return view('index');
     }
-
     }
 
 

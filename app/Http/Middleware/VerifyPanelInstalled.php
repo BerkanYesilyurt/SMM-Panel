@@ -17,9 +17,7 @@ class VerifyPanelInstalled
      */
     public function handle(Request $request, Closure $next)
     {
-        $config = new Config();
-        $isPanelInstalled = $config->where('name','=', 'is_installed')->value('value');
-        if($isPanelInstalled == 1){
+        if(configValue('is_installed')){
             return $next($request);
         }else{
             return redirect()->route('install');
