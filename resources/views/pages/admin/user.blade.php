@@ -102,10 +102,10 @@
                         </div>
 
                         <div class="mb-3 col-md-6">
-                            <label for="status" class="form-label">Status</label>
-                            <select name="status" id="status" class="select2 form-select">
-                                @foreach(App\Enums\UserStatusEnum::values() as $key => $value)
-                                    <option value="{{ $key }}" @selected($user->status == $key)>{{ $value }}</option>
+                            <label for="authority" class="form-label">Authority</label>
+                            <select name="authority" id="authority" class="select2 form-select">
+                                @foreach(App\Enums\UserAuthorityEnum::values() as $key => $value)
+                                    <option value="{{ $key }}" @selected($user->authority == $key)>{{ strtoupper($value) }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -132,7 +132,7 @@
                         <div class="mb-3 col-md-4">
                             <label for="last_login" class="form-label">Last Login</label>
                             <input class="form-control" type="text" readonly id="last_login" name="last_login"
-                                   value="{{$user->last_login->diffForHumans()}}">
+                                   value="{{$user->last_login?->diffForHumans()}}">
                         </div>
 
                         <div class="mb-3 col-md-4">
