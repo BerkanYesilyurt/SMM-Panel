@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\admin;
 
-use App\Enums\UserStatusEnum;
+use App\Enums\UserAuthorityEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
@@ -22,7 +22,7 @@ class UpdateUserDetailsRequest extends FormRequest
             'email' => ['required', 'email', 'max:150', Rule::unique('users', 'email')->ignore($this->user)],
             'contact' => ['required', 'max:150'],
             'timezone' => ['nullable', 'numeric', 'min:-100000', 'max:100000'],
-            'status' => ['required', new Enum(UserStatusEnum::class)],
+            'authority' => ['required', new Enum(UserAuthorityEnum::class)],
             'api_key' => ['nullable', 'min:55', 'max:55'],
             'password' => ['required_if:set_new_password,1', 'min:6', 'max:50']
         ];
@@ -38,7 +38,7 @@ class UpdateUserDetailsRequest extends FormRequest
             'email' => 'E-mail',
             'contact' => 'Contact',
             'timezone' => 'Timezone',
-            'status' => 'Status',
+            'authority' => 'Authority',
             'api_key' => 'API Key',
             'password' => 'Password'
         ];
