@@ -45,7 +45,7 @@
                             <td><center>{!!$error->status_code ? '<span class="badge bg-danger">' . $error->status_code . '</span>' :  '-' !!}</center></td>
                             <td><center><span class="badge bg-{{$error->method == 'GET' ? 'info' : 'primary'}}">{{$error->method}}</span></center></td>
                             <td><center>{{$error->created_at->diffForHumans()}}</center></td>
-                            <td><center><a href="/admin/error/{{$error->id}}" target="_blank" class="btn btn-sm btn-danger">
+                            <td><center><a href="/admin/error/{{$error->id}}" class="btn btn-sm btn-danger">
                                         <span class="tf-icons bx bx-detail"></span>&nbsp; Error Details
                                     </a></center></td>
                         </tr>
