@@ -5,6 +5,9 @@
 
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> Error / {{$error->id}}
+            <button type="button" class="btn btn-primary" onclick="location.href = '{{ url()->previous() }}'" style="float:right;">
+                <span class="tf-icons bx bx-arrow-back"></span>&nbsp; Go Back
+            </button>
         </h4>
 
         <div class="row">
