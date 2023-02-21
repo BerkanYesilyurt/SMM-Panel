@@ -30,25 +30,17 @@
         <div class="card">
 
             <div class="table-responsive text-nowrap">
-                <style>
-                    table {
-                        border-spacing: 0px;
-                        table-layout: fixed;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                </style>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th style="width: 5%;"><center>ID</center></th>
-                        <th style="width: 15%;"><center>NAME</center></th>
-                        <th style="width: 20%;"><center>E-MAIL</center></th>
-                        <th style="width: 10%;"><center>AUTHORITY</center></th>
-                        <th style="width: 15%;"><center>STATUS</center></th>
-                        <th style="width: 8%;"><center>BALANCE</center></th>
-                        <th style="width: 12%;"><center>CREATED AT</center></th>
-                        <th style="width: 15%;"><center>EDIT</center></th>
+                        <th><center>ID</center></th>
+                        <th><center>NAME</center></th>
+                        <th><center>E-MAIL</center></th>
+                        <th><center>AUTHORITY</center></th>
+                        <th><center>STATUS</center></th>
+                        <th><center>BALANCE</center></th>
+                        <th><center>CREATED AT</center></th>
+                        <th><center>EDIT</center></th>
 
                     </tr>
                     </thead>
@@ -77,6 +69,9 @@
                             <td><center>{{$configsArray['currency_symbol']}}{{round($user->balance, 4)}}</center></td>
                             <td><center>{{$user->created_at->diffForHumans()}}</center></td>
                             <td><center>
+                            <button type="button" onclick="prepareForDelete(this)" data-userid="{{$user->id}}" data-useremail="{{$user->email}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteUser">
+                                <span class="tf-icons bx bx-trash"></span>
+                            </button>
                             <a href="/admin/user/{{$user->id}}/edit" target="_blank" class="btn btn-sm btn-primary">
                                 <span class="tf-icons bx bx-edit"></span>&nbsp; Edit User
                             </a>
@@ -154,9 +149,44 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modalCenterDeleteUser" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="deleteuser" action="/admin/delete-user">
+                        @csrf
+                        <input type="hidden" name="delete_id" id="delete_id">
+
+                        <div class="col mb-3">
+                            <span id="prepareForDelete"></span>
+                        </div>
+
+                        <div class="col mb-3">
+                            <button class="btn btn-danger" onclick="deleteUser(); this.disabled = true;" style="color: white; width: 100%;">Delete User</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function submit(){
             document.getElementById("form").submit();
+        }
+
+        function prepareForDelete(element){
+            document.getElementById('delete_id').value = element.dataset.userid;
+            document.getElementById('prepareForDelete').innerHTML = '<b>' + element.dataset.useremail + '(ID: ' + element.dataset.userid + ') </b> will be deleted. Are you sure?';
+        }
+
+        function deleteUser(){
+            document.getElementById("deleteuser").submit();
         }
     </script>
 @endsection
