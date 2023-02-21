@@ -79,6 +79,7 @@ Route::middleware(['auth', 'isadmin', 'verifypanelinstalled'])->prefix('/admin/'
 
     Route::get('users', [\App\Http\Controllers\admin\UserController::class, 'usersPage']);
     Route::post('new-user', [\App\Http\Controllers\admin\UserController::class, 'createUser']);
+    Route::post('delete-user', [\App\Http\Controllers\admin\UserController::class, 'deleteUser']);
     Route::get('user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'getUserDetails']);
     Route::post('user/{user}/edit', [\App\Http\Controllers\admin\UserController::class, 'updateUserDetails']);
     Route::post('user/{user}/balance-update', [\App\Http\Controllers\admin\UserController::class, 'updateUserBalance']);
