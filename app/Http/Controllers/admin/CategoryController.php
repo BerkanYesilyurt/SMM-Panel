@@ -53,7 +53,7 @@ class CategoryController extends Controller
     public function deleteCategory(Request $request)
     {
         $request->validate([
-            'delete_id' => 'required|numeric',
+            'delete_id' => 'required|numeric|exists:categories,id',
         ]);
 
         DB::transaction(function () use($request){
