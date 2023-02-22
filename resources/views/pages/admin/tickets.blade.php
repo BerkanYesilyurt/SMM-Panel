@@ -43,8 +43,9 @@
                             <td><center>{{$ticket->created_at->diffForHumans()}}</center></td>
                             <td>
                                 <center>
-                                    <form action="/admin/ban" method="POST">
-                                    @csrf
+                                    <button type="button" onclick="prepareForDelete(this)" data-ticketid="{{$ticket->id}}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteTicket">
+                                        <span class="tf-icons bx bx-trash"></span>
+                                    </button>
                                     <a class="btn btn-info" href="/admin/ticket/{{$ticket->id}}">Show Ticket</a>
                                     <a href="/admin/user/{{$ticket->user_id}}/edit" target="_blank" class="btn btn-primary"
                                             data-bs-toggle="tooltip" data-bs-offset="0,4"
@@ -59,7 +60,6 @@
                                             data-bs-original-title="<span>Ban this user from using a ticket.</span>">
                                         <i class='bx bx-block' ></i>
                                     </a>
-                                    </form>
                                 </center>
                             </td>
                         </tr>
@@ -78,4 +78,39 @@
         </div>
         <center><br>{{ $tickets->links() }}</center>
     </div>
+
+    <div class="modal fade" id="modalCenterDeleteTicket" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="deleteticket" action="/admin/delete-ticket">
+                        @csrf
+                        <input type="hidden" name="delete_id" id="delete_id">
+
+                        <div class="col mb-3">
+                            <span id="prepareForDelete"></span>
+                        </div>
+
+                        <div class="col mb-3">
+                            <button class="btn btn-danger" onclick="deleteTicket(); this.disabled = true;" style="color: white; width: 100%;">Delete Ticket</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function prepareForDelete(element){
+            document.getElementById('delete_id').value = element.dataset.ticketid;
+            document.getElementById('prepareForDelete').innerHTML = '<b>(ID: ' + element.dataset.ticketid + ') </b>ticket and all related messages will be deleted. Are you sure?';
+        }
+        function deleteTicket(){
+            document.getElementById("deleteticket").submit();
+        }
+    </script>
 @endsection
