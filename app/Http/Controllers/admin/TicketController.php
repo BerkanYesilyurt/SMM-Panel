@@ -6,6 +6,7 @@ use App\Enums\TicketStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 
@@ -55,5 +56,20 @@ class TicketController extends Controller
 
         $ticket->update(['status' => $request->status]);
         return back()->with('message', 'You have successfully updated the ticket status!');
+    }
+
+    public function deleteTicketAndRelatedMessages(Request $request)
+    {
+        $request->validate([
+            'delete_id' => 'required|numeric|exists:tickets,id',
+        ]);
+
+        DB::transaction(function () use($request){
+            Ticket::where('id', $request->delete_id)->delete();
+            TicketMessage::where('ticket_id', $request->delete_id)->delete();
+        });
+
+        return back()->with('message', 'You have successfully deleted ticket and related messages.');
+
     }
 }
