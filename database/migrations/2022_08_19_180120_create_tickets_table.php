@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('feature_request')->nullable();
             $table->string('status')->default(TicketStatusEnum::ACTIVE->value);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

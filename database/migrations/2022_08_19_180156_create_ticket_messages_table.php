@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('seen_by_user');
             $table->integer('seen_by_support');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
