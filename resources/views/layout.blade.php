@@ -149,9 +149,9 @@
 
             <div class="menu-inner-shadow"></div>
 
+            <ul class="menu-inner py-1">
             @if(auth()->user()->authority == \App\Enums\UserAuthorityEnum::admin->value)
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Admin</span></li>
-                <ul class="menu-inner py-1">
                     <li class="menu-item">
                         <a href="/admin/dashboard" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-crown" style="color:#ff3e1d;"></i>
