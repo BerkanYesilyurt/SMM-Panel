@@ -41,7 +41,7 @@ Route::middleware(['auth', 'maintenance', 'verifypanelinstalled', 'isaccountbann
 
     Route::get('/tickets', [TicketController::class, 'index']);
     Route::post('/tickets', [TicketController::class, 'createTicket']);
-    Route::get('/ticket/{ticket_id}', [TicketController::class, 'ticketMessages']);
+    Route::get('/ticket/{ticket}', [TicketController::class, 'ticketMessages']);
     Route::post('/ticket_message', [TicketController::class, 'newTicketMessage']);
 
     Route::get('/faq', [FaqController::class, 'faqPage']);
