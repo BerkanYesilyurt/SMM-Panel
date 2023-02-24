@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TicketStatusEnum;
-use App\Enums\UserAuthorityEnum;
 use App\Http\Requests\CreateTicketRequest;
 use App\Models\PaymentMethod;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class TicketController extends Controller
 {
@@ -66,16 +64,14 @@ class TicketController extends Controller
         return redirect('/tickets');
     }
 
-    public function ticketMessages($ticket_id, Ticket $ticket, TicketMessage $ticketMessage){
-        $relatedTicket = $ticket->where('id', $ticket_id)->first();
-
-        if(auth()->user()->id == $relatedTicket->user_id){
-            $ticketMessages = $ticketMessage->where('ticket_id', $ticket_id)->orderBy('created_at', 'ASC')->get();
-            TicketMessage::where('ticket_id', $ticket_id)->update(['seen_by_user' => 1]);
-
-            return view('pages.ticket-messages', compact('ticketMessages'))
-                ->with('ticket_id', $ticket_id)
-                ->with('status', $relatedTicket->status);
+    public function ticketMessages(Ticket $ticket){
+        if(auth()->user()->id == $ticket->user_id){
+            TicketMessage::where('ticket_id', $ticket->id)->update(['seen_by_user' => 1]);
+            return view('pages.ticket-messages', [
+                'ticketMessages' => $ticket->ticketMessages,
+                'ticket_id' => $ticket->id,
+                'status' => $ticket->status
+            ]);
         }else{
             return redirect('/');
         }
