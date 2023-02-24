@@ -5,8 +5,18 @@
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> Tickets
         </h4>
-        <div class="card">
 
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                <ul style="margin-bottom: 1px; color:#478924;">
+                    <b>{{session('message')}}</b>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+        @endif
+
+        <div class="card">
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
