@@ -49,7 +49,8 @@ class Ticket extends Model
 
     public function ticketMessages()
     {
-        return $this->hasMany(TicketMessage::class, 'ticket_id', 'id');
+        return $this->hasMany(TicketMessage::class, 'ticket_id', 'id')
+            ->orderBy('created_at', 'ASC');
     }
 
     public function user()
