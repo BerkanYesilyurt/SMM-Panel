@@ -52,13 +52,26 @@
                                             <input class="form-control form-select-lg" type="date" name="until_at" value="{{now()->addDays(7)->format('Y-m-d')}}" id="date" />
                                         </div>
 
-                                        <div class="mt-2 mb-3">
+                                        <div class="mt-2">
                                             <label for="type" class="form-label">Type</label>
                                             <select id="type" name="type" class="form-select form-select-lg">
                                                 @if($type == 'ticket')<option value="ticket" selected>Ticket Ban</option>@endif
                                                 @if($type == 'account')<option value="account" selected>Account Ban</option>@endif
                                             </select>
                                         </div>
+
+                                        @if($type == 'ticket')
+                                            <div class="mt-1 mb-3">
+                                                <div class="form-check form-check-inline mt-3">
+                                                    <input class="form-check-input" type="radio" name="ticketOptions" id="ticketRadio1" value="close">
+                                                    <label class="form-check-label" for="ticketRadio1">Close all tickets of this user.</label>
+                                                </div><br>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="ticketOptions" id="ticketRadio2" value="delete">
+                                                    <label class="form-check-label" for="ticketRadio2">Delete all tickets of this user.</label>
+                                                </div>
+                                            </div>
+                                        @endif
 
                                         <div class="mt-2 mb-3">
                                             <button class="btn btn-primary btn-lg" type="submit" style="width: 100%;">BAN</button>
