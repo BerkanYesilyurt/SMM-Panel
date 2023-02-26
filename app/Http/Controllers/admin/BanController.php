@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\TicketStatusEnum;
 use App\Enums\UserBanTypesEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Ticket;
+use App\Models\TicketMessage;
 use App\Models\User;
 use App\Models\UserBan;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
@@ -28,8 +32,20 @@ class BanController extends Controller
                 $query->where('user_id', $request->user_id);
             })],
             'permanent' => 'required|boolean',
-            'until_at' => 'required|date|date_format:Y-m-d'
+            'until_at' => 'required|date|date_format:Y-m-d',
+            'ticketOptions' => 'required_if:type,=,ticket|in:close,delete'
         ]);
+
+        if($request->has('ticketOptions')){
+            if($request->ticketOptions == 'close'){
+                DB::transaction(function () use($request){
+                    Ticket::where('user_id', $request->user_id)->update(['status' => TicketStatusEnum::CLOSED->value]);
+                    TicketMessage::where('user_id', $request->user_id)->update(['seen_by_support' => 1]);
+                });
+            }elseif ($request->ticketOptions == 'delete'){
+                Ticket::where('user_id', $request->user_id)->delete();
+            }
+        }
 
         UserBan::create($fields);
         return back()->with('message', 'You have successfully banned the user.');
