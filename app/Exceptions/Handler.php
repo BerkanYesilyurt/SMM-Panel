@@ -55,7 +55,14 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        createErrorLog($request, $e);
+        if($this->reportOrNot($e)){
+            createErrorLog($request, $e);
+        }
         return parent::render($request, $e);
+    }
+
+    public function reportOrNot($e)
+    {
+        return $this->shouldReport($e) || !configValue('errorlogs_importance_level');
     }
 }
