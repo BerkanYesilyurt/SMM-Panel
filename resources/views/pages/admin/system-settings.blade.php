@@ -133,6 +133,11 @@
                                 <option value="1" @selected($settings['forgot_password']['value'] == 1)>Active</option>
                             </select>
                         </div>
+
+                        <div class="divider divider-dashed"></div>
+
+                        <h5>Error Handling</h5>
+
                         <div class="mb-3 col-md-6">
                             <label for="errorlogs_delete" class="form-label">Deletion Period of Error Logs - <b>{{date('d F Y H:i', strtotime($settings['errorlogs_delete']['updated_at']))}}</b></label>
                             <select name="errorlogs_delete" id="errorlogs_delete" class="select2 form-select">
@@ -142,6 +147,14 @@
                                 <option value="14" @selected($settings['errorlogs_delete']['value'] == 14)>2 Weeks</option>
                                 <option value="30" @selected($settings['errorlogs_delete']['value'] == 30)>1 Month</option>
                                 <option value="365" @selected($settings['errorlogs_delete']['value'] == 365)>1 Year</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="errorlogs_importance_level" class="form-label">Error Log Importance Level - <b>{{date('d F Y H:i', strtotime($settings['errorlogs_importance_level']['updated_at']))}}</b></label>
+                            <select name="errorlogs_importance_level" id="errorlogs_importance_level" class="select2 form-select">
+                                <option value="0" @selected($settings['errorlogs_importance_level']['value'] == 0)>All Error Types</option>
+                                <option value="1" @selected($settings['errorlogs_importance_level']['value'] == 1)>Only Important Error Types</option>
                             </select>
                         </div>
 
