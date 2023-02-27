@@ -63,7 +63,7 @@
                                         @if($type == 'ticket')
                                             <div class="mt-1 mb-3">
                                                 <div class="form-check form-check-inline mt-3">
-                                                    <input class="form-check-input" type="radio" name="ticketOptions" id="ticketRadio1" value="close">
+                                                    <input class="form-check-input" type="radio" name="ticketOptions" id="ticketRadio1" value="close" required>
                                                     <label class="form-check-label" for="ticketRadio1">Close all tickets of this user.</label>
                                                 </div><br>
                                                 <div class="form-check form-check-inline">
