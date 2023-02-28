@@ -136,6 +136,33 @@
 
                         <div class="divider divider-dashed"></div>
 
+                        <h5>Ticket Options</h5>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="ticket_status" class="form-label">Ticket Panel - <b>{{date('d F Y H:i', strtotime($settings['ticket_status']['updated_at']))}}</b></label>
+                            <select name="ticket_status" id="ticket_status" class="select2 form-select">
+                                <option value="0" @selected($settings['ticket_status']['value'] == 0)>Inactive</option>
+                                <option value="1" @selected($settings['ticket_status']['value'] == 1)>Active</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="max_open_ticket" class="form-label">Max. Open Ticket Per User - <b>{{date('d F Y H:i', strtotime($settings['max_open_ticket']['updated_at']))}}</b></label>
+                            <select name="max_open_ticket" id="max_open_ticket" class="select2 form-select">
+                                <option value="1" @selected($settings['max_open_ticket']['value'] == 1)>1 Open Ticket</option>
+                                <option value="2" @selected($settings['max_open_ticket']['value'] == 2)>2 Open Tickets</option>
+                                <option value="3" @selected($settings['max_open_ticket']['value'] == 3)>3 Open Tickets</option>
+                                <option value="5" @selected($settings['max_open_ticket']['value'] == 5)>5 Open Tickets</option>
+                                <option value="10" @selected($settings['max_open_ticket']['value'] == 10)>10 Open Tickets</option>
+                                <option value="25" @selected($settings['max_open_ticket']['value'] == 25)>25 Open Tickets</option>
+                                <option value="50" @selected($settings['max_open_ticket']['value'] == 50)>50 Open Tickets</option>
+                                <option value="100" @selected($settings['max_open_ticket']['value'] == 100)>100 Open Tickets</option>
+                                <option value="9999" @selected($settings['max_open_ticket']['value'] == 9999)>Unlimited Open Tickets</option>
+                            </select>
+                        </div>
+
+                        <div class="divider divider-dashed"></div>
+
                         <h5>Error Handling</h5>
 
                         <div class="mb-3 col-md-6">
