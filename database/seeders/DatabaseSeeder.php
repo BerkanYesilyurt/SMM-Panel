@@ -84,6 +84,14 @@ class DatabaseSeeder extends Seeder
                 'value' => '0'
             ],
             [
+                'name' => 'ticket_status',
+                'value' => '1',
+            ],
+            [
+                'name' => 'max_open_ticket',
+                'value' => '5',
+            ],
+            [
                 'name' => 'terms_content',
                 'value' => 'We reserve the right to change these terms of service without notice. You are expected to read all terms of service before placing any order to insure you are up to date with any changes or any future changes.',
             ],
