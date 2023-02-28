@@ -205,7 +205,7 @@
                     </a>
                 </li>
 
-                @if($configsArray['service_updates_page'] == 1)
+                @if($configsArray['service_updates_page'])
                 <li class="menu-item{{ request()->is('serviceupdates') || request()->is('serviceupdates/*') ? ' active' : '' }}">
                     <a href="/serviceupdates" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-left-indent"></i>
@@ -235,7 +235,7 @@
                     </li>
                 @endif
 
-                @if(!checkBan('ticket'))
+                @if($configsArray['ticket_status'] && !checkBan('ticket'))
                 <li class="menu-item{{ request()->is('tickets') || request()->is('ticket/*') ? ' active' : '' }}">
                     <a href="/tickets" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-chat"></i>
