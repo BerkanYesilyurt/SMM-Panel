@@ -18,6 +18,16 @@
             </div>
             <br>
         @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                <ul style="margin-bottom: 1px; color:#478924;">
+                    <b>{{session('message')}}</b>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+            <br>
+        @endif
     <div class="card">
 
         <div class="table-responsive text-nowrap">
