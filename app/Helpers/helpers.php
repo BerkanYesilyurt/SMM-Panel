@@ -32,15 +32,18 @@ if (!function_exists('checkBan')){
 }
 
 if (!function_exists('getBanDateMessage')) {
-    function getBanDateMessage($type)
+    function getBanDateMessage($type, $user = NULL)
     {
-        if (Auth::user()->is_banned) {
-            $ban_record = Auth::user()->is_banned->where('type', UserBanTypesEnum::from($type)->value)->first();
+        if(is_null($user)){
+            $user = Auth::user();
+        }
+        if ($user->is_banned) {
+            $ban_record = $user->is_banned->where('type', UserBanTypesEnum::from($type)->value)->first();
             if ($ban_record) {
                 if($ban_record->permanent){
                     return '<span class="badge bg-danger">There is no time limit for this ban.</span>';
                 }else{
-                    return 'The account is temporarily suspended until <span class="badge bg-danger">' . date('d F Y h:i:s', strtotime($ban_record->until_at)) . '</span>';
+                    return 'The ' . strtolower(UserBanTypesEnum::from($type)->value) . ' is temporarily suspended until <span class="badge bg-danger">' . date('d F Y h:i:s', strtotime($ban_record->until_at)) . '</span>';
                 }
             }
         }

@@ -80,7 +80,7 @@
                                     @else
                                     <div class="alert alert-danger" role="alert">
                                         <b>This user is {{$type}} banned.</b>
-                                        <br>{!! getBanDateMessage($type) !!}
+                                        <br>{!! getBanDateMessage($type, $user) !!}
                                     </div>
                                     <form action="/admin/delete-ban" method="POST">
                                         @csrf
