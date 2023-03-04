@@ -5,7 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Enums\UserAuthorityEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\UpdateUserDetailsRequest;
+use App\Models\Ticket;
+use App\Models\TicketMessage;
 use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
@@ -60,7 +63,11 @@ class UserController extends Controller
             'delete_id' => 'required|numeric|exists:users,id',
         ]);
 
-        User::where('id', $request->delete_id)->delete();
+        DB::transaction(function () use($request){
+            User::where('id', $request->delete_id)->delete();
+            Ticket::where('user_id', $request->delete_id)->delete();
+            TicketMessage::where('user_id', $request->delete_id)->delete();
+        });
         return back()->with('message', 'You have successfully deleted the user.');
     }
 }
