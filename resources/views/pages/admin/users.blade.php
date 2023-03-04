@@ -166,7 +166,7 @@
                         </div>
 
                         <div class="col mb-3">
-                            <button class="btn btn-danger" onclick="deleteUser(); this.disabled = true;" style="color: white; width: 100%;">Delete User</button>
+                            <button class="btn btn-danger" onclick="deleteUser(); this.disabled = true;" style="color: white; width: 100%;">Delete User & Tickets</button>
                         </div>
 
                     </form>
