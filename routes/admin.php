@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AnnouncementController;
+use App\Http\Controllers\admin\ApiController;
 use App\Http\Controllers\admin\BanController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
@@ -68,3 +69,5 @@ Route::post('delete-ban', [BanController::class, 'deleteBan']);
 Route::get('errors', [ErrorController::class, 'errorLogsPage']);
 Route::get('error/{error}', [ErrorController::class, 'errorDetailsPage']);
 Route::post('delete-errors', [ErrorController::class, 'deleteErrorLogs']);
+
+Route::get('api', [ApiController::class, 'apiPage']);
