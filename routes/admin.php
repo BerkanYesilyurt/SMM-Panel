@@ -71,3 +71,6 @@ Route::get('error/{error}', [ErrorController::class, 'errorDetailsPage']);
 Route::post('delete-errors', [ErrorController::class, 'deleteErrorLogs']);
 
 Route::get('api', [ApiController::class, 'apiPage']);
+Route::post('api', [ApiController::class, 'updateApi']);
+Route::post('new-payment-method', [ApiController::class, 'createApi']);
+Route::post('delete-api', [ApiController::class, 'deleteApi']);
