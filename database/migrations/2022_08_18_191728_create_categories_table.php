@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(100);
             $table->text('name');
             $table->string('status')->default(CategoryStatusEnum::ACTIVE->value);
             $table->timestamps();
