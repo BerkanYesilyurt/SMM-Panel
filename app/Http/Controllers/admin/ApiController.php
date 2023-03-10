@@ -10,9 +10,22 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    public function apiPage(){
-        return view('pages.admin.api', [
+    public function apisPage(){
+        return view('pages.admin.apis', [
             'apis' => Api::all()
+        ]);
+    }
+
+    public function newApiPage()
+    {
+        return view('pages.admin.api')->withTitle('New API');
+    }
+
+    public function editApiPage(Api $api)
+    {
+        return view('pages.admin.api', [
+            'title' => 'Edit API',
+            'api' => $api
         ]);
     }
 
