@@ -70,7 +70,9 @@ Route::get('errors', [ErrorController::class, 'errorLogsPage']);
 Route::get('error/{error}', [ErrorController::class, 'errorDetailsPage']);
 Route::post('delete-errors', [ErrorController::class, 'deleteErrorLogs']);
 
-Route::get('api', [ApiController::class, 'apiPage']);
+Route::get('apis', [ApiController::class, 'apisPage']);
+Route::get('api/{api}/edit', [ApiController::class, 'editApiPage']);
 Route::post('api', [ApiController::class, 'updateApi']);
+Route::get('new-api', [ApiController::class, 'newApiPage']);
 Route::post('new-api', [ApiController::class, 'createApi']);
 Route::post('delete-api', [ApiController::class, 'deleteApi']);
