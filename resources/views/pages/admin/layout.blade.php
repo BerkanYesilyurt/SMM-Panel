@@ -255,9 +255,9 @@
 
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">API</span></li>
                     <li class="menu-item">
-                        <a href="/admin/api" class="menu-link">
+                        <a href="/admin/apis" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-network-chart"></i>
-                            <div data-i18n="System Settings">API</div>
+                            <div data-i18n="System Settings">APIs</div>
                         </a>
                     </li>
                 </ul>
