@@ -4,6 +4,9 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> APIs
+            <a href="/admin/new-api" class="btn btn-primary" style="float:right;">
+                <span class="tf-icons bx bx-plus"></span>&nbsp; New API
+            </a>
         </h4>
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -43,6 +46,9 @@
                                    <button type="button" onclick="prepareForDelete(this)" data-apiid="{{$api->id}}" data-apiname="{{$api->name}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteApi">
                                        <span class="tf-icons bx bx-trash"></span>
                                    </button>
+                                   <a href="/admin/api/{{$api->id}}/edit" class="btn btn-sm btn-primary">
+                                       <span class="tf-icons bx bx-pencil"></span>&nbsp; Change API Details
+                                   </a>
                                 </center>
                             </td>
                         </tr>
