@@ -18,7 +18,10 @@ class ApiController extends Controller
 
     public function newApiPage()
     {
-        return view('pages.admin.api')->withTitle('New API');
+        return view('pages.admin.api', [
+            'title' => 'New API',
+            'path' => 'new-api'
+        ]);
     }
 
     public function editApiPage(Api $api)
