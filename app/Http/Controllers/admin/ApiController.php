@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\ApiRequest;
 use App\Models\Api;
 use App\Models\Service;
 use DB;
@@ -32,9 +33,10 @@ class ApiController extends Controller
         ]);
     }
 
-    public function createApi()
+    public function createApi(ApiRequest $request)
     {
-        //TODO: createApi
+        Api::create($request->validated());
+        return back()->with('message', 'You have successfully created the API.');
     }
 
     public function updateApi()
