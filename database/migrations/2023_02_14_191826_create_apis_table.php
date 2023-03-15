@@ -21,15 +21,15 @@ return new class extends Migration
             $table->string('services_action');
             $table->string('add_action');
             $table->string('status_action');
-            $table->string('refill_action');
-            $table->string('refill_status_action');
+            $table->string('refill_action')->nullable();
+            $table->string('refill_status_action')->nullable();
             $table->string('balance_action');
             $table->string('service_key');
             $table->string('link_key');
             $table->string('quantity_key');
             $table->string('order_key');
             $table->string('orders_key');
-            $table->string('refill_key');
+            $table->string('refill_key')->nullable();
             $table->timestamps();
         });
     }
