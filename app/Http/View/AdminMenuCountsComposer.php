@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\View;
-use App\Models\{Announcement, Category, ErrorLog, Faq, Order, PaymentMethod, Service, ServiceUpdate, Ticket, User};
+use App\Models\{Announcement, Api, Category, ErrorLog, Faq, Order, PaymentMethod, Service, ServiceUpdate, Ticket, User};
 
 use Illuminate\View\View;
 class AdminMenuCountsComposer
@@ -18,7 +18,8 @@ class AdminMenuCountsComposer
             'announcements' => Announcement::count(),
             'tickets' => Ticket::count(),
             'faq' => Faq::count(),
-            'errors' => ErrorLog::count()
+            'errors' => ErrorLog::count(),
+            'api' => Api::count()
         ]);
     }
 }
