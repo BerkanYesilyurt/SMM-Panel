@@ -257,7 +257,9 @@
                     <li class="menu-item">
                         <a href="/admin/apis" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-network-chart"></i>
-                            <div data-i18n="System Settings">APIs</div>
+                            <div data-i18n="System Settings">APIs
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['api'])}}</span>
+                            </div>
                         </a>
                     </li>
                 </ul>
