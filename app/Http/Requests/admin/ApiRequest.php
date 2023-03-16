@@ -15,31 +15,41 @@ class ApiRequest extends FormRequest
     {
         return [
             'name' => 'required|min:1|max:150',
+            'url' => 'required|min:1|max:250',
             'key' => 'required|min:1|max:250',
-            'order_endpoint' => 'required|min:1|max:250',
-            'order_method' => 'required|in:get,post',
-            'order_id_key' => 'required|min:1|max:100',
-            'status_endpoint' => 'required|min:1|max:250',
-            'status_method' => 'required|in:get,post',
-            'status_key' => 'required|min:1|max:100',
-            'start_counter_key' => 'required|min:1|max:100',
-            'remain_key' => 'required|min:1|max:100'
+            'services_action' => 'required|min:1|max:100',
+            'add_action' => 'required|min:1|max:100',
+            'status_action' => 'required|min:1|max:100',
+            'refill_action' => 'required|min:1|max:100',
+            'refill_status_action' => 'required|min:1|max:100',
+            'balance_action' => 'required|min:1|max:100',
+            'service_key' => 'required|min:1|max:100',
+            'link_key' => 'required|min:1|max:100',
+            'quantity_key' => 'required|min:1|max:100',
+            'order_key' => 'required|min:1|max:100',
+            'orders_key' => 'required|min:1|max:100',
+            'refill_key' => 'required|min:1|max:100'
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Name',
-            'key' => 'Key',
-            'order_endpoint' => 'Order Endpoint',
-            'order_method' => 'Order Method',
-            'order_id_key' => 'Order ID Key',
-            'status_endpoint' => 'Status Endpoint',
-            'status_method' => 'Status Method',
-            'status_key' => 'Status Key',
-            'start_counter_key' => 'Start Counter Key',
-            'remain_key' => 'Remain Key'
+            'name' => 'API Name',
+            'url' => 'API URL',
+            'key' => 'API Key',
+            'services_action' => 'Services Action',
+            'add_action' => 'Add Action',
+            'status_action' => 'Status Action',
+            'refill_action' => 'Refill Action',
+            'refill_status_action' => 'Refill Status Action',
+            'balance_action' => 'Balance Action',
+            'service_key' => 'Service Key',
+            'link_key' => 'Link Key',
+            'quantity_key' => 'Quantity Key',
+            'order_key' => 'Order Key',
+            'orders_key' => 'Orders Key',
+            'refill_key' => 'Refill Key'
         ];
     }
 }
