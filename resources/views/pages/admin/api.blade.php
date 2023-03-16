@@ -36,76 +36,108 @@
                         @csrf
                         <div class="row">
                             <div class="mb-3 col-md-6">
-                                <label for="name" class="form-label">Name:</label>
+                                <label for="name" class="form-label">API Name:</label>
                                 <input class="form-control" type="text" id="name" name="name"
                                        value="{{$api->name ?? ''}}">
                             </div>
 
                             <div class="mb-3 col-md-6">
-                                <label for="key" class="form-label">Key:</label>
+                                <label for="url" class="form-label">API URL:</label>
+                                <input class="form-control" type="text" id="url" name="url"
+                                       value="{{$api->url ?? ''}}">
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="key" class="form-label">API Key:</label>
                                 <input class="form-control" type="text" id="key" name="key"
                                        value="{{$api->key ?? ''}}">
+                            </div>
+
+                            <div class="divider divider-dashed"></div>
+                            <h5>Service</h5>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="services_action" class="form-label">Services Action:</label>
+                                <input class="form-control" type="text" id="services_action" name="services_action"
+                                       value="{{$api->services_action ?? ''}}">
                             </div>
 
                             <div class="divider divider-dashed"></div>
                             <h5>Order</h5>
 
                             <div class="mb-3 col-md-6">
-                                <label for="order_endpoint" class="form-label">Order Endpoint:</label>
-                                <input class="form-control" type="text" id="order_endpoint" name="order_endpoint"
-                                       value="{{$api->order_endpoint ?? ''}}">
-                            </div>
-
-                            <div class="col mb-3">
-                                <label for="order_method" class="form-label">Order Method:</label>
-                                <select id="order_method" class="form-control" name="order_method">
-                                        <option value="get" @selected(isset($api->order_method) && $api->order_method == 'get')>GET</option>
-                                        <option value="post" @selected(isset($api->order_method) && $api->order_method == 'post')>POST</option>
-                                </select>
+                                <label for="add_action" class="form-label">Add Action:</label>
+                                <input class="form-control" type="text" id="add_action" name="add_action"
+                                       value="{{$api->add_action ?? ''}}">
                             </div>
 
                             <div class="mb-3 col-md-6">
-                                <label for="order_id_key" class="form-label">Order ID Key:</label>
-                                <input class="form-control" type="text" id="order_id_key" name="order_id_key"
-                                       value="{{$api->order_id_key ?? ''}}">
+                                <label for="service_key" class="form-label">Service Key:</label>
+                                <input class="form-control" type="text" id="service_key" name="service_key"
+                                       value="{{$api->service_key ?? ''}}">
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="link_key" class="form-label">Link Key:</label>
+                                <input class="form-control" type="text" id="link_key" name="link_key"
+                                       value="{{$api->link_key ?? ''}}">
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="quantity_key" class="form-label">Quantity Key:</label>
+                                <input class="form-control" type="text" id="quantity_key" name="quantity_key"
+                                       value="{{$api->quantity_key ?? ''}}">
                             </div>
 
                             <div class="divider divider-dashed"></div>
-                            <h5>Status</h5>
+                            <h5>Order Status</h5>
 
                             <div class="mb-3 col-md-6">
-                                <label for="status_endpoint" class="form-label">Status Endpoint:</label>
-                                <input class="form-control" type="text" id="status_endpoint" name="status_endpoint"
-                                       value="{{$api->status_endpoint ?? ''}}">
-                            </div>
-
-                            <div class="col mb-3">
-                                <label for="status_method" class="form-label">Status Method:</label>
-                                <select id="status_method" class="form-control" name="status_method">
-                                    <option value="get" @selected(isset($api->status_method) && $api->status_method == 'get')>GET</option>
-                                    <option value="post" @selected(isset($api->status_method) && $api->status_method == 'post')>POST</option>
-                                </select>
+                                <label for="order_key" class="form-label">Order Key:</label>
+                                <input class="form-control" type="text" id="order_key" name="order_key"
+                                       value="{{$api->order_key ?? ''}}">
                             </div>
 
                             <div class="mb-3 col-md-6">
-                                <label for="status_key" class="form-label">Status Key:</label>
-                                <input class="form-control" type="text" id="status_key" name="status_key"
-                                       value="{{$api->status_key ?? ''}}">
+                                <label for="orders_key" class="form-label">Orders Key:</label>
+                                <input class="form-control" type="text" id="orders_key" name="orders_key"
+                                       value="{{$api->orders_key ?? ''}}">
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="status_action" class="form-label">Status Action:</label>
+                                <input class="form-control" type="text" id="status_action" name="status_action"
+                                       value="{{$api->status_action ?? ''}}">
                             </div>
 
                             <div class="divider divider-dashed"></div>
-                            <h5>Other</h5>
+                            <h5>Refill & Refill Status (optional)</h5>
 
                             <div class="mb-3 col-md-6">
-                                <label for="start_counter_key" class="form-label">Start Counter Key:</label>
-                                <input class="form-control" type="text" id="start_counter_key" name="start_counter_key"
-                                       value="{{$api->start_counter_key ?? ''}}">
+                                <label for="refill_action" class="form-label">Refill Action:</label>
+                                <input class="form-control" type="text" id="refill_action" name="refill_action"
+                                       value="{{$api->refill_action ?? ''}}">
                             </div>
 
                             <div class="mb-3 col-md-6">
-                                <label for="remain_key" class="form-label">Remain Key:</label>
-                                <input class="form-control" type="text" id="remain_key" name="remain_key"
-                                       value="{{$api->remain_key ?? ''}}">
+                                <label for="refill_status_action" class="form-label">Refill Status Action:</label>
+                                <input class="form-control" type="text" id="refill_status_action" name="refill_status_action"
+                                       value="{{$api->refill_status_action ?? ''}}">
+                            </div>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="refill_key" class="form-label">Refill Key:</label>
+                                <input class="form-control" type="text" id="refill_key" name="refill_key"
+                                       value="{{$api->refill_key ?? ''}}">
+                            </div>
+
+                            <div class="divider divider-dashed"></div>
+                            <h5>Balance</h5>
+
+                            <div class="mb-3 col-md-6">
+                                <label for="balance_action" class="form-label">Balance Action:</label>
+                                <input class="form-control" type="text" id="balance_action" name="balance_action"
+                                       value="{{$api->balance_action ?? ''}}">
                             </div>
 
                             <div class="mt-2">
