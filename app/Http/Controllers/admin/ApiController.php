@@ -39,9 +39,10 @@ class ApiController extends Controller
         return back()->with('message', 'You have successfully created the API.');
     }
 
-    public function updateApi()
+    public function updateApi(ApiRequest $request)
     {
-        //TODO: updateApi
+        Api::findOrFail($request->id)->update($request->safe()->except(['id']));
+        return back()->with('message', 'You have successfully edited API details.');
     }
 
     public function deleteApi(Request $request)
