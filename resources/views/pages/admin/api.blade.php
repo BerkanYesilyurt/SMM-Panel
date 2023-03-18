@@ -34,6 +34,9 @@
                 <div class="card-body">
                     <form action="/admin/{{$path ?? 'api'}}" method="POST">
                         @csrf
+                        @if(isset($api))
+                            <input type="hidden" name="id" value="{{$api->id}}" />
+                        @endif
                         <div class="row">
                             <div class="mb-3 col-md-6">
                                 <label for="name" class="form-label">API Name:</label>
