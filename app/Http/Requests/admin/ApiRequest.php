@@ -14,6 +14,7 @@ class ApiRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'nullable|numeric|exists:apis,id',
             'name' => 'required|min:1|max:150',
             'url' => 'required|min:1|max:250',
             'key' => 'required|min:1|max:250',
@@ -35,6 +36,7 @@ class ApiRequest extends FormRequest
     public function attributes()
     {
         return [
+            'id' => 'API ID',
             'name' => 'API Name',
             'url' => 'API URL',
             'key' => 'API Key',
