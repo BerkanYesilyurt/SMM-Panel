@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\CategoryStatusEnum;
 use App\Enums\OrderStatusEnum;
+use App\Events\OrderPlaced;
 use App\Http\Requests\NewOrderRequest;
 use App\Models\Category;
 use App\Models\Order;
@@ -75,6 +76,10 @@ class OrderController extends Controller
                 ]);
                 return $createOrder->id;
             });
+
+            if($orderService->api_provider_id){
+                event(new OrderPlaced(Order::find($orderId)));
+            }
 
             return back()
                 ->with([
