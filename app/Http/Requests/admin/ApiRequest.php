@@ -16,7 +16,7 @@ class ApiRequest extends FormRequest
         return [
             'id' => 'nullable|numeric|exists:apis,id',
             'name' => 'required|min:1|max:150',
-            'url' => 'required|min:1|max:250',
+            'url' => 'required|url|min:1|max:250',
             'key' => 'required|min:1|max:250',
             'services_action' => 'required|min:1|max:100',
             'add_action' => 'required|min:1|max:100',
