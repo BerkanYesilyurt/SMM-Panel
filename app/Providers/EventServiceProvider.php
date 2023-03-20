@@ -3,11 +3,12 @@
 namespace App\Providers;
 
 use App\Events\LastLogin;
+use App\Events\OrderPlaced;
 use App\Listeners\LastLoginListener;
+use App\Listeners\OrderPlacedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         LastLogin::class => [
             LastLoginListener::class,
         ],
+        OrderPlaced::class => [
+            OrderPlacedListener::class,
+        ]
     ];
 
     /**
