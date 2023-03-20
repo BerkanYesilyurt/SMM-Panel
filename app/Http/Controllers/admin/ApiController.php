@@ -36,7 +36,7 @@ class ApiController extends Controller
     public function createApi(ApiRequest $request)
     {
         Api::create($request->validated());
-        return back()->with('message', 'You have successfully created the API.');
+        return redirect('/admin/apis')->with('message', 'You have successfully created the API.');
     }
 
     public function updateApi(ApiRequest $request)
