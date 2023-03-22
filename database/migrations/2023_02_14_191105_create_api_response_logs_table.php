@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('api_response_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('order_id');
-            $table->unsignedInteger('api_id');
+            $table->unsignedInteger('order_id')->index();
+            $table->unsignedInteger('api_id')->index();
             $table->text('response');
             $table->timestamps();
         });

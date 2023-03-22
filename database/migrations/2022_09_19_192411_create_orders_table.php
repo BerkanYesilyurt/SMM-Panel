@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id()->startingValue(10000);
-            $table->integer('user_id');
-            $table->integer('service_id');
+            $table->integer('user_id')->index();
+            $table->integer('service_id')->index();
             $table->text('link');
             $table->integer('quantity');
             $table->decimal('charge', 15, 5);
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer('api_order_id')->nullable();
             $table->string('start_count')->nullable();
             $table->string('remain')->nullable();
-            $table->string('status')->default(OrderStatusEnum::PENDING->value);
+            $table->string('status')->default(OrderStatusEnum::PENDING->value)->index();
             $table->timestamps();
         });
     }

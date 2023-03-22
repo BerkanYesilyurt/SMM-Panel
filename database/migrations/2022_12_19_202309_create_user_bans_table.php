@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_bans', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('type');
+            $table->integer('user_id')->index();
+            $table->string('type')->index();
             $table->boolean('permanent');
             $table->timestamp('until_at')->nullable();
         });

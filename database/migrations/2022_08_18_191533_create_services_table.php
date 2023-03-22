@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id()->startingValue(1000);
-            $table->integer('category_id');
+            $table->integer('category_id')->index();
             $table->text('name');
             $table->text('description');
             $table->decimal('price', 15, 5)->default('0');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('type')->default('manual');
             $table->integer('api_provider_id')->nullable();
             $table->integer('api_service_id')->nullable();
-            $table->string('status')->default(ServiceStatusEnum::ACTIVE->value);
+            $table->string('status')->default(ServiceStatusEnum::ACTIVE->value)->index();
             $table->timestamps();
             $table->softDeletes();
         });

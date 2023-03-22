@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('ticket_messages', function (Blueprint $table) {
             $table->id();
-            $table->integer('ticket_id');
-            $table->integer('user_id');
+            $table->integer('ticket_id')->index();
+            $table->integer('user_id')->index();
             $table->text('message');
             $table->integer('seen_by_user');
             $table->integer('seen_by_support');

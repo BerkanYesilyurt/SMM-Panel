@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id()->startingValue(1000);
-            $table->integer('user_id');
+            $table->integer('user_id')->index();
             $table->string('subject')->default('OTHER');
             $table->text('message');
             $table->string('order_id')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('pay_type')->nullable();
             $table->string('pay_id')->nullable();
             $table->string('feature_request')->nullable();
-            $table->string('status')->default(TicketStatusEnum::ACTIVE->value);
+            $table->string('status')->default(TicketStatusEnum::ACTIVE->value)->index();
             $table->timestamps();
             $table->softDeletes();
         });
