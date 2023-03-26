@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\ApiResponseLog;
 use App\Models\ErrorLog;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
-function createErrorLog($request, $e){
+function createErrorLog($request, $e)
+{
     if($e instanceof Throwable) {
         return ErrorLog::create([
             'user_id' => auth()->user()->id ?? NULL,
@@ -20,4 +22,15 @@ function createErrorLog($request, $e){
         ]);
     }
 }
+
+function createApiResponseLog($orderId, $apiId, $response, $error = false): void
+{
+    ApiResponseLog::create([
+        'order_id' => $orderId,
+        'api_id' => $apiId,
+        'response' => $response,
+        'error' => $error
+    ]);
+}
+
 
