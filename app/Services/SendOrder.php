@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
+use App\Events\OrderStatus;
 use App\Models\Api;
-use App\Models\ApiResponseLog;
 use App\Models\Order;
 use Illuminate\Support\Facades\Http;
 
@@ -26,22 +26,15 @@ class SendOrder
                     $this->api->quantity_key => $this->order->quantity
                 ]);
 
-            if($response->successful()){
-                $this->createApiResponseLog($response->body());
+            // TODO: $response->object()->order will be replaced with API response matches
+            if($response->successful() && isset($response->object()->order)){
+                createApiResponseLog($this->order->id, $this->order->api_provider_id, $response->body());
+                event(new OrderStatus($this->order));
             }else{
-                $this->createApiResponseLog('ERROR: ' . $response->body());
+                createApiResponseLog($this->order->id, $this->order->api_provider_id, $response->body(), true);
             }
         }catch (\Exception $e){
-            $this->createApiResponseLog('ERROR: ' . $e->getMessage());
+            createApiResponseLog($this->order->id, $this->order->api_provider_id, $e->getMessage(), true);
         }
-    }
-
-    private function createApiResponseLog($response): void
-    {
-        ApiResponseLog::create([
-            'order_id' => $this->order->id,
-            'api_id' => $this->order->api_provider_id,
-            'response' => $response
-        ]);
     }
 }
