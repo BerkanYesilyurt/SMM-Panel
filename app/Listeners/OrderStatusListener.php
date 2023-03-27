@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\OrderStatus;
+use App\Models\Api;
+use App\Services\CheckOrderStatus;
 
 class OrderStatusListener
 {
@@ -24,6 +26,8 @@ class OrderStatusListener
      */
     public function handle(OrderStatus $event)
     {
-        //
+        $order = $event->order;
+        $api = Api::where('id', $event->order->api_provider_id)->first();
+        (new CheckOrderStatus($order, $api))->checkOrderStatus();
     }
 }
