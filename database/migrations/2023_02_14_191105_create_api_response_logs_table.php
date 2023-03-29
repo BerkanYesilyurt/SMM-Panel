@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('order_id')->index();
             $table->unsignedInteger('api_id')->index();
+            $table->smallInteger('type')->index();
             $table->text('response');
             $table->boolean('error')->index();
             $table->timestamps();
+            $table->index(['order_id', 'type']);
         });
     }
 
