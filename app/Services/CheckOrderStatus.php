@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ApiResponseTypesEnum;
 use App\Models\Api;
 use App\Models\Order;
 use Illuminate\Support\Facades\Http;
@@ -12,6 +13,7 @@ class CheckOrderStatus
 
     public function checkOrderStatus(): void
     {
+        $type = ApiResponseTypesEnum::ORDERSTATUS->value;
         try{
             // TODO: withoutVerifying() will be deleted
             $response = Http::withoutVerifying()
@@ -25,12 +27,12 @@ class CheckOrderStatus
 
             // TODO: $response->object()->status will be replaced with API response matches
             if($response->successful() && isset($response->object()->status)){
-                createApiResponseLog($this->order->id, $this->order->api_provider_id, $response->body());
+                createApiResponseLog($this->order->id, $this->order->api_provider_id, $type, $response->body());
             }else{
-                createApiResponseLog($this->order->id, $this->order->api_provider_id, $response->body(), true);
+                createApiResponseLog($this->order->id, $this->order->api_provider_id, $type, $response->body(), true);
             }
         }catch (\Exception $e){
-            createApiResponseLog($this->order->id, $this->order->api_provider_id, $e->getMessage(), true);
+            createApiResponseLog($this->order->id, $this->order->api_provider_id, $type, $e->getMessage(), true);
         }
     }
 }

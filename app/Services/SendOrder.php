@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\ApiResponseTypesEnum;
 use App\Events\OrderStatus;
 use App\Models\Api;
 use App\Models\Order;
@@ -13,6 +14,7 @@ class SendOrder
 
     public function sendOrder(): void
     {
+        $type = ApiResponseTypesEnum::ORDER->value;
         try{
             // TODO: withoutVerifying() will be deleted
             $response = Http::withoutVerifying()
@@ -28,13 +30,13 @@ class SendOrder
 
             // TODO: $response->object()->order will be replaced with API response matches
             if($response->successful() && isset($response->object()->order)){
-                createApiResponseLog($this->order->id, $this->order->api_provider_id, $response->body());
+                createApiResponseLog($this->order->id, $type, $this->order->api_provider_id, $response->body());
                 event(new OrderStatus($this->order));
             }else{
-                createApiResponseLog($this->order->id, $this->order->api_provider_id, $response->body(), true);
+                createApiResponseLog($this->order->id, $type, $this->order->api_provider_id, $response->body(), true);
             }
         }catch (\Exception $e){
-            createApiResponseLog($this->order->id, $this->order->api_provider_id, $e->getMessage(), true);
+            createApiResponseLog($this->order->id, $type, $this->order->api_provider_id, $e->getMessage(), true);
         }
     }
 }
