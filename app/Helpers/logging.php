@@ -23,11 +23,12 @@ function createErrorLog($request, $e)
     }
 }
 
-function createApiResponseLog($orderId, $apiId, $response, $error = false): void
+function createApiResponseLog($orderId, $apiId, $type, $response, $error = false): void
 {
     ApiResponseLog::create([
         'order_id' => $orderId,
         'api_id' => $apiId,
+        'type' => $type,
         'response' => $response,
         'error' => $error
     ]);
