@@ -27,7 +27,7 @@ class OrderPlacedListener
     public function handle(OrderPlaced $event)
     {
         $order = $event->order;
-        $api = Api::where('id', $event->order->api_provider_id)->first();
+        $api = Api::where('id', $order->api_provider_id)->first();
         (new SendOrder($order, $api))->sendOrder();
     }
 }

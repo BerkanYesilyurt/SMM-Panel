@@ -27,7 +27,7 @@ class OrderStatusListener
     public function handle(OrderStatus $event)
     {
         $order = $event->order;
-        $api = Api::where('id', $event->order->api_provider_id)->first();
+        $api = Api::where('id', $order->api_provider_id)->first();
         (new CheckOrderStatus($order, $api))->checkOrderStatus();
     }
 }
