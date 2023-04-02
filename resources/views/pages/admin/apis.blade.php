@@ -34,6 +34,7 @@
                     <tr>
                         <th><center>ID</center></th>
                         <th><center>NAME</center></th>
+                        <th><center>LAST BALANCE</center></th>
                         <th><center>ACTIONS</center></th>
                     </tr>
                     </thead>
@@ -42,6 +43,7 @@
                         <tr>
                             <td><center><b>{{$api->id}}</b></center></td>
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$api->name}}</center></td>
+                            <td><center><b>{{$api->lastBalance?->response?->balance}} {{$api->lastBalance?->response?->currency}}</b></center></td>
                            <td><center>
                                    <button type="button" onclick="prepareForDelete(this)" data-apiid="{{$api->id}}" data-apiname="{{$api->name}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteApi">
                                        <span class="tf-icons bx bx-trash"></span>
