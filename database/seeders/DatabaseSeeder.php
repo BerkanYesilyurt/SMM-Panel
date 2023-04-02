@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Enums\ActiveInactiveState;
+use App\Models\Api;
 use App\Models\Config;
 use App\Models\Faq;
 use App\Models\PaymentMethod;
@@ -151,6 +152,26 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        $apis = [
+            [
+                'name' => 'JAP',
+                'url' => 'https://justanotherpanel.com/api/v2',
+                'key' => 'KEY',
+                'services_action' => 'services',
+                'add_action' => 'add',
+                'status_action' => 'status',
+                'refill_action' => 'refill',
+                'refill_status_action' => 'refill_status',
+                'balance_action' => 'balance',
+                'service_key' => 'service',
+                'link_key' => 'link',
+                'quantity_key' => 'quantity',
+                'order_key' => 'order',
+                'orders_key' => 'orders',
+                'refill_key' => 'refill'
+            ]
+        ];
+
         collect($configs)->each(function ($config){
             Config::create($config);
         });
@@ -161,6 +182,10 @@ class DatabaseSeeder extends Seeder
 
         collect($paymentmethods)->each(function ($paymentmethod){
             PaymentMethod::create($paymentmethod);
+        });
+
+        collect($apis)->each(function ($api){
+            Api::create($api);
         });
     }
 }
