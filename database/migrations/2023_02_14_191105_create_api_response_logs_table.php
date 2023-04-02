@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('api_response_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('order_id')->index();
+            $table->unsignedInteger('order_id')->nullable()->index();
             $table->unsignedInteger('api_id')->index();
             $table->smallInteger('type')->index();
             $table->text('response');
