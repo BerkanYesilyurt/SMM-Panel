@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\ApiResponseTypesEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ApiRequest;
 use App\Models\Api;
@@ -13,7 +14,7 @@ class ApiController extends Controller
 {
     public function apisPage(){
         return view('pages.admin.apis', [
-            'apis' => Api::all()
+            'apis' => Api::with('lastBalance')->get()
         ]);
     }
 
