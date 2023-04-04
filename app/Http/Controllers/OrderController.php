@@ -10,7 +10,6 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
