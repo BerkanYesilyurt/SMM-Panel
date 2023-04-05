@@ -43,7 +43,13 @@
                         <tr>
                             <td><center><b>{{$api->id}}</b></center></td>
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$api->name}}</center></td>
-                            <td><center><b>{{$api->lastBalance?->response?->balance}} {{$api->lastBalance?->response?->currency}}</b></center></td>
+                            <td><center>
+                                    <b>{{isset($api->lastBalance->response->balance) && isset($api->lastBalance->response?->currency)
+                                         ? $api->lastBalance->response->balance . ' ' . $api->lastBalance->response->currency
+                                         : '-'}}
+                                    </b>
+                                </center>
+                            </td>
                            <td><center>
                                    <button type="button" onclick="prepareForDelete(this)" data-apiid="{{$api->id}}" data-apiname="{{$api->name}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteApi">
                                        <span class="tf-icons bx bx-trash"></span>
