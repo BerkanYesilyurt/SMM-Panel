@@ -62,7 +62,7 @@ class FinanceController extends Controller
         PaymentLog::create([
             'user_id' => $user->id,
             'payment_method_id' => $payment_method_id,
-            'currency' => ConfigController::configs()['currency'],
+            'currency' => configValue('currency'),
             'amount' => $amount,
             'details' => $details,
             'status' => PaymentStatusEnum::PENDING->value

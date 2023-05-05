@@ -49,8 +49,6 @@ class UserController extends Controller
     }
 
     public function register(RegisterRequest $request, User $user){
-        $configsArray = ConfigController::configs();
-
         $newUser = $user->create([
             'name' => $request->name,
             'email' => $request->email,
@@ -60,7 +58,7 @@ class UserController extends Controller
             'last_login_ip' => $this->getIpAdress()
         ]);
 
-        if($configsArray['autologin_after_registration'] == 1){
+        if(configValue('autologin_after_registration') == 1){
             auth()->login($newUser);
             return redirect('/');
         }else{
