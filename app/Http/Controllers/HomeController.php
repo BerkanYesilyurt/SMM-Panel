@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Config;
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     public function __construct()
@@ -28,8 +25,7 @@ class HomeController extends Controller
     }
 
     public function showRegister(){
-        $configsArray = ConfigController::configs();
-        if($configsArray['register_page']){
+        if(configValue('register_page')){
             return view('register');
         }else{
             return redirect('/');
