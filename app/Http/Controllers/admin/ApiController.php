@@ -46,6 +46,11 @@ class ApiController extends Controller
         return back()->with('message', 'You have successfully edited API details.');
     }
 
+    public function checkApiBalance(Request $request)
+    {
+        //TODO
+    }
+
     public function deleteApi(Request $request)
     {
         $request->validate([
