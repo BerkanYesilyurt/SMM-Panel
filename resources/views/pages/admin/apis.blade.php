@@ -51,12 +51,19 @@
                                 </center>
                             </td>
                            <td><center>
+                                   <form action="/admin/check-api-balance" method="POST">
                                    <button type="button" onclick="prepareForDelete(this)" data-apiid="{{$api->id}}" data-apiname="{{$api->name}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteApi">
                                        <span class="tf-icons bx bx-trash"></span>
                                    </button>
                                    <a href="/admin/api/{{$api->id}}/edit" class="btn btn-sm btn-primary">
                                        <span class="tf-icons bx bx-pencil"></span>&nbsp; Change API Details
                                    </a>
+                                   @csrf
+                                   <input type="hidden" name="id" value="{{$api->id}}">
+                                   <button type="submit" class="btn btn-sm btn-success">
+                                       <span class="tf-icons bx bx-refresh"></span>&nbsp; Check Balance
+                                   </button>
+                                   </form>
                                 </center>
                             </td>
                         </tr>
