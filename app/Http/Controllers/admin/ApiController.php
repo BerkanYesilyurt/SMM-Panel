@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ApiRequest;
 use App\Models\Api;
 use App\Models\Service;
+use App\Services\CheckApiBalance;
 use DB;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,12 @@ class ApiController extends Controller
 
     public function checkApiBalance(Request $request)
     {
-        //TODO
+        $request->validate([
+            'id' => 'numeric|exists:apis,id'
+        ]);
+
+        (new CheckApiBalance(Api::find($request->id)))->checkApiBalance();
+        return back()->with('message', 'You have successfully checked the API balance.');
     }
 
     public function deleteApi(Request $request)
