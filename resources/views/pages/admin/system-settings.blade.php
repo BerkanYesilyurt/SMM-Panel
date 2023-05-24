@@ -161,6 +161,12 @@
                             </select>
                         </div>
 
+                        <div class="mb-3 col-md-6">
+                            <label for="time_between_messages_tickets" class="form-label">Time Between Messages/Tickets (Minutes) - <b>{{date('d F Y H:i', strtotime($settings['time_between_messages_tickets']['updated_at']))}}</b></label>
+                            <input class="form-control" type="text" id="time_between_messages_tickets" name="time_between_messages_tickets"
+                                   value="{{$settings['time_between_messages_tickets']['value']}}">
+                        </div>
+
                         <div class="divider divider-dashed"></div>
 
                         <h5>Error Handling</h5>
