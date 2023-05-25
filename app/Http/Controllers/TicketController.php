@@ -38,6 +38,16 @@ class TicketController extends Controller
         $openTicketCount = Ticket::where('user_id', auth()->user()->id)
             ->where('status', TicketStatusEnum::ACTIVE->value)
             ->count();
+
+        $lastestTicketTime = Ticket::where('user_id', auth()->user()->id)->orderByDesc('created_at')->first()->created_at;
+        $currentTime = Carbon::now();
+        $newTicketTime = $lastestTicketTime ? $lastestTicketTime->addMinutes(configValue('time_between_messages_tickets')) : NULL;
+
+        if($lastestTicketTime && $newTicketTime && $currentTime <= $newTicketTime){
+            $minutes = $currentTime->diffInMinutes($newTicketTime);
+            return back()->withErrors(["tooFastTickets" => "You need to wait $minutes minutes to create a new ticket."]);
+        }
+
         if($openTicketCount+1 <= configValue('max_open_ticket')){
             $ticket = new Ticket();
             $ticket->user_id = auth()->user()->id;
