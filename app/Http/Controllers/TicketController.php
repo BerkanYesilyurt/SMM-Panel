@@ -80,7 +80,7 @@ class TicketController extends Controller
 
             return back()->with('message', 'You have successfully created a ticket.');
         }
-        return back()->withErrors(["tooMuchTickets" => "You cannot create a new ticket because you have too many open tickets.
+        return back()->withErrors(["tooOftenTickets" => "You cannot create a new ticket because you have too many open tickets.
         Please wait for your existing tickets to be answered."]);
     }
 
@@ -110,7 +110,7 @@ class TicketController extends Controller
 
         if($lastestMessageTime && $newMessageTime && $currentTime <= $newMessageTime){
             $minutes = $currentTime->diffInMinutes($newMessageTime);
-            return back()->withErrors(["tooFastTickets" => "You need to wait $minutes minutes to send a new message."]);
+            return back()->withErrors(["tooOftenMessages" => "You need to wait $minutes minutes to send a new message."]);
         }
 
         $relatedTicket = $ticket->where('id', $request->ticket_id)->first();
