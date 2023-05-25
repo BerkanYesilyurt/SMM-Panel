@@ -7,6 +7,7 @@ use App\Http\Requests\CreateTicketRequest;
 use App\Models\PaymentMethod;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -93,8 +94,17 @@ class TicketController extends Controller
                 'message'            => ['required', 'max:5000']
             ]);
 
-            $relatedTicket = $ticket->where('id', $request->ticket_id)->first();
-            if(auth()->user()->id == $relatedTicket->user_id && $relatedTicket->status != TicketStatusEnum::CLOSED->value){
+        $lastestMessageTime = TicketMessage::where('user_id', auth()->user()->id)->orderByDesc('created_at')->first()->created_at;
+        $currentTime = Carbon::now();
+        $newMessageTime = $lastestMessageTime ? $lastestMessageTime->addMinutes(configValue('time_between_messages_tickets')) : NULL;
+
+        if($lastestMessageTime && $newMessageTime && $currentTime <= $newMessageTime){
+            $minutes = $currentTime->diffInMinutes($newMessageTime);
+            return back()->withErrors(["tooFastTickets" => "You need to wait $minutes minutes to send a new message."]);
+        }
+
+        $relatedTicket = $ticket->where('id', $request->ticket_id)->first();
+        if(auth()->user()->id == $relatedTicket->user_id && $relatedTicket->status != TicketStatusEnum::CLOSED->value){
             $ticketMessages = new TicketMessage();
             $ticketMessages->ticket_id = $request->ticket_id;
             $ticketMessages->user_id = auth()->user()->id;
