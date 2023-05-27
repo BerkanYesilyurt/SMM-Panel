@@ -29,7 +29,7 @@ class UpdateSystemSettingsRequest extends FormRequest
             'errorlogs_importance_level' => 'boolean|required_if:type,firstsection',
             'ticket_status' => 'boolean|required_if:type,firstsection',
             'max_open_ticket' => 'numeric|in:1,2,3,5,10,25,50,100,9999|required_if:type,firstsection',
-            'time_between_messages_tickets' => 'numeric|min:1|max:7200|required_if:type,firstsection',
+            'time_between_messages_tickets' => 'numeric|min:0|max:7200|required_if:type,firstsection',
             'terms_content' => 'nullable',
             'policy_content' => 'nullable',
             'javascript_embed_header' => 'nullable',
