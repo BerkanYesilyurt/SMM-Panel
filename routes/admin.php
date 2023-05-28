@@ -62,6 +62,8 @@ Route::post('payment-methods', [FinanceController::class, 'updatePaymentMethod']
 Route::post('new-payment-method', [FinanceController::class, 'createPaymentMethod']);
 Route::post('delete-payment-method', [FinanceController::class, 'deletePaymentMethod']);
 
+Route::get('payment-logs', [FinanceController::class, 'paymentLogsPage']);
+
 Route::get('ban/{user}/{type}', [BanController::class, 'banPage']);
 Route::post('ban', [BanController::class, 'ban']);
 Route::post('delete-ban', [BanController::class, 'deleteBan']);
