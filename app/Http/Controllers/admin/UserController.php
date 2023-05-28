@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\PaymentStatusEnum;
 use App\Enums\UserAuthorityEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\UpdateUserDetailsRequest;
@@ -50,8 +51,25 @@ class UserController extends Controller
             'balance' => 'required|numeric|min:0|digits_between:1,10'
         ]);
 
+        $amount = $request->balance - $user->balance;
         $user->update([
             'balance' => $request->balance
+        ]);
+
+        $details = [];
+        $details['user_id'] = $user->id;
+        $details['email'] = $user->email;
+        $details['balance'] = $user->balance;
+        $details['last_login'] = $user->last_login;
+        $details['last_login_ip'] = $user->last_login_ip;
+        
+        $user->payment_logs()->create([
+            'user_id' => $user->id,
+            'payment_method_id' => 0,
+            'currency' => configValue('currency'),
+            'amount' => $amount,
+            'details' => $details,
+            'status' => PaymentStatusEnum::COMPLETED->value
         ]);
 
         return back()->with('message', 'You have successfully updated user balance.');
