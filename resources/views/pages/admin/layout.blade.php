@@ -210,6 +210,14 @@
                             </div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="/admin/payment-logs" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-credit-card"></i>
+                            <div data-i18n="Payment Methods">Payment Logs
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['payment_logs'])}}</span>
+                            </div>
+                        </a>
+                    </li>
 
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">Support</span></li>
                     <li class="menu-item">
