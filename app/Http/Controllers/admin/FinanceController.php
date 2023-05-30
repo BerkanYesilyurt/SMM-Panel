@@ -19,6 +19,13 @@ class FinanceController extends Controller
         ]);
     }
 
+    public function paymentLogsPage()
+    {
+        return view('pages.admin.payment-logs', [
+            'paymentLogs' => PaymentLog::all()
+        ]);
+    }
+
     public function createPaymentMethod(Request $request)
     {
         $fields = $request->validate([
