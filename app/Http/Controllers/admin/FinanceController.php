@@ -22,7 +22,7 @@ class FinanceController extends Controller
     public function paymentLogsPage()
     {
         return view('pages.admin.payment-logs', [
-            'paymentLogs' => PaymentLog::all()
+            'paymentLogs' => PaymentLog::paginate(50)
         ]);
     }
 
