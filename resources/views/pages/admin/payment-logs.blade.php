@@ -13,6 +13,7 @@
                     @forelse($paymentLogs as $paymentLog)
                         <a class="list-group-item list-group-item-action" style="font-size: 90% !important;">
                             <b>Payment ID: {{$paymentLog->id}}</b> &nbsp; &raquo; &nbsp;
+                            {{$paymentLog->user->email}} &nbsp; &raquo; &nbsp;
                             {{$paymentLog->created_at->format('d F Y - H:i ')}} &nbsp; &raquo; &nbsp;
                             {{floatval($paymentLog->amount) . ' ' . $paymentLog->currency}} &nbsp; &raquo; &nbsp;
                             <span class="badge bg-@php
