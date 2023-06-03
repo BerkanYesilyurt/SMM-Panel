@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Enums\ActiveInactiveState;
+use App\Enums\PaymentStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentLog;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Str;
 
@@ -68,6 +70,21 @@ class FinanceController extends Controller
             return back()->with('message', 'You have successfully updated the payment method.');
         }
         return back()->withErrors(["slugExists" => "There is a payment method for this name, please choose a different name."]);
+    }
+
+    public function updatePaymentLog(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'id.*' => 'numeric|exists:payment_logs,id',
+            'action' => ['required', Rule::in(['cancel_all'])]
+        ]);
+
+        PaymentLog::whereIn('id', $request->id)->update([
+            'status' => PaymentStatusEnum::CANCELED->value
+        ]);
+
+        return back()->with("message", "You have successfully changed payment logs' statuses as canceled.");
     }
 
     public function deletePaymentMethod(Request $request)
