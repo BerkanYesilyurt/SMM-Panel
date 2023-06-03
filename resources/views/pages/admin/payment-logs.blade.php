@@ -6,12 +6,24 @@
             <span class="text-muted fw-light">Admin Panel /</span> Payment Logs
         </h4>
 
+        <form action="/admin/payment-logs" method="POST">
+            @csrf
+            <div class="input-group mb-3">
+                <select name="action" class="form-select form-select-lg">
+                    <option value="cancel_all">Change Selected Logs' Statuses As Canceled</option>
+                </select>
+                <button type="submit" class="btn btn-primary">
+                    <span class="tf-icons bx bx-right-arrow"></span>&nbsp; Submit
+                </button>
+            </div>
+
     <div class="card mb-4">
         <div class="card-body">
             <div class="row">
                 <div class="list-group list-group-flush">
                     @forelse($paymentLogs as $paymentLog)
                         <a class="list-group-item list-group-item-action" style="font-size: 90% !important;">
+                            <input class="form-check-input me-1" type="checkbox" name="id[]" value="{{$paymentLog->id}}" @disabled($paymentLog->status != \App\Enums\PaymentStatusEnum::PENDING->value)>
                             <b>Payment ID: {{$paymentLog->id}}</b> &nbsp; &raquo; &nbsp;
                             {{$paymentLog->user->email}} &nbsp; &raquo; &nbsp;
                             {{$paymentLog->created_at->format('d F Y - H:i ')}} &nbsp; &raquo; &nbsp;
@@ -42,4 +54,5 @@
         </div>
         <center>{{ $paymentLogs->links() }}</center>
     </div>
+    </form>
 @endsection
