@@ -5,6 +5,26 @@
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> Payment Logs
         </h4>
+        
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul style="margin-bottom: 1px;">
+                    @foreach ($errors->all() as $error)
+                        <li><b>{{$error}}</b></li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if(session('message'))
+            <div class="alert alert-success alert-dismissible">
+                <ul style="margin-bottom: 1px; color:#478924;">
+                    <b>{{session('message')}}</b>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+        @endif
+
 
         <form action="/admin/payment-logs" method="POST">
             @csrf
