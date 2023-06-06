@@ -226,21 +226,37 @@
                             <label for="facebook_link" class="form-label">Facebook Link - <b>{{date('d F Y H:i', strtotime($settings['facebook_link']['updated_at']))}}</b></label>
                             <input class="form-control" type="text" id="facebook_link" name="facebook_link"
                                    value="{{$settings['facebook_link']['value']}}">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" name="show_facebook_link" id="show_facebook_link" @checked($settings['show_facebook_link']['value'])>
+                                <label class="form-check-label" for="show_facebook_link" style="font-size: 90%">Show Facebook Link</label>
+                            </div>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="twitter_link" class="form-label">Twitter Link - <b>{{date('d F Y H:i', strtotime($settings['twitter_link']['updated_at']))}}</b></label>
                             <input class="form-control" type="text" id="twitter_link" name="twitter_link"
                                    value="{{$settings['twitter_link']['value']}}">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" name="show_twitter_link" id="show_twitter_link" @checked($settings['show_twitter_link']['value'])>
+                                <label class="form-check-label" for="show_twitter_link" style="font-size: 90%">Show Twitter Link</label>
+                            </div>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="instagram_link" class="form-label">Instagram Link - <b>{{date('d F Y H:i', strtotime($settings['instagram_link']['updated_at']))}}</b></label>
                             <input class="form-control" type="text" id="instagram_link" name="instagram_link"
                                    value="{{$settings['instagram_link']['value']}}">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" name="show_instagram_link" id="show_instagram_link" @checked($settings['show_instagram_link']['value'])>
+                                <label class="form-check-label" for="show_instagram_link" style="font-size: 90%">Show Instagram Link</label>
+                            </div>
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label for="youtube_link" class="form-label">Youtube Link - <b>{{date('d F Y H:i', strtotime($settings['youtube_link']['updated_at']))}}</b></label>
+                            <label for="youtube_link" class="form-label">YouTube Link - <b>{{date('d F Y H:i', strtotime($settings['youtube_link']['updated_at']))}}</b></label>
                             <input class="form-control" type="text" id="youtube_link" name="youtube_link"
                                    value="{{$settings['youtube_link']['value']}}">
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" name="show_youtube_link" id="show_youtube_link" @checked($settings['show_youtube_link']['value'])>
+                                <label class="form-check-label" for="show_youtube_link" style="font-size: 90%">Show YouTube Link</label>
+                            </div>
                         </div>
 
                         <div class="mt-2">
