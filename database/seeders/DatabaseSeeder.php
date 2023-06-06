@@ -113,10 +113,25 @@ class DatabaseSeeder extends Seeder
                 'value' => ''
             ],
             [
+                'name' => 'show_facebook_link',
+                'value' => '1'
+            ],
+            [
+                'name' => 'show_twitter_link',
+                'value' => '1'
+            ],
+            [
+                'name' => 'show_instagram_link',
+                'value' => '1'
+            ],
+            [
+                'name' => 'show_youtube_link',
+                'value' => '1'
+            ],
+            [
                 'name' => 'facebook_link',
                 'value' => 'https://www.facebook.com'
-            ]
-            ,
+            ],
             [
                 'name' => 'twitter_link',
                 'value' => 'https://www.twitter.com'
@@ -124,8 +139,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'instagram_link',
                 'value' => 'https://www.instagram.com'
-            ]
-            ,
+            ],
             [
                 'name' => 'youtube_link',
                 'value' => 'https://www.youtube.com'
