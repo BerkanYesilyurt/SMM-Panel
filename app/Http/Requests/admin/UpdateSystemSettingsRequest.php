@@ -6,6 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSystemSettingsRequest extends FormRequest
 {
+    protected function prepareForValidation()
+    {
+        if($this->type == 'secondsection'){
+            $this->merge([
+                'show_facebook_link' => $this->show_facebook_link ? 1 : 0,
+                'show_twitter_link' => $this->show_twitter_link ? 1 : 0,
+                'show_instagram_link' => $this->show_instagram_link ? 1 : 0,
+                'show_youtube_link' => $this->show_youtube_link ? 1 : 0
+            ]);
+        }
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -35,9 +46,13 @@ class UpdateSystemSettingsRequest extends FormRequest
             'javascript_embed_header' => 'nullable',
             'javascript_embed_footer' => 'nullable',
             'facebook_link' => 'required_if:type,secondsection',
+            'show_facebook_link' => 'boolean|required_if:type,secondsection',
             'twitter_link' => 'required_if:type,secondsection',
+            'show_twitter_link' => 'boolean|required_if:type,secondsection',
             'instagram_link' => 'required_if:type,secondsection',
+            'show_instagram_link' => 'boolean|required_if:type,secondsection',
             'youtube_link' => 'required_if:type,secondsection',
+            'show_youtube_link' => 'boolean|required_if:type,secondsection',
         ];
     }
 
@@ -67,9 +82,13 @@ class UpdateSystemSettingsRequest extends FormRequest
             'javascript_embed_header' => 'Javascript Embed Header',
             'javascript_embed_footer' => 'Javascript Embed Footer',
             'facebook_link' => 'Facebook Link',
+            'show_facebook_link' => 'Show Facebook Link',
             'twitter_link' => 'Twitter Link',
+            'show_twitter_link' => 'Show Twitter Link',
             'instagram_link' => 'Instagram Link',
+            'show_instagram_link' => 'Show Instagram Link',
             'youtube_link' => 'Youtube Link',
+            'show_youtube_link' => 'Show Youtube Link',
         ];
     }
 
