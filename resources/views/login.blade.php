@@ -185,13 +185,19 @@
                         </div>
                     </form>
                     @if($configsArray['register_page'])
-                    <p class="text-center">
-                        <span>Don't have an account? </span>
-                        <a href="/register">
-                            <span>Sign up</span>
-                        </a>
-                    </p>
+                        <p class="text-center">
+                            <span>Don't have an account? </span>
+                            <a href="/register">
+                                <span>Sign up</span>
+                            </a>
+                        </p>
                     @endif
+                    <p class="text-center">
+                        @if($configsArray['show_facebook_link']) <a href="{{$configsArray['facebook_link']}}" target="_blank"><i class="bx bxl-facebook-square"></i></a> @endif
+                        @if($configsArray['show_instagram_link']) <a href="{{$configsArray['instagram_link']}}" target="_blank"><i class="bx bxl-instagram-alt"></i></a> @endif
+                        @if($configsArray['show_twitter_link']) <a href="{{$configsArray['twitter_link']}}" target="_blank"><i class="bx bxl-twitter"></i></a> @endif
+                        @if($configsArray['show_youtube_link']) <a href="{{$configsArray['youtube_link']}}" target="_blank"><i class="bx bxl-youtube"></i></a> @endif
+                    </p>
                 </div>
             </div>
         </div>
