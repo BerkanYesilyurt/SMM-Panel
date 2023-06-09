@@ -2,14 +2,12 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumTrait;
+
 enum PaymentStatusEnum:int {
+    use EnumTrait;
 
     case CANCELED = 0;
     case PENDING = 1;
     case COMPLETED = 2;
-
-    public static function values(): array
-    {
-        return array_column(self::cases(), 'name', 'value');
-    }
 }

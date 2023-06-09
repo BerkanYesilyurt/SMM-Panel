@@ -2,12 +2,11 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumTrait;
+
 enum CategoryStatusEnum:int {
+    use EnumTrait;
+
     case INACTIVE = 0;
     case ACTIVE = 1;
-
-    public static function values(): array
-    {
-        return array_column(self::cases(), 'name', 'value');
-    }
 }
