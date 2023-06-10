@@ -31,7 +31,7 @@ class ApiController extends Controller
     public function apiResponseLogsPage()
     {
         return view('pages.admin.api-response-logs', [
-            'logs' => ApiResponseLog::paginate(50)
+            'logs' => ApiResponseLog::orderByDesc('created_at')->paginate(50)
         ]);
     }
 
