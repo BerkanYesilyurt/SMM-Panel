@@ -2,9 +2,17 @@
 
 namespace App\Models;
 
-use App\Enums\ApiResponseTypesEnum;
 use Illuminate\Database\Eloquent\Model;
 use Str;
+
+/**
+ * App\Models\ApiResponseLog
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiResponseLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiResponseLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiResponseLog query()
+ * @mixin \Eloquent
+ */
 
 class ApiResponseLog extends Model
 {
