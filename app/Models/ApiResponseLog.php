@@ -20,4 +20,9 @@ class ApiResponseLog extends Model
     {
         return $this->belongsTo(Api::class);
     }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }
