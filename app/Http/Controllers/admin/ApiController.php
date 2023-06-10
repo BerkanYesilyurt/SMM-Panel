@@ -6,6 +6,7 @@ use App\Enums\ApiResponseTypesEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ApiRequest;
 use App\Models\Api;
+use App\Models\ApiResponseLog;
 use App\Models\Service;
 use App\Services\CheckApiBalance;
 use DB;
@@ -24,6 +25,13 @@ class ApiController extends Controller
         return view('pages.admin.api', [
             'title' => 'New API',
             'path' => 'new-api'
+        ]);
+    }
+
+    public function apiResponseLogsPage()
+    {
+        return view('pages.admin.api-response-logs', [
+            'logs' => ApiResponseLog::paginate(50)
         ]);
     }
 
