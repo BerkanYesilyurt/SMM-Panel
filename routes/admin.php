@@ -80,3 +80,5 @@ Route::get('new-api', [ApiController::class, 'newApiPage']);
 Route::post('new-api', [ApiController::class, 'createApi']);
 Route::post('delete-api', [ApiController::class, 'deleteApi']);
 Route::post('check-api-balance', [ApiController::class, 'checkApiBalance']);
+
+Route::get('api-response-logs', [ApiController::class, 'apiResponseLogsPage']);
