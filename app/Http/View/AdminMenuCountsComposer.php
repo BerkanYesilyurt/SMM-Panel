@@ -3,6 +3,7 @@
 namespace App\Http\View;
 use App\Models\{Announcement,
     Api,
+    ApiResponseLog,
     Category,
     ErrorLog,
     Faq,
@@ -31,7 +32,8 @@ class AdminMenuCountsComposer
             'tickets' => Ticket::count(),
             'faq' => Faq::count(),
             'errors' => ErrorLog::count(),
-            'api' => Api::count()
+            'api' => Api::count(),
+            'api_response_logs' => ApiResponseLog::count()
         ]);
     }
 }
