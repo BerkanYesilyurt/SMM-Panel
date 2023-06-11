@@ -265,8 +265,16 @@
                     <li class="menu-item">
                         <a href="/admin/apis" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-network-chart"></i>
-                            <div data-i18n="System Settings">APIs
+                            <div data-i18n="APIs">APIs
                                 <span class="badge bg-label-primary">{{number_format($__menuCounts['api'])}}</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/admin/api-response-logs" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-terminal"></i>
+                            <div data-i18n="API Response Logs">API Response Logs
+                                <span class="badge bg-label-primary">{{number_format($__menuCounts['api_response_logs'])}}</span>
                             </div>
                         </a>
                     </li>
