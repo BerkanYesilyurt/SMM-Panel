@@ -7,7 +7,15 @@ trait FilterTrait {
     public function scopeFilter($builder, $requests = [])
     {
 
+        if(!$requests) {
+            return $builder;
+        }
+
         foreach ($requests as $field => $value){
+
+            if(!$value || !in_array($field, $this->fillable)){
+                continue;
+            }
 
             if(in_array($field, $this->boolFilterFields) && $value != null) {
                 $builder->where($field, (bool)$value);
