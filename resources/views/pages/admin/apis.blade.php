@@ -69,7 +69,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3"><br>
+                            <td colspan="4"><br>
                                 <center>
                                     <b>No APIs Found.</b>
                                 </center>
