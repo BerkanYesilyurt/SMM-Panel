@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Schema;
+
 trait FilterTrait {
 
     public function scopeFilter($builder, $requests = [])
@@ -11,9 +13,9 @@ trait FilterTrait {
             return $builder;
         }
 
+        $columns = array_diff(Schema::getColumnListing($this->getTable()), $this->guarded);
         foreach ($requests as $field => $value){
-
-            if(!$value || !in_array($field, $this->fillable)){
+            if(!$value || !in_array($field, $columns)){
                 continue;
             }
 
