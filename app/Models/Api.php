@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ApiResponseTypesEnum;
+use App\Traits\FilterTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,8 +17,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Api extends Model
 {
+    use FilterTrait;
     protected $table = 'apis';
     protected $guarded = ['id'];
+    protected array $boolFilterFields = [];
+    protected array $stringFilterFields = [
+        'name'
+    ];
 
     public function lastBalance()
     {
