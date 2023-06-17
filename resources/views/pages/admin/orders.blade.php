@@ -34,7 +34,7 @@
                         <tr>
                             <td><center><b>{{$order->id}}</b></center></td>
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center><a target="_blank" href="{{$order->link}}">{{$order->link}}</a></center></td>
-                            <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$order->getServiceName->name}}</center></td>
+                            <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{optional($order->getServiceName)->name ?? '-'}}</center></td>
                             <td><center>{{$order->quantity}}</center></td>
                             <td><center>{{round($order->charge, 4)}}</center></td>
                             <td><center>{{$order->created_at->diffForHumans()}}</center></td>
