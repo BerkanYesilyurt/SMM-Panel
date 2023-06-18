@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CategoryStatusEnum;
 use App\Enums\OrderStatusEnum;
 use App\Events\OrderPlaced;
+use App\Http\Filters\OrdersPageFilter;
 use App\Http\Requests\NewOrderRequest;
 use App\Models\Category;
 use App\Models\Order;
@@ -37,9 +38,9 @@ class OrderController extends Controller
         return view('pages.massorders');
     }
 
-    public function ordersPage(){
+    public function ordersPage(OrdersPageFilter $filter){
         $orderCount = Order::where('user_id','=', auth()->user()->id)->count();
-        $userOrders = Order::with('getServiceName')->where('user_id','=', auth()->user()->id)->paginate(18);
+        $userOrders = Order::with('getServiceName')->filterByFunctions($filter)->paginate(18);
         return view('pages.orders', compact('userOrders'))->with('orderCount', $orderCount);
     }
 
