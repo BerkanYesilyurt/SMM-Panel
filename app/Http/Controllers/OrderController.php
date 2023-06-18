@@ -39,7 +39,7 @@ class OrderController extends Controller
     }
 
     public function ordersPage(OrdersPageFilter $filter){
-        $orderCount = Order::where('user_id','=', auth()->user()->id)->count();
+        $orderCount = Order::filterByFunctions($filter)->count();
         $userOrders = Order::with('getServiceName')->filterByFunctions($filter)->paginate(18);
         return view('pages.orders', compact('userOrders'))->with('orderCount', $orderCount);
     }
