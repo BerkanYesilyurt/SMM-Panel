@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Database\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\Order
