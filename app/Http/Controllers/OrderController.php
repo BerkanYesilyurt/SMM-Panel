@@ -11,7 +11,9 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -38,10 +40,19 @@ class OrderController extends Controller
         return view('pages.massorders');
     }
 
-    public function ordersPage(OrdersPageFilter $filter){
+    public function ordersPage(Request $request, OrdersPageFilter $filter){
+        $request->validate([
+            'status' => ['nullable', 'integer', Rule::in(OrderStatusEnum::getOnlyValues())]
+        ]);
         $orderCount = Order::filterByFunctions($filter)->count();
         $userOrders = Order::with('getServiceName')->filterByFunctions($filter)->paginate(18);
-        return view('pages.orders', compact('userOrders'))->with('orderCount', $orderCount);
+
+        return view('pages.orders', [
+            'statuses' => OrderStatusEnum::values(),
+            'userOrders' => $userOrders,
+            'orderCount' => $orderCount,
+            'currentStatus' => $request->status ?? '-'
+        ]);
     }
 
     public function createNewOrder(NewOrderRequest $request, Order $order){
