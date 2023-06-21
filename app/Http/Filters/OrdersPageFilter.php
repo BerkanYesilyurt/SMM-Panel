@@ -11,8 +11,8 @@ class OrdersPageFilter extends RequestFilter
     {
         return $this->builder->where('user_id', auth()->user()->id);
     }
-    public function test($value)
+    public function status($value)
     {
-        return $this->builder->where('link', 'LIKE', "%$value%");
+        return $this->builder->where('status', $value);
     }
 }
