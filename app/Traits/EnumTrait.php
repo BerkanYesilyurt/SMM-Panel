@@ -9,4 +9,8 @@ trait EnumTrait {
         return array_column(self::cases(), 'name', 'value');
     }
 
+    public static function getOnlyValues(): \Illuminate\Support\Collection
+    {
+        return collect(self::cases())->pluck('value');
+    }
 }
