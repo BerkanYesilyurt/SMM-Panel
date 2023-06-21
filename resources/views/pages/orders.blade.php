@@ -2,21 +2,22 @@
 @section('subTitle', 'Orders')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
+
+        <form action="{{route('orders')}}" method="POST">
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">{{$configsArray['title']}} /</span> Orders
+                @csrf
+                <select class="form-select" name="status" onchange="this.form.submit()" style="float:right; width: 200px;">
+                    <option>All Orders</option>
+                    @foreach($statuses as $statusKey => $statusValue)
+                        <option value="{{$statusKey}}" @selected($statusKey == $currentStatus)>{{$statusValue}}</option>
+                    @endforeach
+                </select>
         </h4>
+        </form>
 
         <div class="card">
-
             <div class="table-responsive text-nowrap">
-                <style>
-                    table {
-                        border-spacing: 0px;
-                        table-layout: fixed;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                </style>
                 <table class="table">
                     <thead>
                     <tr>
