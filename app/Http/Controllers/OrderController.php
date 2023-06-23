@@ -41,7 +41,7 @@ class OrderController extends Controller
     }
 
     public function ordersPage(Request $request, OrdersPageFilter $filter){
-        $request->validate([
+        $fields = $request->validate([
             'status' => ['nullable', 'integer', Rule::in(OrderStatusEnum::getOnlyValues())]
         ]);
         $orderCount = Order::filterByFunctions($filter)->count();
@@ -49,7 +49,7 @@ class OrderController extends Controller
 
         return view('pages.orders', [
             'statuses' => OrderStatusEnum::values(),
-            'userOrders' => $userOrders,
+            'userOrders' => $userOrders->appends($fields),
             'orderCount' => $orderCount,
             'currentStatus' => $request->status ?? '-'
         ]);
