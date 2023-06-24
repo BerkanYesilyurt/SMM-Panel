@@ -42,7 +42,7 @@ class OrderController extends Controller
 
     public function ordersPage(Request $request, OrdersPageFilter $filter){
         $fields = $request->validate([
-            'status' => ['nullable', 'integer', Rule::in(OrderStatusEnum::getOnlyValues())]
+            'status' => ['nullable', Rule::in(array_merge(OrderStatusEnum::getOnlyValues()->toArray(), ['all']))]
         ]);
         $orderCount = Order::filterByFunctions($filter)->count();
         $userOrders = Order::with('getServiceName')->filterByFunctions($filter)->paginate(18);
