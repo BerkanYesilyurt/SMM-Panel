@@ -9,7 +9,7 @@ class OrdersPageFilter extends RequestFilter
 {
     public function default()
     {
-        return $this->builder->where('user_id', auth()->user()->id);
+        return $this->builder->where('user_id', auth()->user()->id)->orderByDesc('created_at');
     }
     public function status($value)
     {
