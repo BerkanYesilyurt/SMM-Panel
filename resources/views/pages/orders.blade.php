@@ -8,7 +8,7 @@
             <span class="text-muted fw-light">{{$configsArray['title']}} /</span> Orders
                 @csrf
                 <select class="form-select" name="status" onchange="this.form.submit()" style="float:right; width: 200px;">
-                    <option>All Orders</option>
+                    <option value="all">All Orders</option>
                     @foreach($statuses as $statusKey => $statusValue)
                         <option value="{{$statusKey}}" @selected($statusKey == $currentStatus)>{{$statusValue}}</option>
                     @endforeach
