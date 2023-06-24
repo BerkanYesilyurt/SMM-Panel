@@ -13,6 +13,8 @@ class OrdersPageFilter extends RequestFilter
     }
     public function status($value)
     {
-        return $this->builder->where('status', $value);
+        if($value != 'all'){
+            return $this->builder->where('status', $value);
+        }
     }
 }
