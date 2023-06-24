@@ -55,7 +55,7 @@ Route::post('categories', [CategoryController::class, 'updateCategory']);
 Route::post('new-category', [CategoryController::class, 'createNewCategory']);
 Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
 
-Route::get('orders', [OrderController::class, 'ordersPage']);
+Route::match(['POST', 'GET'], 'orders', [OrderController::class, 'ordersPage'])->name('admin-orders');
 
 Route::get('payment-methods', [FinanceController::class, 'paymentMethodsPage']);
 Route::post('payment-methods', [FinanceController::class, 'updatePaymentMethod']);
