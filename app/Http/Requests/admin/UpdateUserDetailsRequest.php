@@ -19,7 +19,7 @@ class UpdateUserDetailsRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:150'],
-            'email' => ['required', 'email', 'max:150', Rule::unique('users', 'email')->ignore($this->user)],
+            'email' => ['required', 'email:filter', 'max:150', Rule::unique('users', 'email')->ignore($this->user)],
             'contact' => ['required', 'max:150'],
             'timezone' => ['nullable', 'numeric', 'min:-100000', 'max:100000'],
             'authority' => ['required', new Enum(UserAuthorityEnum::class)],

@@ -29,7 +29,7 @@ class UserController extends Controller
     {
         $fields = $request->validate([
             'name' => ['required', 'min:3', 'max:150'],
-            'email' => ['required', 'email', 'max:150', Rule::unique('users', 'email')],
+            'email' => ['required', 'email:filter', 'max:150', Rule::unique('users', 'email')],
             'balance' => 'required|numeric|min:0|digits_between:1,10',
             'password' => ['min:6', 'max:50'],
             'contact' => ['required', 'max:150'],
@@ -62,7 +62,7 @@ class UserController extends Controller
         $details['balance'] = $user->balance;
         $details['last_login'] = $user->last_login;
         $details['last_login_ip'] = $user->last_login_ip;
-        
+
         $user->payment_logs()->create([
             'user_id' => $user->id,
             'payment_method_id' => 0,
