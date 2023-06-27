@@ -13,8 +13,8 @@ abstract class Model extends EloquentModel
      * @param Filter $filter
      * @return Builder
      */
-    public function scopeFilterByFunctions(Builder $query, Filter $filter): Builder
+    public function scopeFilterByFunctions(Builder $query, Filter $filter, $additionalParams = NULL): Builder
     {
-        return $filter->filterByFunctions($query);
+        return $filter->filterByFunctions($query, $additionalParams);
     }
 }
