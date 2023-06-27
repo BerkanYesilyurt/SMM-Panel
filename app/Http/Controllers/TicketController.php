@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TicketStatusEnum;
+use App\Http\Filters\TicketIndexFilter;
 use App\Http\Requests\CreateTicketRequest;
 use App\Models\PaymentMethod;
 use App\Models\Ticket;
@@ -23,10 +24,9 @@ class TicketController extends Controller
         });
     }
 
-    public function index(Ticket $ticket){
-        $tickets = $ticket->with('ticketMessages')
-            ->where('user_id', auth()->user()->id)
-            ->orderBy('created_at')
+    public function index(TicketIndexFilter $filter, $status = NULL){
+        $tickets = Ticket::with('ticketMessages')
+            ->filterByFunctions($filter, ['status' => $status])
             ->paginate(15);
         return view('pages.tickets', [
             'tickets' => $tickets,
@@ -39,7 +39,7 @@ class TicketController extends Controller
             ->where('status', TicketStatusEnum::ACTIVE->value)
             ->count();
 
-        $lastestTicketTime = Ticket::where('user_id', auth()->user()->id)->orderByDesc('created_at')->first()->created_at;
+        $lastestTicketTime = optional(Ticket::where('user_id', auth()->user()->id)->orderByDesc('created_at')->first())->created_at;
         $currentTime = Carbon::now();
         $newTicketTime = $lastestTicketTime ? $lastestTicketTime->addMinutes(configValue('time_between_messages_tickets')) : NULL;
 
