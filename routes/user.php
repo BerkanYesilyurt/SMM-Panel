@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/logout', [UserController::class, 'logout']);
 
+Route::get('/tickets/{status?}', [TicketController::class, 'index']);
 Route::get('/tickets', [TicketController::class, 'index']);
 Route::post('/tickets', [TicketController::class, 'createTicket']);
 Route::get('/ticket/{ticket}', [TicketController::class, 'ticketMessages']);
