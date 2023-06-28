@@ -13,7 +13,7 @@ abstract class RequestFilter
     public function filterByFunctions(Builder $builder, $additionalParams): Builder
     {
         $this->builder = $builder;
-        $this->additionalParams = new Fluent($additionalParams);
+        $this->additionalParams = $additionalParams ? new Fluent($additionalParams) : NULL;
         $this->default();
 
         foreach(request()->all() as $name => $value) {
