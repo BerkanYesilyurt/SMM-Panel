@@ -2,6 +2,7 @@
 
 namespace App\Http\Filters;
 
+use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Request;
 
@@ -9,12 +10,21 @@ class OrdersPageFilter extends RequestFilter
 {
     public function default()
     {
-        return $this->builder->where('user_id', auth()->user()->id)->orderByDesc('created_at');
+        $this->status($this->additionalParams->status);
+        return $this->builder->orderByDesc('created_at');
     }
     public function status($value)
     {
-        if($value != 'all'){
-            return $this->builder->where('status', $value);
+        if($value && $value != 'all'){
+            $status = match ($value){
+                'pending' => OrderStatusEnum::PENDING->value,
+                'processing' => OrderStatusEnum::PROCESSING->value,
+                'inprogress' => OrderStatusEnum::INPROGRESS->value,
+                'completed' => OrderStatusEnum::COMPLETED->value,
+                'partial' => OrderStatusEnum::PARTIAL->value,
+                'canceled' => OrderStatusEnum::CANCELED->value,
+            };
+            return $this->builder->where('status', $status);
         }
     }
 }
