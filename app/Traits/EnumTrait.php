@@ -13,4 +13,12 @@ trait EnumTrait {
     {
         return collect(self::cases())->pluck('value');
     }
+
+    public static function getOnlyNames($lowerCase = false): \Illuminate\Support\Collection
+    {
+        $namesCollection = collect(self::cases())->pluck('name');
+        return $lowerCase
+            ? $namesCollection->map(fn ($name) => strtolower($name))
+            : $namesCollection;
+    }
 }
