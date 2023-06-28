@@ -32,7 +32,8 @@ Route::post('/new-order', [OrderController::class, 'createNewOrder']);
 
 Route::get('/massorders', [OrderController::class, 'massOrderPage']);
 
-Route::match(['POST', 'GET'], '/orders', [OrderController::class, 'ordersPage'])->name('orders');
+Route::get('/orders/{status?}', [OrderController::class, 'ordersPage']);
+Route::get('/orders', [OrderController::class, 'ordersPage'])->name('orders');
 
 Route::get('/serviceupdates', [ServiceController::class, 'serviceUpdatesPage']);
 
