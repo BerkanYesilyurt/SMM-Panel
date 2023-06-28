@@ -11,9 +11,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -40,18 +38,25 @@ class OrderController extends Controller
         return view('pages.massorders');
     }
 
-    public function ordersPage(Request $request, OrdersPageFilter $filter){
-        $fields = $request->validate([
-            'status' => ['nullable', Rule::in(array_merge(OrderStatusEnum::getOnlyValues()->toArray(), ['all']))]
-        ]);
-        $orderCount = Order::filterByFunctions($filter)->count();
-        $userOrders = Order::with('getServiceName')->filterByFunctions($filter)->paginate(18);
+    public function ordersPage(OrdersPageFilter $filter, $status = NULL){
+        if($status && !in_array($status, OrderStatusEnum::getOnlyNames(true)->toArray())){
+            return redirect()->route('orders');
+        }
+
+        $orderCount = Order::filterByFunctions($filter, ['status' => $status])
+            ->where('user_id', auth()->user()->id)
+            ->count();
+
+        $userOrders = Order::with('getServiceName')
+            ->filterByFunctions($filter, ['status' => $status])
+            ->where('user_id', auth()->user()->id)
+            ->paginate(18);
 
         return view('pages.orders', [
             'statuses' => OrderStatusEnum::values(),
-            'userOrders' => $userOrders->appends($fields),
+            'userOrders' => $userOrders,
             'orderCount' => $orderCount,
-            'currentStatus' => $request->status ?? '-'
+            'currentStatus' => $status ?? '-'
         ]);
     }
 
