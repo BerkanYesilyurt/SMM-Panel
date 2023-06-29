@@ -2,18 +2,15 @@
 @section('subTitle', 'Orders')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <form action="{{route('admin-orders')}}" method="POST">
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> Orders
-            @csrf
-            <select class="form-select" name="status" onchange="this.form.submit()" style="float:right; width: 200px;">
-                <option value="all">All Orders</option>
+            <select class="form-select" name="status" onchange="redirectToStatus(this)" style="float:right; width: 200px;">
+                <option>ALL</option>
                 @foreach($statuses as $statusKey => $statusValue)
-                    <option value="{{$statusKey}}" @selected($statusKey == $currentStatus)>{{$statusValue}}</option>
+                    <option value="{{$statusKey}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
                 @endforeach
             </select>
         </h4>
-        </form>
 
         <div class="card">
 
@@ -85,4 +82,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function redirectToStatus(element){
+            var baseUrl = '{{ route('admin-orders') }}';
+            window.location.replace((baseUrl + '/' + element.options[element.selectedIndex].text.toLowerCase()));
+        }
+    </script>
 @endsection
