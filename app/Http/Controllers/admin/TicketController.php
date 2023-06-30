@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Enums\TicketStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Filters\admin\TicketIndexFilter;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use DB;
@@ -12,11 +13,16 @@ use Illuminate\Validation\Rules\Enum;
 
 class TicketController extends Controller
 {
-    public function ticketPage()
+    public function ticketPage(TicketIndexFilter $filter, $status = NULL)
     {
+        if($status && !in_array($status, TicketStatusEnum::getOnlyNames(true)->toArray())){
+            return redirect()->route('admin-tickets');
+        }
+
         return view('pages.admin.tickets', [
+            'statuses' => TicketStatusEnum::values(),
             'tickets' => Ticket::with('ticketMessages', 'user')
-                ->orderBy('created_at')
+                ->filterByFunctions($filter, ['status' => $status])
                 ->paginate(25)
         ]);
     }
