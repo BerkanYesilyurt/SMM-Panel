@@ -25,10 +25,16 @@ class TicketController extends Controller
     }
 
     public function index(TicketIndexFilter $filter, $status = NULL){
+        if($status && !in_array($status, TicketStatusEnum::getOnlyNames(true)->toArray())){
+            return redirect()->route('tickets');
+        }
+
         $tickets = Ticket::with('ticketMessages')
             ->filterByFunctions($filter, ['status' => $status])
             ->paginate(15);
+
         return view('pages.tickets', [
+            'statuses' => TicketStatusEnum::values(),
             'tickets' => $tickets,
             'paymentMethods' => PaymentMethod::all()
         ]);
