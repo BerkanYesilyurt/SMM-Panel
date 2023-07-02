@@ -12,7 +12,6 @@ use App\Models\Service;
 use App\Models\Ticket;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CountController extends Controller
