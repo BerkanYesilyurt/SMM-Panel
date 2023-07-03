@@ -4,12 +4,13 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
             <span class="text-muted fw-light">Admin Panel /</span> Orders
-            <select class="form-select" name="status" onchange="redirectToStatus(this)" style="float:right; width: 200px;">
+            <select class="form-select" name="status" onchange="redirectToStatus(this)" style="float:right;  margin-left: 10px; width: 15%">
                 <option>ALL</option>
                 @foreach($statuses as $statusKey => $statusValue)
                     <option value="{{$statusKey}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
                 @endforeach
             </select>
+            <input type="text" class="form-control" name="search" style="float:right; width: 15%" />
         </h4>
 
         <div class="card">
