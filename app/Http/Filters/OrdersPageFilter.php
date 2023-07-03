@@ -13,6 +13,13 @@ class OrdersPageFilter extends RequestFilter
         $this->status($this->additionalParams->status);
         return $this->builder->orderByDesc('created_at');
     }
+
+    public function search($value)
+    {
+        return $this->builder->whereId($value)
+            ->orWhere('link', 'LIKE', '%'.$value.'%');
+    }
+
     public function status($value)
     {
         if($value && $value != 'all'){
