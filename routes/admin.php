@@ -55,7 +55,8 @@ Route::post('categories', [CategoryController::class, 'updateCategory']);
 Route::post('new-category', [CategoryController::class, 'createNewCategory']);
 Route::post('delete-category', [CategoryController::class, 'deleteCategory']);
 
-Route::get('orders/{status?}', [OrderController::class, 'ordersPage']);
+Route::get('orders/{status?}', [OrderController::class, 'ordersPage'])
+    ->whereIn('status', ['pending', 'processing', 'inprogress', 'completed', 'partial', 'cancelled']);
 Route::get('orders', [OrderController::class, 'ordersPage'])->name('admin-orders');
 
 Route::get('payment-methods', [FinanceController::class, 'paymentMethodsPage']);
