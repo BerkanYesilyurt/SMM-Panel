@@ -81,7 +81,7 @@ class FinanceController extends Controller
         ]);
 
         PaymentLog::whereIn('id', $request->id)->update([
-            'status' => PaymentStatusEnum::CANCELED->value
+            'status' => PaymentStatusEnum::CANCELLED->value
         ]);
 
         return back()->with("message", "You have successfully changed payment logs' statuses as canceled.");
