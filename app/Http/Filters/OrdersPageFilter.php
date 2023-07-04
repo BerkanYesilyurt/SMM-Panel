@@ -22,7 +22,7 @@ class OrdersPageFilter extends RequestFilter
 
     public function status($value)
     {
-        if($value && $value != 'all'){
+        if($value && $value != 'all' && in_array($value, OrderStatusEnum::getOnlyNames(true)->toArray())){
             $status = match ($value){
                 'pending' => OrderStatusEnum::PENDING->value,
                 'processing' => OrderStatusEnum::PROCESSING->value,
