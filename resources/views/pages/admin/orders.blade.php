@@ -2,16 +2,19 @@
 @section('subTitle', 'Orders')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">Admin Panel /</span> Orders
-            <select class="form-select" name="status" onchange="redirectToStatus(this)" style="float:right;  margin-left: 10px; width: 15%">
-                <option>ALL</option>
-                @foreach($statuses as $statusKey => $statusValue)
-                    <option value="{{$statusKey}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
-                @endforeach
-            </select>
-            <input type="text" class="form-control" name="search" style="float:right; width: 15%" />
-        </h4>
+        <form method="GET" id="filterform">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Admin Panel /</span> Orders
+                <select class="form-select" name="status" id="status" style="float:right;  margin-left: 10px; width: 15%">
+                    <option value="all">ALL</option>
+                    @foreach($statuses as $statusKey => $statusValue)
+                        <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
+                    @endforeach
+                </select>
+                <input type="text" class="form-control" name="search" id="search" style="float:right; width: 15%" />
+                <input type="button" onclick="setStatusUrlAndSubmit()" value="Do it" />
+            </h4>
+        </form>
 
         <div class="card">
 
@@ -85,9 +88,21 @@
     </div>
 
     <script>
-        function redirectToStatus(element){
-            var baseUrl = '{{ route('admin-orders') }}';
-            window.location.replace((baseUrl + '/' + element.options[element.selectedIndex].text.toLowerCase()));
+        function setStatusUrlAndSubmit(){
+            let loginForm = document.getElementById("filterform");
+            let baseUrl = '{{ route('admin-orders') }}';
+            let path = document.querySelector('#status option:checked').value;
+            let formUrl = new URL(baseUrl + '/' + (path != 'all' ? path : ''));
+
+            if(document.getElementById("search").value.length > 0){
+                formUrl.searchParams.append("search", document.getElementById("search").value);
+            }else{
+                loginForm.search.disabled = true;
+            }
+
+            loginForm.action = formUrl.href;
+            loginForm.status.disabled = true;
+            loginForm.submit();
         }
     </script>
 @endsection
