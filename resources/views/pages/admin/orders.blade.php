@@ -5,14 +5,16 @@
         <form method="GET" id="filterform">
             <h4 class="fw-bold py-3 mb-4">
                 <span class="text-muted fw-light">Admin Panel /</span> Orders
-                <select class="form-select" name="status" id="status" style="float:right;  margin-left: 10px; width: 15%">
-                    <option value="all">ALL</option>
-                    @foreach($statuses as $statusKey => $statusValue)
-                        <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
-                    @endforeach
-                </select>
-                <input type="text" class="form-control" name="search" id="search" style="float:right; width: 15%" />
-                <input type="button" onclick="setStatusUrlAndSubmit()" value="Do it" />
+                <div style="float:right; display: flex">
+                    <select class="form-select" name="status" id="status" style="margin-left: 10px;">
+                        <option value="all">ALL</option>
+                        @foreach($statuses as $statusKey => $statusValue)
+                            <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
+                        @endforeach
+                    </select>
+                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" placeholder="Order ID, Link, Word"/>
+                    <button class="btn btn-info" onclick="setStatusUrlAndSubmit()" id="submitButton"><i class='bx bx-search-alt-2'></i></button>
+                </div>
             </h4>
         </form>
 
@@ -89,6 +91,8 @@
 
     <script>
         function setStatusUrlAndSubmit(){
+            document.getElementById("submitButton").disabled = true;
+
             let loginForm = document.getElementById("filterform");
             let baseUrl = '{{ route('admin-orders') }}';
             let path = document.querySelector('#status option:checked').value;
