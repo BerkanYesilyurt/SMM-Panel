@@ -14,6 +14,13 @@ class TicketIndexFilter extends RequestFilter
         return $this->builder->where('user_id', auth()->user()->id)->orderByDesc('created_at');
     }
 
+    public function search($value)
+    {
+        return $this->builder->where('order_id', $value)
+            ->orWhere('pay_id', $value)
+            ->orWhere('message', 'LIKE', '%'.$value.'%');
+    }
+
     public function status($value)
     {
         if($value && $value != 'all'){
