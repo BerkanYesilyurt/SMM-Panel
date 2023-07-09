@@ -43,12 +43,12 @@ class OrderController extends Controller
             return redirect()->route('orders');
         }
 
-        $orderCount = Order::filterByFunctions($filter, ['status' => $status])
+        $orderCount = Order::filterByFunctions($filter, ['status' => $status, 'excepts' => ['search']])
             ->where('user_id', auth()->user()->id)
             ->count();
 
         $userOrders = Order::with('getServiceName')
-            ->filterByFunctions($filter, ['status' => $status])
+            ->filterByFunctions($filter, ['status' => $status, 'excepts' => ['search']])
             ->where('user_id', auth()->user()->id)
             ->paginate(18);
 
