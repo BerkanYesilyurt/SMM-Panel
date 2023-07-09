@@ -17,10 +17,15 @@ abstract class RequestFilter
         $this->default();
 
         foreach(request()->all() as $name => $value) {
-            if(method_exists($this, $name)) {
+            if(method_exists($this, $name) && $this->checkIfParamIsExcept($name)) {
                 call_user_func_array([$this, $name], [$value]);
             }
         }
         return $this->builder;
+    }
+
+    public function checkIfParamIsExcept($name): bool
+    {
+        return !($this->additionalParams->excepts && in_array($name, (array)$this->additionalParams->excepts));
     }
 }
