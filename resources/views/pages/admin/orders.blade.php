@@ -12,7 +12,7 @@
                             <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
                         @endforeach
                     </select>
-                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" placeholder="Order ID, Link, Word"/>
+                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="Order ID, Link, Word"/>
                     <button class="btn btn-info" onclick="setStatusUrlAndSubmit()" id="submitButton"><i class='bx bx-search-alt-2'></i></button>
                 </div>
             </h4>
