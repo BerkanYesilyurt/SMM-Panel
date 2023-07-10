@@ -12,7 +12,7 @@
                             <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
                         @endforeach
                     </select>
-                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="Order ID, Link, Word"/>
+                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="Order ID, Link, Email"/>
                     <button class="btn btn-info" onclick="setStatusUrlAndSubmit()" id="submitButton"><i class='bx bx-search-alt-2'></i></button>
                 </div>
             </h4>
@@ -21,30 +21,24 @@
         <div class="card">
 
             <div class="table-responsive text-nowrap">
-                <style>
-                    table {
-                        border-spacing: 0px;
-                        table-layout: fixed;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                </style>
                 <table class="table">
                     <thead>
                     <tr>
-                        <th style="width: 8%;"><center>ORDER ID</center></th>
-                        <th style="width: 26%;"><center>LINK</center></th>
-                        <th style="width: 26%;"><center>SERVICE NAME</center></th>
-                        <th style="width: 8%;"><center>QUANTITY</center></th>
-                        <th style="width: 10%;"><center>CHARGE</center></th>
-                        <th style="width: 12%;"><center>DATE</center></th>
-                        <th style="width: 10%;"><center>STATUS</center></th>
+                        <th><center>ORDER ID</center></th>
+                        <th><center>USER ID</center></th>
+                        <th><center>LINK</center></th>
+                        <th><center>SERVICE NAME</center></th>
+                        <th><center>QUANTITY</center></th>
+                        <th><center>CHARGE</center></th>
+                        <th><center>DATE</center></th>
+                        <th><center>STATUS</center></th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                     @forelse($orders as $order)
                         <tr>
                             <td><center><b>{{$order->id}}</b></center></td>
+                            <td><center><a target="_blank" href="/admin/user/{{$order->user->id}}/edit"><b>{{$order->user->id}}</b></a></center></td>
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center><a target="_blank" href="{{$order->link}}">{{$order->link}}</a></center></td>
                             <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{optional($order->getServiceName)->name ?? '-'}}</center></td>
                             <td><center>{{$order->quantity}}</center></td>
