@@ -17,7 +17,10 @@ class OrdersPageFilter extends RequestFilter
     public function search($value)
     {
         return $this->builder->whereId($value)
-            ->orWhere('link', 'LIKE', '%'.$value.'%');
+            ->orWhere('link', 'LIKE', '%'.$value.'%')
+            ->orWhereHas('user', function ($query) use ($value){
+                $query->where('email', 'LIKE', '%'.$value.'%');
+            });
     }
 
     public function status($value)
