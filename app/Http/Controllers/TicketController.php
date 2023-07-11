@@ -30,13 +30,15 @@ class TicketController extends Controller
         }
 
         $tickets = Ticket::with('ticketMessages')
-            ->filterByFunctions($filter, ['status' => $status])
+            ->where('user_id', auth()->user()->id)
+            ->filterByFunctions($filter, ['status' => $status, 'excepts' => ['search']])
             ->paginate(15);
 
         return view('pages.tickets', [
             'statuses' => TicketStatusEnum::values(),
             'tickets' => $tickets,
-            'paymentMethods' => PaymentMethod::all()
+            'paymentMethods' => PaymentMethod::all(),
+            'currentStatus' => $status ?? '-'
         ]);
     }
 
