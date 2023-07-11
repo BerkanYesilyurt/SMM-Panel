@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Enums\TicketStatusEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Filters\admin\TicketIndexFilter;
+use App\Http\Filters\TicketIndexFilter;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use DB;
