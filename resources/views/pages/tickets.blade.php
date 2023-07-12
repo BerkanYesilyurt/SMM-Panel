@@ -2,12 +2,24 @@
 @section('subTitle', 'Tickets')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">{{$configsArray['title']}} /</span> Tickets
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="float:right;">
-                <span class="tf-icons bx bx-plus"></span>&nbsp; New Ticket
-            </button>
-        </h4>
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">{{$configsArray['title']}} /</span> Tickets
+                <div style="float:right; display: flex">
+                    <form method="GET" id="filterform">
+                        <select class="form-select w-px-200" name="status" id="status" onchange="redirectToStatus(this)">
+                            <option value="all">ALL</option>
+                            @foreach($statuses as $statusKey => $statusValue)
+                                <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
+                            @endforeach
+                        </select>
+                    </form>
+
+                    <button type="button" class="btn btn-primary" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                        <span class="tf-icons bx bx-plus"></span>&nbsp; New Ticket
+                    </button>
+                </div>
+            </h4>
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul style="margin-bottom: 1px;">
@@ -219,5 +231,9 @@
             document.getElementById("form").submit();
         }
 
+        function redirectToStatus(element){
+            var baseUrl = '{{ route('tickets') }}';
+            window.location.replace((baseUrl + '/' + element.options[element.selectedIndex].text.toLowerCase()));
+        }
     </script>
 @endsection
