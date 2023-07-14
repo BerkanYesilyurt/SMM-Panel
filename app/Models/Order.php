@@ -51,7 +51,7 @@ class Order extends Model
 
     protected $guarded = ['id'];
 
-    public function getServiceName()
+    public function service()
     {
         return $this->hasOne(Service::class, 'id', 'service_id');
     }
