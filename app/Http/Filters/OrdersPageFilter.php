@@ -20,6 +20,9 @@ class OrdersPageFilter extends RequestFilter
             ->orWhere('link', 'LIKE', '%'.$value.'%')
             ->orWhereHas('user', function ($query) use ($value){
                 $query->where('email', 'LIKE', '%'.$value.'%');
+            })
+            ->orWhereHas('service', function ($query) use ($value){
+                $query->where('name', 'LIKE', '%'.$value.'%');
             });
     }
 
