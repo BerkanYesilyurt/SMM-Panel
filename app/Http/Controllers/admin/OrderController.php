@@ -19,7 +19,7 @@ class OrderController extends Controller
 
         return view('pages.admin.orders', [
             'statuses' => OrderStatusEnum::values(),
-            'orders' => Order::with(['getServiceName', 'user'])->filterByFunctions($filter, ['status' => $status])->paginate(50)->withQueryString(),
+            'orders' => Order::with(['service', 'user'])->filterByFunctions($filter, ['status' => $status])->paginate(50)->withQueryString(),
             'orderCount' => Order::filterByFunctions($filter, ['status' => $status])->count(),
             'currentStatus' => $status ?? '-'
         ]);

@@ -47,7 +47,7 @@ class OrderController extends Controller
             ->where('user_id', auth()->user()->id)
             ->count();
 
-        $userOrders = Order::with('getServiceName')
+        $userOrders = Order::with('service')
             ->filterByFunctions($filter, ['status' => $status, 'excepts' => ['search']])
             ->where('user_id', auth()->user()->id)
             ->paginate(18);

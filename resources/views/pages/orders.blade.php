@@ -32,7 +32,7 @@
                                 <tr>
                                     <td><center><b>{{$userOrder->id}}</b></center></td>
                                     <td style="white-space:pre-wrap; word-wrap:break-word;"><center><a target="_blank" href="{{$userOrder->link}}">{{$userOrder->link}}</a></center></td>
-                                    <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$userOrder->getServiceName->name}}</center></td>
+                                    <td style="white-space:pre-wrap; word-wrap:break-word;"><center>{{$userOrder->service->name}}</center></td>
                                     <td><center>{{$userOrder->quantity}}</center></td>
                                     <td><center>{{$configsArray['currency_symbol']}}{{round($userOrder->charge, 4)}}</center></td>
                                     <td><center>{{$userOrder->created_at->diffForHumans()}}</center></td>
