@@ -6,13 +6,13 @@
             <h4 class="fw-bold py-3 mb-4">
                 <span class="text-muted fw-light">Admin Panel /</span> Orders
                 <div style="float:right; display: flex">
-                    <select class="form-select" name="status" id="status" style="margin-left: 10px;">
+                    <select class="form-select w-px-200" name="status" id="status" style="margin-left: 10px;">
                         <option value="all">ALL</option>
                         @foreach($statuses as $statusKey => $statusValue)
                             <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
                         @endforeach
                     </select>
-                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="Order ID, Link, Email"/>
+                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="ID, Link, Email, Service Name"/>
                     <button class="btn btn-info" onclick="setStatusUrlAndSubmit()" id="submitButton"><i class='bx bx-search-alt-2'></i></button>
                 </div>
             </h4>
