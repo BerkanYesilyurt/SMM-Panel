@@ -16,10 +16,12 @@ class TicketIndexFilter extends RequestFilter
 
     public function search($value)
     {
-        return $this->builder->where('id', $value)
-            ->orwhere('order_id', $value)
-            ->orWhere('pay_id', $value)
-            ->orWhere('message', 'LIKE', '%'.$value.'%');
+        return $this->builder->where(function ($query) use ($value) {
+            $query->where('id', $value)
+                ->orwhere('order_id', $value)
+                ->orWhere('pay_id', $value)
+                ->orWhere('message', 'LIKE', '%'.$value.'%');
+        });
     }
 
     public function status($value)
