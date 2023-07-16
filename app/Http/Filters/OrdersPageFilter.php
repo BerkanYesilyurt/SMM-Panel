@@ -16,14 +16,16 @@ class OrdersPageFilter extends RequestFilter
 
     public function search($value)
     {
-        return $this->builder->whereId($value)
+        return $this->builder->where(function ($query) use ($value) {
+            $query->whereId($value)
             ->orWhere('link', 'LIKE', '%'.$value.'%')
-            ->orWhereHas('user', function ($query) use ($value){
-                $query->where('email', 'LIKE', '%'.$value.'%');
+            ->orWhereHas('user', function ($q) use ($value){
+                $q->where('email', 'LIKE', '%'.$value.'%');
             })
-            ->orWhereHas('service', function ($query) use ($value){
-                $query->where('name', 'LIKE', '%'.$value.'%');
+            ->orWhereHas('service', function ($q) use ($value){
+                $q->where('name', 'LIKE', '%'.$value.'%');
             });
+        });
     }
 
     public function status($value)
