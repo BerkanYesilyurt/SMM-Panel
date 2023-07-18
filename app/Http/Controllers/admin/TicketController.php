@@ -23,7 +23,8 @@ class TicketController extends Controller
             'statuses' => TicketStatusEnum::values(),
             'tickets' => Ticket::with('ticketMessages', 'user')
                 ->filterByFunctions($filter, ['status' => $status])
-                ->paginate(25)
+                ->paginate(25),
+            'currentStatus' => $status ?? '-'
         ]);
     }
 
