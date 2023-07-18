@@ -34,7 +34,8 @@ Route::post('delete-service', [ServiceController::class, 'deleteService']);
 Route::get('servicesupdates', [ServiceController::class, 'serviceUpdatesPage']);
 Route::post('servicesupdates', [ServiceController::class, 'updateServiceUpdates']);
 
-Route::get('tickets', [TicketController::class, 'ticketPage']);
+Route::get('tickets/{status?}', [TicketController::class, 'ticketPage']);
+Route::get('tickets', [TicketController::class, 'ticketPage'])->name('admin-tickets');
 Route::get('ticket/{ticket}', [TicketController::class, 'ticketMessages']);
 Route::post('ticket/{ticket}', [TicketController::class, 'updateTicketStatus']);
 Route::post('ticket_message', [TicketController::class, 'newTicketMessage']);
