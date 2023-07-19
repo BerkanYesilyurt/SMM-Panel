@@ -2,9 +2,21 @@
 @section('subTitle', 'Tickets')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">Admin Panel /</span> Tickets
-        </h4>
+        <form method="GET" id="filterform">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Admin Panel /</span> Tickets
+                <div style="float:right; display: flex">
+                    <select class="form-select w-px-200" name="status" id="status" style="margin-left: 10px;">
+                        <option value="all">ALL</option>
+                        @foreach($statuses as $statusKey => $statusValue)
+                            <option value="{{strtolower($statusValue)}}" @selected(strtolower($statusValue) == $currentStatus)>{{$statusValue}}</option>
+                        @endforeach
+                    </select>
+                    <input type="text" class="form-control" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="Ticket ID, Order ID, Pay ID, Message"/>
+                    <button class="btn btn-info" onclick="setStatusUrlAndSubmit()" id="submitButton"><i class='bx bx-search-alt-2'></i></button>
+                </div>
+            </h4>
+        </form>
 
         @if(session('message'))
             <div class="alert alert-success alert-dismissible">
@@ -119,8 +131,28 @@
             document.getElementById('delete_id').value = element.dataset.ticketid;
             document.getElementById('prepareForDelete').innerHTML = '<b>(ID: ' + element.dataset.ticketid + ') </b>ticket and all related messages will be deleted. Are you sure?';
         }
+
         function deleteTicket(){
             document.getElementById("deleteticket").submit();
+        }
+
+        function setStatusUrlAndSubmit(){
+            document.getElementById("submitButton").disabled = true;
+
+            let loginForm = document.getElementById("filterform");
+            let baseUrl = '{{ route('admin-tickets') }}';
+            let path = document.querySelector('#status option:checked').value;
+            let formUrl = new URL(baseUrl + '/' + (path != 'all' ? path : ''));
+
+            if(document.getElementById("search").value.length > 0){
+                formUrl.searchParams.append("search", document.getElementById("search").value);
+            }else{
+                loginForm.search.disabled = true;
+            }
+
+            loginForm.action = formUrl.href;
+            loginForm.status.disabled = true;
+            loginForm.submit();
         }
     </script>
 @endsection
