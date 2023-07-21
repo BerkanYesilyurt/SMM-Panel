@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Enums\PaymentStatusEnum;
 use App\Enums\UserAuthorityEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Filters\UsersPageFilter;
 use App\Http\Requests\admin\UpdateUserDetailsRequest;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
@@ -16,8 +17,8 @@ use Illuminate\Validation\Rules\Enum;
 
 class UserController extends Controller
 {
-    public function usersPage(){
-        $users = User::paginate(50);
+    public function usersPage(UsersPageFilter $filter){
+        $users = User::filterByFunctions($filter)->paginate(50);
         return view('pages.admin.users', compact('users'));
     }
 
