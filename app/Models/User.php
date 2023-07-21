@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Filters\RequestFilter as Filter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -100,6 +102,11 @@ class User extends Authenticatable
         'payment_logs',
         'is_banned'
     ];
+
+    public function scopeFilterByFunctions(Builder $query, Filter $filter, $additionalParams = NULL): Builder
+    {
+        return $filter->filterByFunctions($query, $additionalParams);
+    }
 
     public function payment_logs()
     {
