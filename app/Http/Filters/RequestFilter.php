@@ -26,6 +26,9 @@ abstract class RequestFilter
 
     public function checkIfParamIsExcept($name): bool
     {
+        if(!$this->additionalParams){
+            return true;
+        }
         return !($this->additionalParams->excepts && in_array($name, (array)$this->additionalParams->excepts));
     }
 }
