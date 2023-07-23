@@ -17,7 +17,11 @@ use Illuminate\Validation\Rules\Enum;
 
 class UserController extends Controller
 {
-    public function usersPage(UsersPageFilter $filter){
+    public function usersPage(Request $request, UsersPageFilter $filter){
+        $request->validate([
+            'orderby' => ['starts_with:asc_,desc_', 'ends_with:_id,_balance'],
+        ]);
+
         $users = User::filterByFunctions($filter)->paginate(50);
         return view('pages.admin.users', compact('users'));
     }
