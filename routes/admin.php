@@ -19,7 +19,7 @@ Route::get('dashboard', [DashboardController::class, 'dashboardPage']);
 Route::get('system-settings', [SettingsController::class, 'systemSettingsPage']);
 Route::post('system-settings', [SettingsController::class, 'updateSystemSettings']);
 
-Route::get('users', [UserController::class, 'usersPage']);
+Route::get('users', [UserController::class, 'usersPage'])->name('admin-users');
 Route::post('new-user', [UserController::class, 'createUser']);
 Route::post('delete-user', [UserController::class, 'deleteUser']);
 Route::get('user/{user}/edit', [UserController::class, 'getUserDetails']);
