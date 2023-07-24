@@ -19,7 +19,8 @@ class UserController extends Controller
 {
     public function usersPage(Request $request, UsersPageFilter $filter){
         $request->validate([
-            'orderby' => ['starts_with:asc_,desc_', 'ends_with:_id,_balance'],
+            'orderby' => ['nullable', 'starts_with:asc_,desc_', 'ends_with:_id,_balance'],
+            'type' => ['nullable', 'in:ticket,account']
         ]);
 
         $users = User::filterByFunctions($filter)->paginate(50);
