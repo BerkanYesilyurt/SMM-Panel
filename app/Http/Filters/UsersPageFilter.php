@@ -20,4 +20,15 @@ class UsersPageFilter extends RequestFilter
                 ->orWhere('contact', 'LIKE', '%'.$value.'%');
         });
     }
+
+    public function type($value)
+    {
+        return $this->builder->whereHas('is_banned', function ($query) use ($value) {
+            $query->where('type', $value)
+                ->where(function ($q){
+                    $q->where('permanent', true)
+                        ->orWhere('until_at', '>=', now());
+                });
+        });
+    }
 }
