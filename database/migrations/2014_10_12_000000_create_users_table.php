@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id()->startingValue(1000);
             $table->string('name');
             $table->string('email')->unique()->index();
             $table->decimal('balance', 15, 5)->default('0');
