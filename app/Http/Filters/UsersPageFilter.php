@@ -23,12 +23,16 @@ class UsersPageFilter extends RequestFilter
 
     public function type($value)
     {
-        return $this->builder->whereHas('is_banned', function ($query) use ($value) {
-            $query->where('type', $value)
-                ->where(function ($q){
-                    $q->where('permanent', true)
-                        ->orWhere('until_at', '>=', now());
-                });
-        });
+        if($value == 'deleted'){
+            return $this->builder->withTrashed();
+        }else{
+            return $this->builder->whereHas('is_banned', function ($query) use ($value) {
+                $query->where('type', $value)
+                    ->where(function ($q){
+                        $q->where('permanent', true)
+                            ->orWhere('until_at', '>=', now());
+                    });
+            });
+        }
     }
 }
