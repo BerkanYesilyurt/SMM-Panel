@@ -2,12 +2,36 @@
 @section('subTitle', 'Users')
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">Admin Panel /</span> Users
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenterNewUser" style="float:right;">
-                <span class="tf-icons bx bx-plus"></span>&nbsp; New User
-            </button>
-        </h4>
+
+
+        <form method="GET" id="filterform">
+            <h4 class="fw-bold py-3 mb-4">
+                <span class="text-muted fw-light">Admin Panel /</span> Users
+                <div style="float:right; display: flex">
+                    <select class="form-select w-px-200" name="orderby" id="orderby" style="margin-left: 10px;">
+                        <option value="all">Order By Defaults</option>
+                        <option value="desc_id">Order By Balance (max to min)</option>
+                        <option value="asc_id">Order By Balance (min to max)</option>
+                        <option value="desc_id">Order By Creation date (new to old)</option>
+                        <option value="asc_id">Order By Creation date (old to new)</option>
+                    </select>
+                    <select class="form-select w-px-200" name="type" id="type" style="margin-left: 10px;">
+                        <option value="all">All Users</option>
+                        <option value="account">Only Account Banned Users</option>
+                        <option value="ticket">Only Ticket Banned Users</option>
+                        <option value="deleted">Only Deleted Users</option>
+                    </select>
+                    <input type="text" class="form-control w-px-250" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="ID, Name, Email, Contact"/>
+                    <button class="btn btn-info" onclick="prepareAndSubmit()" id="submitButton"><i class='bx bx-search-alt-2'></i></button>
+
+                    <button type="button" class="btn btn-primary w-px-200" style="margin-left: 10px;" data-bs-toggle="modal" data-bs-target="#modalCenterNewUser">
+                        <span class="bx bx-plus"></span>&nbsp; New User
+                    </button>
+                </div>
+            </h4>
+        </form>
+
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul style="margin-bottom: 1px;">
@@ -178,6 +202,10 @@
     <script>
         function submit(){
             document.getElementById("form").submit();
+        }
+
+        function prepareAndSubmit(){
+            //TODO
         }
 
         function prepareForDelete(element){
