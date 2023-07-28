@@ -9,17 +9,17 @@
                 <span class="text-muted fw-light">Admin Panel /</span> Users
                 <div style="float:right; display: flex">
                     <select class="form-select w-px-200" name="orderby" id="orderby" style="margin-left: 10px;">
-                        <option value="all">Order By Defaults</option>
-                        <option value="desc_id">Order By Balance (max to min)</option>
-                        <option value="asc_id">Order By Balance (min to max)</option>
-                        <option value="desc_id">Order By Creation date (new to old)</option>
-                        <option value="asc_id">Order By Creation date (old to new)</option>
+                        <option value="all">Order By Default</option>
+                        <option value="desc_id" @selected(request()->orderby == 'desc_id')>Order By Balance (max to min)</option>
+                        <option value="asc_id" @selected(request()->orderby == 'asc_id')>Order By Balance (min to max)</option>
+                        <option value="desc_id" @selected(request()->orderby == 'desc_id')>Order By Creation date (new to old)</option>
+                        <option value="asc_id" @selected(request()->orderby == 'asc_id')>Order By Creation date (old to new)</option>
                     </select>
                     <select class="form-select w-px-200" name="type" id="type" style="margin-left: 10px;">
                         <option value="all">All Users</option>
-                        <option value="account">Only Account Banned Users</option>
-                        <option value="ticket">Only Ticket Banned Users</option>
-                        <option value="deleted">Only Deleted Users</option>
+                        <option value="account" @selected(request()->type == 'account')>Only Account Banned Users</option>
+                        <option value="ticket" @selected(request()->type == 'ticket')>Only Ticket Banned Users</option>
+                        <option value="deleted" @selected(request()->type == 'deleted')>Only Deleted Users</option>
                     </select>
                     <input type="text" class="form-control w-px-250" style="margin: 0 10px 0 10px" name="search" id="search" value="{{request()->search}}" placeholder="ID, Name, Email, Contact"/>
                     <button class="btn btn-info" onclick="prepareAndSubmit()" id="submitButton"><i class='bx bx-search-alt-2'></i></button>
@@ -205,7 +205,22 @@
         }
 
         function prepareAndSubmit(){
-            //TODO
+            document.getElementById("submitButton").disabled = true;
+
+            let loginForm = document.getElementById("filterform");
+            let baseUrl = '{{ route('admin-users') }}';
+            let formUrl = new URL(baseUrl);
+
+            if(document.getElementById("search").value.length > 0){
+                formUrl.searchParams.append("search", document.getElementById("search").value);
+            }else{
+                loginForm.search.disabled = true;
+            }
+
+            loginForm.action = formUrl.href;
+            loginForm.orderby.disabled = document.getElementById("orderby").value === 'all';
+            loginForm.type.disabled = document.getElementById("type").value === 'all';
+            loginForm.submit();
         }
 
         function prepareForDelete(element){
