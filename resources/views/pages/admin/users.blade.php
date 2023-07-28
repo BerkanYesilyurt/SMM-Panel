@@ -89,7 +89,7 @@
                         echo 'success';
                     }
                     @endphp me-1">{{$user->authority == \App\Enums\UserAuthorityEnum::none->value ? 'USER' : strtoupper(\App\Enums\UserAuthorityEnum::from($user->authority)->name)}}</span></center></td>
-                            <td><center>{{checkBan('account', $user) ? 'Account Banned' : (checkBan('ticket', $user) ? 'Ticket Banned' : 'ACTIVE')}}</center></td>
+                            <td><center>{{checkBan('account', $user) ? 'Account Banned' : (checkBan('ticket', $user) ? 'Ticket Banned' : 'ACTIVE')}} {{is_null($user->deleted_at) ? '' : '/ DELETED'}}</center></td>
                             <td><center>{{$configsArray['currency_symbol']}}{{round($user->balance, 4)}}</center></td>
                             <td><center>{{$user->created_at->diffForHumans()}}</center></td>
                             <td><center>
