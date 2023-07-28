@@ -25,7 +25,7 @@ class UsersPageFilter extends RequestFilter
     public function type($value)
     {
         if($value == 'deleted'){
-            return $this->builder->withTrashed();
+            return $this->builder->onlyTrashed();
         }else{
             return $this->builder->whereHas('is_banned', function ($query) use ($value) {
                 $query->where('type', $value)
