@@ -10,8 +10,8 @@
                 <div style="float:right; display: flex">
                     <select class="form-select w-px-200" name="orderby" id="orderby" style="margin-left: 10px;">
                         <option value="all">Order By Default</option>
-                        <option value="desc_id" @selected(request()->orderby == 'desc_id')>Order By Balance (max to min)</option>
-                        <option value="asc_id" @selected(request()->orderby == 'asc_id')>Order By Balance (min to max)</option>
+                        <option value="desc_balance" @selected(request()->orderby == 'desc_balance')>Order By Balance (max to min)</option>
+                        <option value="asc_balance" @selected(request()->orderby == 'asc_balance')>Order By Balance (min to max)</option>
                         <option value="desc_id" @selected(request()->orderby == 'desc_id')>Order By Creation date (new to old)</option>
                         <option value="asc_id" @selected(request()->orderby == 'asc_id')>Order By Creation date (old to new)</option>
                     </select>
