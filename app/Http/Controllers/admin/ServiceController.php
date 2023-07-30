@@ -19,7 +19,7 @@ class ServiceController extends Controller
     public function servicesPage()
     {
         return view('pages.admin.services', [
-            'services' => Service::all(),
+            'services' => Service::with('category')->get(),
             'categories' => Category::all()
         ]);
     }
