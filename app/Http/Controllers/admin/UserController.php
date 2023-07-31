@@ -82,17 +82,22 @@ class UserController extends Controller
         return back()->with('message', 'You have successfully updated user balance.');
     }
 
-    public function deleteUser(Request $request)
+    public function deleteOrRestoreUser(Request $request)
     {
         $request->validate([
-            'delete_id' => 'required|numeric|exists:users,id',
+            'user_id' => 'required|numeric|exists:users,id',
         ]);
 
-        DB::transaction(function () use($request){
-            User::where('id', $request->delete_id)->delete();
-            Ticket::where('user_id', $request->delete_id)->delete();
-            TicketMessage::where('user_id', $request->delete_id)->delete();
-        });
-        return back()->with('message', 'You have successfully deleted the user.');
+        if(optional(User::withTrashed()->where('id', $request->user_id)->first())->deleted_at){
+            User::onlyTrashed()->where('id', $request->user_id)->restore();
+            return back()->with('message', 'You have successfully restored the user.');
+        }else{
+            DB::transaction(function () use($request){
+                User::where('id', $request->user_id)->delete();
+                Ticket::where('user_id', $request->user_id)->delete();
+                TicketMessage::where('user_id', $request->user_id)->delete();
+            });
+            return back()->with('message', 'You have successfully deleted the user.');
+        }
     }
 }
