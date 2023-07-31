@@ -93,7 +93,7 @@
                             <td><center>{{$configsArray['currency_symbol']}}{{round($user->balance, 4)}}</center></td>
                             <td><center>{{$user->created_at->diffForHumans()}}</center></td>
                             <td><center>
-                            <button type="button" onclick="prepareForDelete(this)" data-userid="{{$user->id}}" data-useremail="{{$user->email}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteUser">
+                            <button type="button" onclick="prepareForDeleteOrRestore(this)" data-userid="{{$user->id}}" data-useremail="{{$user->email}}" data-deleted="{{(bool)$user->deleted_at}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalCenterDeleteUser">
                                 <span class="tf-icons bx bx-trash"></span>
                             </button>
                             <a href="/admin/user/{{$user->id}}/edit" target="_blank" class="btn btn-sm btn-primary">
@@ -177,20 +177,20 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete User</h5>
+                    <h5 class="modal-title">User Action</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="deleteuser" action="/admin/delete-user">
+                    <form method="POST" id="deleteuser" action="/admin/delete-or-restore-user">
                         @csrf
-                        <input type="hidden" name="delete_id" id="delete_id">
+                        <input type="hidden" name="user_id" id="user_id">
 
                         <div class="col mb-3">
-                            <span id="prepareForDelete"></span>
+                            <span id="prepareForDeleteOrRestore"></span>
                         </div>
 
                         <div class="col mb-3">
-                            <button class="btn btn-danger" onclick="deleteUser(); this.disabled = true;" style="color: white; width: 100%;">Delete User & Tickets</button>
+                            <button class="btn" id="delete-or-restore-button" onclick="deleteUser(); this.disabled = true;" style="color: white; width: 100%;"></button>
                         </div>
 
                     </form>
@@ -223,9 +223,12 @@
             loginForm.submit();
         }
 
-        function prepareForDelete(element){
-            document.getElementById('delete_id').value = element.dataset.userid;
-            document.getElementById('prepareForDelete').innerHTML = '<b>' + element.dataset.useremail + '(ID: ' + element.dataset.userid + ') </b> will be deleted. Are you sure?';
+        function prepareForDeleteOrRestore(element){
+            let isDeleted = element.dataset.deleted;
+            document.getElementById('user_id').value = element.dataset.userid;
+            document.getElementById('delete-or-restore-button').innerHTML = isDeleted ? 'Restore User' : 'Delete User & Tickets';
+            document.getElementById('delete-or-restore-button').classList.add(isDeleted ? 'btn-success' : 'btn-danger');
+            document.getElementById('prepareForDeleteOrRestore').innerHTML = '<b>' + element.dataset.useremail + '(ID: ' + element.dataset.userid + ') </b> will be ' + (isDeleted ? 'restored' : 'deleted') + '. Are you sure?';
         }
 
         function deleteUser(){
