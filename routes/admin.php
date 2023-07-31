@@ -21,7 +21,7 @@ Route::post('system-settings', [SettingsController::class, 'updateSystemSettings
 
 Route::get('users', [UserController::class, 'usersPage'])->name('admin-users');
 Route::post('new-user', [UserController::class, 'createUser']);
-Route::post('delete-user', [UserController::class, 'deleteUser']);
+Route::post('delete-or-restore-user', [UserController::class, 'deleteOrRestoreUser']);
 Route::get('user/{user}/edit', [UserController::class, 'getUserDetails']);
 Route::post('user/{user}/edit', [UserController::class, 'updateUserDetails']);
 Route::post('user/{user}/balance-update', [UserController::class, 'updateUserBalance']);
